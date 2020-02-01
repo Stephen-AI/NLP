@@ -4,11 +4,21 @@ from sentiment_data import *
 from utils import *
 from collections import defaultdict
 import nltk
+import string
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 import numpy as np
+from enum import Enum
+from heapq import heappop, heappush
 
-stopwrds = set(stopwords.words('english'))
+stopwrds = set(stopwords.words('english')) | set(string.punctuation)
+SMOL = 1e-8
+
+class StepType(Enum):
+    CONSTANT=0
+    FIXED_FACTOR=1
+    HARMONIC=2
+    
 
 class FeatureExtractor(object):
     """
@@ -35,7 +45,6 @@ class UnigramFeatureExtractor(FeatureExtractor):
     """
     def __init__(self, indexer: Indexer, examples: List[SentimentExample]=None):
         self.indexer = indexer
-        self.counts = defaultdict(int)
         if examples:
             self.load_examples(examples)
 
@@ -48,28 +57,21 @@ class UnigramFeatureExtractor(FeatureExtractor):
 
     def count_and_index(self, words: List[str]):
         for word in words:
-            if word.isalpha():
-                lower_case = word.lower()
-                if lower_case not in stopwrds:
-                    self.indexer.add_and_get_index(lower_case)
-                    self.counts[lower_case] += 1
+            lower_case = word.lower()
+            if lower_case not in stopwrds:
+                self.indexer.add_and_get_index(lower_case)
             
     def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
-        counts = []
         if add_to_indexer:
             self.count_and_index(ex_words)
+        counter = defaultdict(int)
         for word in ex_words:
+            lower_case = word.lower()
             # TODO What if the word is not in the indexer and add_to_indexer is false
-            counts.append(self.counts[word.lower()])
-        return counts
-
-    def __str__(self):
-        return repr(self.counts)
-            
-
-                
-        
-
+            if lower_case not in stopwrds:
+                counter[lower_case] += 1
+        return list([counter[word] for word in ex_words])
+             
 
 class BigramFeatureExtractor(FeatureExtractor):
     """
@@ -139,7 +141,7 @@ class LogisticRegressionClassifier(SentimentClassifier):
         feat_vec = self.feature_extractor.extract_features(ex_words)
         prod = weights_dot_features(self.weights, ex_words, 
                                     self.feature_extractor.get_indexer(), feat_vec)
-        pos = cond_prob_label_features(prod, True)
+        pos = cond_prob_label_features(prod)
         if pos > 0.5:
             return 1
         return 0
@@ -159,7 +161,10 @@ def weights_dot_features(weights, words: List[str], indexer: Indexer,
         #If feat_vec[idx] == 0, its probably a stopword and wasn't stored in indexer
         if feat_vec[idx] != 0:
             weight_idx = indexer.index_of(word.lower())
-            sum += feat_vec[idx] * weights[weight_idx]
+            prod = 0
+            if weight_idx >= 0:
+                prod = feat_vec[idx] * weights[weight_idx]
+            sum += prod
     return sum
 
 
@@ -178,7 +183,9 @@ def weight_plus_features(weights, words: List[str], indexer: Indexer, \
         sign = -1 if subtract else 1
         if feat_vec[idx] != 0:
             weight_idx = indexer.index_of(word.lower())
-            weights[weight_idx] += (feat_vec[idx] * sign)
+            if weight_idx >= 0:
+                weights[weight_idx] += (feat_vec[idx] * sign)
+            
 
 def feature_scale(feat_vec: List[int], alpha) -> List[int]:
     """
@@ -188,10 +195,35 @@ def feature_scale(feat_vec: List[int], alpha) -> List[int]:
     for x in feat_vec:
         scaled.append(x * alpha)
     return scaled
+
+def print_top_10(weights, indexer: Indexer, positive: bool=True):
+    q = []
+    sign = 1 if positive else -1
+    for i in range(len(weights)):
+        if len(q) < 10:
+            heappush(q, (sign * weights[i], i))
+        else:
+            least, idx = heappop(q)
+            if weights[i] * sign > least:
+                heappush(q, (sign * weights[i], i))
+            else:
+                heappush(q, (least, idx))
+    q = sorted(q)
+    i = 1
+    print("top 10 most", "positive" if positive else "negative")
+    for weight, idx in q:
+        print("{}.) {}:{}".format(i, indexer.get_object(idx), weight))
+        i += 1
+    print()
+        
+            
+
+    
     
 def train_perceptron(train_exs: List[SentimentExample], 
-                     feat_extractor: FeatureExtractor, EPOCHS: int = 50,
-                     alpha: float = 1.0) -> PerceptronClassifier:
+                    feat_extractor: FeatureExtractor, EPOCHS: int=30,
+                    alpha : float=np.exp(-4),
+                    step=StepType.CONSTANT) -> PerceptronClassifier:
     """
     Train a classifier with the perceptron.
     :param train_exs: training set, List of SentimentExample objects
@@ -200,8 +232,12 @@ def train_perceptron(train_exs: List[SentimentExample],
     """
     indexer = feat_extractor.get_indexer()
     weights = np.zeros(len(indexer))
-    for _ in range(EPOCHS):
+    for i in range(EPOCHS):
         np.random.shuffle(train_exs)
+        if step == StepType.FIXED_FACTOR:
+            alpha = 1 / (10 ** i)
+        elif step == StepType.HARMONIC:
+            alpha = 1 / (i+1)
         for ex in train_exs:
             feat_vec = feat_extractor.extract_features(ex.words)
             prod = weights_dot_features(weights, ex.words, indexer, feat_vec)
@@ -209,25 +245,30 @@ def train_perceptron(train_exs: List[SentimentExample],
             if predicted_label != ex.label:
                 feat_vec = feature_scale(feat_vec, alpha) if alpha != 1.0 else feat_vec
                 weight_plus_features(weights, ex.words, indexer, feat_vec, not ex.label)           
-
+    print_top_10(weights, indexer)
+    print_top_10(weights, indexer, False)
     return PerceptronClassifier(weights, feat_extractor)
 
-def cond_prob_label_features(w_dot_feat: float, label: bool) -> float:
+def cond_prob_label_features(w_dot_feat: float) -> float:
     """
-    Finds P(label | X)
+    Finds P(label=1 | X)
     :param w_dot_feat: The dot product of the weights and feature(x)
-    :param label: Positive or negative label
-    :return P(label| X)
+    :return P(label=1| X)
     """
+    if w_dot_feat > 709:
+        return 1e-8
     exp = np.exp(w_dot_feat)
-    if label:
-        return exp / (1 + exp)   
-    else:
-        return 1 / (1 + exp)
+    return exp / (1 + exp)    
+
+def nll(y, p):
+    m = -y * np.log(SMOL + p)
+    n = (1-y) * np.log(SMOL + (1-p))
+    return m - n
 
 def train_logistic_regression(train_exs: List[SentimentExample], 
-                              feat_extractor: FeatureExtractor, EPOCHS: int=50,
-                              alpha : float=1) -> LogisticRegressionClassifier:
+                              feat_extractor: FeatureExtractor, EPOCHS: int=30,
+                              alpha : float=np.exp(-4),
+                              step=StepType.CONSTANT) -> LogisticRegressionClassifier:
     """
     Train a logistic regression model.
     :param train_exs: training set, List of SentimentExample objects
@@ -236,16 +277,27 @@ def train_logistic_regression(train_exs: List[SentimentExample],
     """
     indexer = feat_extractor.get_indexer()
     weights = np.zeros(len(indexer))
-    for _ in range(EPOCHS):
+
+    for i in range(EPOCHS):
+        if step == StepType.FIXED_FACTOR:
+            alpha = 1 / (10 ** i)
+        elif step == StepType.HARMONIC:
+            alpha = 1 / (i+1)
         np.random.shuffle(train_exs)
+        sum = 0.0
         for ex in train_exs:
             feat_vec = feat_extractor.extract_features(ex.words)
-            # f(ex) * -1 + P(y = ex.label | ex)
+
+            # f(ex) * P(y = ex.label | ex) - label
             prod = weights_dot_features(weights, ex.words, indexer, feat_vec)
-            cond_prob = cond_prob_label_features(prod, bool(ex.label))
-            feat_vec = feature_scale(feat_vec, alpha * (-1 + cond_prob))
+            pos_prob = cond_prob_label_features(prod)
+            nl = nll(ex.label, pos_prob)
+            sum += nl
+            feat_vec = feature_scale(feat_vec, alpha * (pos_prob - ex.label))
             #update weights
             weight_plus_features(weights, ex.words, indexer, feat_vec, True)
+        # print("NLL for epoch {}: {}".format(i, sum/len(train_exs)))
+
     
     return LogisticRegressionClassifier(weights, feat_extractor)
 
@@ -258,6 +310,13 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
     :param train_exs: training set, List of SentimentExample objects
     :return: trained SentimentClassifier model, of whichever type is specified
     """
+    def get_step_type():
+        if args.fixed_factor:
+            return StepType.FIXED_FACTOR
+        if args.harmonic:
+            return StepType.HARMONIC
+        return StepType.CONSTANT
+
     # Initialize feature extractor
     if args.model == "TRIVIAL":
         feat_extractor = None
@@ -277,9 +336,14 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
     if args.model == "TRIVIAL":
         model = TrivialSentimentClassifier()
     elif args.model == "PERCEPTRON":
-        model = train_perceptron(train_exs, feat_extractor)
+        model = train_perceptron(train_exs, feat_extractor, EPOCHS=args.epochs,
+                                 alpha=args.alpha)
     elif args.model == "LR":
-        model = train_logistic_regression(train_exs, feat_extractor)
+        model = train_logistic_regression(train_exs, feat_extractor, 
+                                          EPOCHS=args.epochs, 
+                                          alpha=args.alpha, step=get_step_type())
     else:
         raise Exception("Pass in TRIVIAL, PERCEPTRON, or LR to run the appropriate system")
     return model
+
+    

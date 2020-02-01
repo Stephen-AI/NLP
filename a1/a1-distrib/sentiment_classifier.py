@@ -26,6 +26,14 @@ def _parse_args():
     parser.add_argument('--blind_test_path', type=str, default='data/test-blind.txt', help='path to blind test set (you should not need to modify)')
     parser.add_argument('--test_output_path', type=str, default='test-blind.output.txt', help='output path for test predictions')
     parser.add_argument('--no_run_on_test', dest='run_on_test', default=True, action='store_false', help='skip printing output on the test set')
+    parser.add_argument('--epochs', type=int, default=50, help='numbers of iterations for training')
+    parser.add_argument('--alpha', type=float, default=np.exp(-4), help='the step size')
+    parser.add_argument('--harmonic', default=False, action='store_true', 
+                        help='variable step size using harmonic function wrt EPOCHS')
+    parser.add_argument('--fixed_factor', default=False, action='store_true', 
+                        help='variable step size reducing step size by 10 on each iteration')
+    parser.add_argument('--avg_run', type=int, default=1, help='train and test a model n times and average the relevant data')
+
     args = parser.parse_args()
     return args
 
@@ -37,7 +45,7 @@ def evaluate(classifier, exs):
     :param exs: the list of SentimentExamples to evaluate on
     :return: None (but prints output)
     """
-    print_evaluation([ex.label for ex in exs], [classifier.predict(ex.words) for ex in exs])
+    return print_evaluation([ex.label for ex in exs], [classifier.predict(ex.words) for ex in exs])
 
 
 def print_evaluation(golds: List[SentimentExample], predictions: List[SentimentExample]):
@@ -69,14 +77,15 @@ def print_evaluation(golds: List[SentimentExample], predictions: List[SentimentE
         if prediction == 1 and gold == 1:
             num_pos_correct += 1
         num_total += 1
-    print("Accuracy: %i / %i = %f" % (num_correct, num_total, float(num_correct) / num_total))
+    accuracy = float(num_correct) / num_total
+    print("Accuracy: %i / %i = %f" % (num_correct, num_total, accuracy))
     prec = float(num_pos_correct) / num_pred if num_pred > 0 else 0.0
     rec = float(num_pos_correct) / num_gold if num_gold > 0 else 0.0
     f1 = 2 * prec * rec / (prec + rec) if prec > 0 and rec > 0 else 0.0
     print("Precision (fraction of predicted positives that are correct): %i / %i = %f" % (num_pos_correct, num_pred, prec)
           + "; Recall (fraction of true positives predicted correctly): %i / %i = %f" % (num_pos_correct, num_gold, rec)
           + "; F1 (harmonic mean of precision and recall): %f" % f1)
-
+    return accuracy
 
 if __name__ == '__main__':
     args = _parse_args()
@@ -88,14 +97,20 @@ if __name__ == '__main__':
     test_exs_words_only = read_blind_sst_examples(args.blind_test_path)
     print(repr(len(train_exs)) + " / " + repr(len(dev_exs)) + " / " + repr(len(test_exs_words_only)) + " train/dev/test examples")
 
+    total_time = 0
     # Train and evaluate
-    start_time = time.time()
-    model = train_model(args, train_exs)
-    print("=====Train Accuracy=====")
-    evaluate(model, train_exs)
-    print("=====Dev Accuracy=====")
-    evaluate(model, dev_exs)
-    print("Time for training and evaluation: %.2f seconds" % (time.time() - start_time))
+    for _ in range(args.avg_run):
+        start_time = time.time()
+        model = train_model(args, train_exs)
+        print("=====Train Accuracy=====")
+        evaluate(model, train_exs)
+        print("=====Dev Accuracy=====")
+        evaluate(model, dev_exs)
+        time_taken = time.time() - start_time
+        total_time += time_taken
+        print("Time for training and evaluation: %.2f seconds" % (time_taken))
+    
+    print("average of {} runs is: {}".format(args.avg_run, total_time/args.avg_run))
 
     # Write the test set output
     if args.run_on_test:
