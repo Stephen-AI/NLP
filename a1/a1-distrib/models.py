@@ -2,7 +2,7 @@
 
 from sentiment_data import *
 from utils import *
-from collections import defaultdict
+from collections import defaultdict, Counter
 import nltk
 import string
 nltk.download('stopwords')
@@ -10,6 +10,8 @@ from nltk.corpus import stopwords
 import numpy as np
 from enum import Enum
 from heapq import heappop, heappush
+import matplotlib.pyplot as plt
+
 
 stopwrds = set(stopwords.words('english')) | set(string.punctuation)
 SMOL = 1e-8
@@ -37,6 +39,11 @@ class FeatureExtractor(object):
         """
         raise Exception("Don't call me, call my subclasses")
 
+    def sentence_preprocess(self, words: List[str]) -> List[str]:
+        """
+            Preprocess a sentence by filtering or making it into bigrams
+        """
+        raise Exception("Don't call me, call my subclasses")
 
 class UnigramFeatureExtractor(FeatureExtractor):
     """
@@ -50,26 +57,25 @@ class UnigramFeatureExtractor(FeatureExtractor):
 
     def load_examples(self, examples: List[SentimentExample]):
         for ex in examples:
-            self.count_and_index(ex.words)
+            self.index_word(ex.words)
     
     def get_indexer(self) -> Indexer:
         return self.indexer
 
-    def count_and_index(self, words: List[str]):
-        for word in words:
-            lower_case = word.lower()
-            if lower_case not in stopwrds:
-                self.indexer.add_and_get_index(lower_case)
-            
+    def index_word(self, words: List[str]):
+        filtered_words = self.sentence_preprocess(words)
+        for word in filtered_words:
+            self.indexer.add_and_get_index(word)
+    
+    def sentence_preprocess(self, words: List[str]):
+        filtered = list(filter(lambda word: word not in stopwrds, words))
+        return list([word.lower() for word in filtered])
+    
+    # assume ex_words has been stripped of stop words
     def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
         if add_to_indexer:
-            self.count_and_index(ex_words)
-        counter = defaultdict(int)
-        for word in ex_words:
-            lower_case = word.lower()
-            # TODO What if the word is not in the indexer and add_to_indexer is false
-            if lower_case not in stopwrds:
-                counter[lower_case] += 1
+            self.index_word(ex_words)
+        counter = Counter(ex_words)
         return list([counter[word] for word in ex_words])
              
 
@@ -77,16 +83,82 @@ class BigramFeatureExtractor(FeatureExtractor):
     """
     Bigram feature extractor analogous to the unigram one.
     """
-    def __init__(self, indexer: Indexer):
-        raise Exception("Must be implemented")
+    def __init__(self, indexer: Indexer, examples: List[SentimentExample]=None):
+        self.indexer = indexer
+        if examples:
+            self.load_examples(examples)
+    
+    def load_examples(self, examples: List[SentimentExample]):
+        for example in examples:
+            self.index_bigram(example.words)
+    
+    def index_bigram(self, words: List[str]):
+        for bigram in self.sentence_preprocess(words):
+            self.indexer.add_and_get_index(bigram)
+
+    def get_indexer(self):
+        return self.indexer
+    
+    def sentence_preprocess(self, words: List[str]) -> List[str]:
+        i, j = [0, 1]
+        filtered_words = list(filter(lambda word: word not in stopwrds, words))
+        bigrams = []
+        while j < len(filtered_words):
+            bigrams.append("{} {}".format(filtered_words[i].lower(), 
+                                            filtered_words[j].lower()))
+            i += 1
+            j += 1
+        return bigrams
+
+    def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
+        counter = Counter(ex_words)
+        return list([counter[bigram] for bigram in ex_words])
 
 
 class BetterFeatureExtractor(FeatureExtractor):
     """
     Better feature extractor...try whatever you can think of!
     """
-    def __init__(self, indexer: Indexer):
-        raise Exception("Must be implemented")
+    def __init__(self, indexer: Indexer, examples: List[SentimentExample]=None):
+        self.indexer = indexer
+        self.idfs = defaultdict(int)
+        if examples:
+            self.load_examples(examples)
+        for term, idf in self.idfs.items():
+            self.idfs[term] = np.log(len(examples)/idf)
+
+
+    def load_examples(self, examples: List[SentimentExample]):
+        for ex in examples:
+            self.index_word(ex.words)
+    
+    def get_indexer(self) -> Indexer:
+        return self.indexer
+
+    def index_word(self, words: List[str]):
+        filtered_words = self.sentence_preprocess(words)
+        visited = set()
+        for word in filtered_words:
+            self.indexer.add_and_get_index(word)
+            if word not in visited:
+                visited.add(word)
+                self.idfs[word] += 1
+    
+    def sentence_preprocess(self, words: List[str]):
+        filtered = list(filter(lambda word: word not in stopwrds, words))
+        return list([word.lower() for word in filtered])
+    
+    def get_word_idf(self, word: str) -> float:
+        res = self.idfs[word]
+        return res if res != 0 else 1
+
+    # assume ex_words has been stripped of stop words
+    def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
+        if add_to_indexer:
+            self.index_word(ex_words)
+        counter = Counter(ex_words)
+        return list([counter[word] * self.get_word_idf(word) for word in ex_words])
+
 
 
 class SentimentClassifier(object):
@@ -120,8 +192,10 @@ class PerceptronClassifier(SentimentClassifier):
         self.feature_extractor = feat_extractor
     
     def predict(self, ex_words: List[str]) -> int:
-        feat_vec = self.feature_extractor.extract_features(ex_words)
-        prod = weights_dot_features(self.weights, ex_words, 
+        words = self.feature_extractor.sentence_preprocess(ex_words)
+        feat_vec = self.feature_extractor.extract_features(words)
+        
+        prod = weights_dot_features(self.weights, words, 
                                     self.feature_extractor.get_indexer(), feat_vec)
         return 1 if prod > 0 else 0
         
@@ -138,8 +212,9 @@ class LogisticRegressionClassifier(SentimentClassifier):
         self.feature_extractor = feat_extractor
     
     def predict(self, ex_words: List[str]) -> int:
-        feat_vec = self.feature_extractor.extract_features(ex_words)
-        prod = weights_dot_features(self.weights, ex_words, 
+        words = self.feature_extractor.sentence_preprocess(ex_words)
+        feat_vec = self.feature_extractor.extract_features(words)
+        prod = weights_dot_features(self.weights, words, 
                                     self.feature_extractor.get_indexer(), feat_vec)
         pos = cond_prob_label_features(prod)
         if pos > 0.5:
@@ -160,7 +235,7 @@ def weights_dot_features(weights, words: List[str], indexer: Indexer,
     for idx, word in enumerate(words):
         #If feat_vec[idx] == 0, its probably a stopword and wasn't stored in indexer
         if feat_vec[idx] != 0:
-            weight_idx = indexer.index_of(word.lower())
+            weight_idx = indexer.index_of(word)
             prod = 0
             if weight_idx >= 0:
                 prod = feat_vec[idx] * weights[weight_idx]
@@ -182,7 +257,7 @@ def weight_plus_features(weights, words: List[str], indexer: Indexer, \
         #If feat_vec[idx] == 0, its probably a stop word and wasn't stored in indexer
         sign = -1 if subtract else 1
         if feat_vec[idx] != 0:
-            weight_idx = indexer.index_of(word.lower())
+            weight_idx = indexer.index_of(word)
             if weight_idx >= 0:
                 weights[weight_idx] += (feat_vec[idx] * sign)
             
@@ -239,14 +314,15 @@ def train_perceptron(train_exs: List[SentimentExample],
         elif step == StepType.HARMONIC:
             alpha = 1 / (i+1)
         for ex in train_exs:
-            feat_vec = feat_extractor.extract_features(ex.words)
-            prod = weights_dot_features(weights, ex.words, indexer, feat_vec)
+            words = feat_extractor.sentence_preprocess(ex.words)
+            feat_vec = feat_extractor.extract_features(words)
+            prod = weights_dot_features(weights, words, indexer, feat_vec)
             predicted_label = 1 if prod > 0 else 0
             if predicted_label != ex.label:
                 feat_vec = feature_scale(feat_vec, alpha) if alpha != 1.0 else feat_vec
-                weight_plus_features(weights, ex.words, indexer, feat_vec, not ex.label)           
-    print_top_10(weights, indexer)
-    print_top_10(weights, indexer, False)
+                weight_plus_features(weights, words, indexer, feat_vec, not ex.label)           
+    # print_top_10(weights, indexer)
+    # print_top_10(weights, indexer, False)
     return PerceptronClassifier(weights, feat_extractor)
 
 def cond_prob_label_features(w_dot_feat: float) -> float:
@@ -284,23 +360,63 @@ def train_logistic_regression(train_exs: List[SentimentExample],
         elif step == StepType.HARMONIC:
             alpha = 1 / (i+1)
         np.random.shuffle(train_exs)
-        sum = 0.0
+        # sum = 0.0
         for ex in train_exs:
-            feat_vec = feat_extractor.extract_features(ex.words)
-
-            # f(ex) * P(y = ex.label | ex) - label
-            prod = weights_dot_features(weights, ex.words, indexer, feat_vec)
+            words = feat_extractor.sentence_preprocess(ex.words)
+            feat_vec = feat_extractor.extract_features(words)
+            prod = weights_dot_features(weights, words, indexer, feat_vec)
             pos_prob = cond_prob_label_features(prod)
-            nl = nll(ex.label, pos_prob)
-            sum += nl
+            # nl = nll(ex.label, pos_prob)
+            # sum += nl
             feat_vec = feature_scale(feat_vec, alpha * (pos_prob - ex.label))
             #update weights
-            weight_plus_features(weights, ex.words, indexer, feat_vec, True)
+            weight_plus_features(weights, words, indexer, feat_vec, True)
         # print("NLL for epoch {}: {}".format(i, sum/len(train_exs)))
 
-    
     return LogisticRegressionClassifier(weights, feat_extractor)
 
+def dll_avg(model: LogisticRegressionClassifier, exs: List[SentimentExample]):
+    loss = 0
+    for ex in exs:
+        feat_extractor = model.feature_extractor
+        words = feat_extractor.sentence_preprocess(ex.words)
+        feat_vec = feat_extractor.extract_features(words)
+        dot_prod = weights_dot_features(model.weights, words, 
+                                        feat_extractor.indexer, feat_vec)
+        prob = cond_prob_label_features(dot_prod)
+        prob = prob if ex.label else 1 - prob
+        loss += np.log(prob)
+    return loss / len(exs)
+
+
+def get_accuracy_count(model: SentimentClassifier, dev_ex: List[SentimentExample]):
+    count = 0
+    for ex in dev_ex:
+        if not (model.predict(ex.words) ^ ex.label):
+            count += 1
+    return count / len(dev_ex)
+
+def plot_LR_accuracies(train_ex: List[SentimentExample], dev_ex: List[SentimentExample]):
+    feat_extractor = UnigramFeatureExtractor(Indexer(), train_ex)
+    epochs = [1, 10, 20, 30, 50]
+    schedules = [StepType.CONSTANT, StepType.FIXED_FACTOR, StepType.HARMONIC]
+    
+    plt.rcParams.update({'font.size': 15})
+    for step in schedules:
+        accuracies = []
+        dlls = []
+        _, ax = plt.subplots()
+        for epoch in epochs:
+            model = train_logistic_regression(train_ex, feat_extractor, epoch, step=step)
+            acc = get_accuracy_count(model, dev_ex)
+            dll = dll_avg(model, train_ex)
+            accuracies.append(acc)
+            dlls.append(dll)
+        ax.set_xlabel('Epochs')
+        ax.plot(epochs, dlls, label="Epoch vs Average Loss")
+        ax.plot(epochs, accuracies, label="Epoch vs Dev Accuracy")
+        plt.savefig("{}.png".format(str(step)),dpi=150)
+               
 
 def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
     """
@@ -325,10 +441,10 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
         feat_extractor = UnigramFeatureExtractor(Indexer(), train_exs)
     elif args.feats == "BIGRAM":
         # Add additional preprocessing code here
-        feat_extractor = BigramFeatureExtractor(Indexer())
+        feat_extractor = BigramFeatureExtractor(Indexer(),train_exs)
     elif args.feats == "BETTER":
         # Add additional preprocessing code here
-        feat_extractor = BetterFeatureExtractor(Indexer())
+        feat_extractor = BetterFeatureExtractor(Indexer(), train_exs)
     else:
         raise Exception("Pass in UNIGRAM, BIGRAM, or BETTER to run the appropriate system")
 

@@ -33,7 +33,7 @@ def _parse_args():
     parser.add_argument('--fixed_factor', default=False, action='store_true', 
                         help='variable step size reducing step size by 10 on each iteration')
     parser.add_argument('--avg_run', type=int, default=1, help='train and test a model n times and average the relevant data')
-
+    parser.add_argument('--plot', default=False, action='store_true', help='plot LR graphs')
     args = parser.parse_args()
     return args
 
@@ -97,22 +97,25 @@ if __name__ == '__main__':
     test_exs_words_only = read_blind_sst_examples(args.blind_test_path)
     print(repr(len(train_exs)) + " / " + repr(len(dev_exs)) + " / " + repr(len(test_exs_words_only)) + " train/dev/test examples")
 
-    total_time = 0
-    # Train and evaluate
-    for _ in range(args.avg_run):
-        start_time = time.time()
-        model = train_model(args, train_exs)
-        print("=====Train Accuracy=====")
-        evaluate(model, train_exs)
-        print("=====Dev Accuracy=====")
-        evaluate(model, dev_exs)
-        time_taken = time.time() - start_time
-        total_time += time_taken
-        print("Time for training and evaluation: %.2f seconds" % (time_taken))
+    if args.plot:
+        plot_LR_accuracies(train_exs, dev_exs)
+    else:
+        total_time = 0
+        # Train and evaluate
+        for _ in range(args.avg_run):
+            start_time = time.time()
+            model = train_model(args, train_exs)
+            print("=====Train Accuracy=====")
+            evaluate(model, train_exs)
+            print("=====Dev Accuracy=====")
+            evaluate(model, dev_exs)
+            time_taken = time.time() - start_time
+            total_time += time_taken
+            print("Time for training and evaluation: %.2f seconds" % (time_taken))
     
-    print("average of {} runs is: {}".format(args.avg_run, total_time/args.avg_run))
+        print("average of {} runs is: {}".format(args.avg_run, total_time/args.avg_run))
 
-    # Write the test set output
-    if args.run_on_test:
-        test_exs_predicted = [SentimentExample(words, model.predict(words)) for words in test_exs_words_only]
-        write_sentiment_examples(test_exs_predicted, args.test_output_path)
+        # Write the test set output
+        if args.run_on_test:
+            test_exs_predicted = [SentimentExample(words, model.predict(words)) for words in test_exs_words_only]
+            write_sentiment_examples(test_exs_predicted, args.test_output_path)
