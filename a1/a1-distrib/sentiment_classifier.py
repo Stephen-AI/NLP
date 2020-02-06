@@ -27,7 +27,7 @@ def _parse_args():
     parser.add_argument('--test_output_path', type=str, default='test-blind.output.txt', help='output path for test predictions')
     parser.add_argument('--no_run_on_test', dest='run_on_test', default=True, action='store_false', help='skip printing output on the test set')
     parser.add_argument('--epochs', type=int, default=50, help='numbers of iterations for training')
-    parser.add_argument('--alpha', type=float, default=np.exp(-4), help='the step size')
+    parser.add_argument('--alpha', type=float, default=1e-4, help='the step size')
     parser.add_argument('--harmonic', default=False, action='store_true', 
                         help='variable step size using harmonic function wrt EPOCHS')
     parser.add_argument('--fixed_factor', default=False, action='store_true', 

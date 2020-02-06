@@ -68,15 +68,17 @@ class UnigramFeatureExtractor(FeatureExtractor):
             self.indexer.add_and_get_index(word)
     
     def sentence_preprocess(self, words: List[str]):
-        filtered = list(filter(lambda word: word not in stopwrds, words))
-        return list([word.lower() for word in filtered])
+        filtered = [word.lower() for word in words if word.lower() not in stopwrds]
+        # filtered = list(filter(lambda word: word not in stopwrds, words))
+        # return list([word.lower() for word in filtered])
+        return filtered
     
     # assume ex_words has been stripped of stop words
     def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
         if add_to_indexer:
             self.index_word(ex_words)
         counter = Counter(ex_words)
-        return list([counter[word] for word in ex_words])
+        return [counter[word] for word in ex_words]
              
 
 class BigramFeatureExtractor(FeatureExtractor):
@@ -112,7 +114,7 @@ class BigramFeatureExtractor(FeatureExtractor):
 
     def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
         counter = Counter(ex_words)
-        return list([counter[bigram] for bigram in ex_words])
+        return [counter[bigram] for bigram in ex_words]
 
 
 class BetterFeatureExtractor(FeatureExtractor):
@@ -145,19 +147,19 @@ class BetterFeatureExtractor(FeatureExtractor):
                 self.idfs[word] += 1
     
     def sentence_preprocess(self, words: List[str]):
-        filtered = list(filter(lambda word: word not in stopwrds, words))
-        return list([word.lower() for word in filtered])
-    
-    def get_word_idf(self, word: str) -> float:
-        res = self.idfs[word]
-        return res if res != 0 else 1
+        filtered = [word.lower() for word in words if word.lower() not in stopwrds]
+        return filtered
 
     # assume ex_words has been stripped of stop words
     def extract_features(self, ex_words: List[str], add_to_indexer: bool=False) -> List[int]:
         if add_to_indexer:
             self.index_word(ex_words)
         counter = Counter(ex_words)
-        return list([counter[word] * self.get_word_idf(word) for word in ex_words])
+        vals = counter.values()
+        max_word = 1
+        if vals:
+            max_word = max(counter.values())
+        return list([(counter[word] * self.idfs[word])/max_word for word in ex_words])
 
 
 
@@ -256,20 +258,17 @@ def weight_plus_features(weights, words: List[str], indexer: Indexer, \
     for idx, word in enumerate(words):
         #If feat_vec[idx] == 0, its probably a stop word and wasn't stored in indexer
         sign = -1 if subtract else 1
-        if feat_vec[idx] != 0:
-            weight_idx = indexer.index_of(word)
-            if weight_idx >= 0:
-                weights[weight_idx] += (feat_vec[idx] * sign)
+        weight_idx = indexer.index_of(word)
+        if weight_idx >= 0:
+            weights[weight_idx] += (feat_vec[idx] * sign)
             
 
-def feature_scale(feat_vec: List[int], alpha) -> List[int]:
+def feature_scale(feat_vec: List[int], alpha):
     """
     Scale a feature vector by alpha
     """
-    scaled = []
-    for x in feat_vec:
-        scaled.append(x * alpha)
-    return scaled
+    for i in range(len(feat_vec)):
+        feat_vec[i] *= alpha
 
 def print_top_10(weights, indexer: Indexer, positive: bool=True):
     q = []
@@ -297,7 +296,7 @@ def print_top_10(weights, indexer: Indexer, positive: bool=True):
     
 def train_perceptron(train_exs: List[SentimentExample], 
                     feat_extractor: FeatureExtractor, EPOCHS: int=30,
-                    alpha : float=np.exp(-4),
+                    alpha : float=1e-4,
                     step=StepType.CONSTANT) -> PerceptronClassifier:
     """
     Train a classifier with the perceptron.
@@ -307,6 +306,7 @@ def train_perceptron(train_exs: List[SentimentExample],
     """
     indexer = feat_extractor.get_indexer()
     weights = np.zeros(len(indexer))
+    np.random.seed(0)
     for i in range(EPOCHS):
         np.random.shuffle(train_exs)
         if step == StepType.FIXED_FACTOR:
@@ -319,7 +319,7 @@ def train_perceptron(train_exs: List[SentimentExample],
             prod = weights_dot_features(weights, words, indexer, feat_vec)
             predicted_label = 1 if prod > 0 else 0
             if predicted_label != ex.label:
-                feat_vec = feature_scale(feat_vec, alpha) if alpha != 1.0 else feat_vec
+                feature_scale(feat_vec, alpha) if alpha != 1.0 else feat_vec
                 weight_plus_features(weights, words, indexer, feat_vec, not ex.label)           
     # print_top_10(weights, indexer)
     # print_top_10(weights, indexer, False)
@@ -353,7 +353,7 @@ def train_logistic_regression(train_exs: List[SentimentExample],
     """
     indexer = feat_extractor.get_indexer()
     weights = np.zeros(len(indexer))
-
+    np.random.seed(0)
     for i in range(EPOCHS):
         if step == StepType.FIXED_FACTOR:
             alpha = 1 / (10 ** i)
@@ -368,7 +368,7 @@ def train_logistic_regression(train_exs: List[SentimentExample],
             pos_prob = cond_prob_label_features(prod)
             # nl = nll(ex.label, pos_prob)
             # sum += nl
-            feat_vec = feature_scale(feat_vec, alpha * (pos_prob - ex.label))
+            feature_scale(feat_vec, alpha * (pos_prob - ex.label))
             #update weights
             weight_plus_features(weights, words, indexer, feat_vec, True)
         # print("NLL for epoch {}: {}".format(i, sum/len(train_exs)))
@@ -432,7 +432,7 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
         if args.harmonic:
             return StepType.HARMONIC
         return StepType.CONSTANT
-
+    alpha = args.alpha
     # Initialize feature extractor
     if args.model == "TRIVIAL":
         feat_extractor = None
@@ -452,12 +452,16 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
     if args.model == "TRIVIAL":
         model = TrivialSentimentClassifier()
     elif args.model == "PERCEPTRON":
+        # if args.feats == "UNIGRAM":
+        #     alpha = 0.001
         model = train_perceptron(train_exs, feat_extractor, EPOCHS=args.epochs,
-                                 alpha=args.alpha)
+                                 alpha=alpha)
     elif args.model == "LR":
+        # if args.feats == "UNIGRAM":
+        #     alpha = 0.0112
         model = train_logistic_regression(train_exs, feat_extractor, 
                                           EPOCHS=args.epochs, 
-                                          alpha=args.alpha, step=get_step_type())
+                                          alpha=alpha, step=get_step_type())
     else:
         raise Exception("Pass in TRIVIAL, PERCEPTRON, or LR to run the appropriate system")
     return model
