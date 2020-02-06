@@ -20,6 +20,12 @@ class StepType(Enum):
     CONSTANT=0
     FIXED_FACTOR=1
     HARMONIC=2
+
+alpha_map = {
+    ("LR", "UNIGRAM"): 0.0112,
+    ("PERCEPTRON", "UNIGRAM"): 0.001,
+    ("PERCEPTRON", "BETTER"): 0.099
+}
     
 
 class FeatureExtractor(object):
@@ -432,7 +438,6 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
         if args.harmonic:
             return StepType.HARMONIC
         return StepType.CONSTANT
-    alpha = args.alpha
     # Initialize feature extractor
     if args.model == "TRIVIAL":
         feat_extractor = None
@@ -447,6 +452,10 @@ def train_model(args, train_exs: List[SentimentExample]) -> SentimentClassifier:
         feat_extractor = BetterFeatureExtractor(Indexer(), train_exs)
     else:
         raise Exception("Pass in UNIGRAM, BIGRAM, or BETTER to run the appropriate system")
+    combo_tup = (args.model, args.feats)
+    alpha = args.alpha
+    if combo_tup in alpha_map:
+        alpha = alpha_map[combo_tup]
 
     # Train the model
     if args.model == "TRIVIAL":
