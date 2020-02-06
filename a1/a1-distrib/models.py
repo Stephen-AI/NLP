@@ -344,7 +344,8 @@ def nll(y, p):
 def train_logistic_regression(train_exs: List[SentimentExample], 
                               feat_extractor: FeatureExtractor, EPOCHS: int=30,
                               alpha : float=np.exp(-4),
-                              step=StepType.CONSTANT) -> LogisticRegressionClassifier:
+                              step=StepType.CONSTANT,
+                              weights=None) -> LogisticRegressionClassifier:
     """
     Train a logistic regression model.
     :param train_exs: training set, List of SentimentExample objects
@@ -352,7 +353,8 @@ def train_logistic_regression(train_exs: List[SentimentExample],
     :return: trained LogisticRegressionClassifier model
     """
     indexer = feat_extractor.get_indexer()
-    weights = np.zeros(len(indexer))
+    if not weights:
+        weights = np.zeros(len(indexer))
     np.random.seed(0)
     for i in range(EPOCHS):
         if step == StepType.FIXED_FACTOR:
@@ -400,18 +402,19 @@ def plot_LR_accuracies(train_ex: List[SentimentExample], dev_ex: List[SentimentE
     feat_extractor = UnigramFeatureExtractor(Indexer(), train_ex)
     epochs = [1, 10, 20, 30, 50]
     schedules = [StepType.CONSTANT, StepType.FIXED_FACTOR, StepType.HARMONIC]
-    
+    weights = None
     plt.rcParams.update({'font.size': 15})
     for step in schedules:
         accuracies = []
         dlls = []
         _, ax = plt.subplots()
-        for epoch in epochs:
-            model = train_logistic_regression(train_ex, feat_extractor, epoch, step=step)
+        for epoch in range(6):
+            model = train_logistic_regression(train_ex, feat_extractor, epoch, step=step, weights=weights)
             acc = get_accuracy_count(model, dev_ex)
             dll = dll_avg(model, train_ex)
             accuracies.append(acc)
             dlls.append(dll)
+            weights = model.weights
         ax.set_xlabel('Epochs')
         ax.plot(epochs, dlls, label="Epoch vs Average Loss")
         ax.plot(epochs, accuracies, label="Epoch vs Dev Accuracy")
