@@ -1,0 +1,4 @@
+a1-distrib/.vscode/
+a1-distrib/__pycache__/
+a1-distrib/test-blind.output.txt
+a1-distrib/*.png
