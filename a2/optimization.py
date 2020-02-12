@@ -16,6 +16,8 @@ def _parse_args():
     parser.add_argument('--lr', type=float, default=1., help='learning rate')
     parser.add_argument('--weight_decay', type=float, default=0., help='weight decay')
     parser.add_argument('--epochs', type=int, default=100, help='number of epochs')
+    parser.add_argument('--tip_point', type=float, default=0.0, help='find tipping point starting from provided value.')
+    parser.add_argument('--best_step', default=False, help='finding the best step', action='store_true')
     args = parser.parse_args()
     return args
 
@@ -39,32 +41,66 @@ def quadratic_grad(x1, x2):
     """
     return np.array([2 * x1 - 2, 16 * x2 -16])
 
+def dist_from_optimum(x, y):
+    return y**2 + (1-x[0]) ** 2 + (1-x[1]) ** 2
 
-def sgd_test_quadratic(args):
+def sgd_test_quadratic(args, empir=False):
     xlist = np.linspace(-3.0, 3.0, 100)
     ylist = np.linspace(-3.0, 3.0, 100)
     X, Y = np.meshgrid(xlist, ylist)
     Z = quadratic(X, Y)
-    plt.figure()
+    if not empir:
+        plt.figure()
+
+    if empir:
+        print("stepsize:", args.lr)
 
     # Track the points visited here
     points_history = []
     curr_point = np.array([0, 0])
     for iter in range(0, args.epochs):
         next_point = curr_point - args.lr * quadratic_grad(curr_point[0], curr_point[1])
+        d = dist_from_optimum(next_point, quadratic(*next_point))
+        if  d <= 0.01:
+            print("We have arrived after epoch:", iter)
+            return iter
         points_history.append(curr_point)
-        print("Point after epoch %i: %s" % (iter, repr(next_point)))
+        if not empir:
+            print("Point after epoch %i: %s" % (iter, repr(next_point)))
+            print("distance from optimum:", d ** 0.5)
         curr_point = next_point
-    points_history.append(curr_point)
-    cp = plt.contourf(X, Y, Z)
-    plt.colorbar(cp)
-    plt.plot([p[0] for p in points_history], [p[1] for p in points_history], color='k', linestyle='-', linewidth=1, marker=".")
-    plt.title('SGD on quadratic')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.show()
-    exit()
+    if empir:
+        print("Point after epoch %i: %s" % (args.epochs, repr(curr_point)))
+        return args.epochs
+        
+    if not empir:
+        points_history.append(curr_point)
+        cp = plt.contourf(X, Y, Z)
+        plt.colorbar(cp)
+        plt.plot([p[0] for p in points_history], [p[1] for p in points_history], color='k', linestyle='-', linewidth=1, marker=".")
+        plt.title('SGD on quadratic')
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.show()
+        exit()
 
+def tipping_point(args):
+    start = args.tip_point
+    for i in range(1,51):
+        args.lr = start * i
+        sgd_test_quadratic(args, True)
+
+def best_step_size(args):
+    start = 0.11
+    steps = []
+    iters = []
+    while start >= 0:
+        args.lr = start
+        steps.append(start)
+        iters.append(sgd_test_quadratic(args, True))
+        start -= 0.01
+    plt.plot(steps, iters)
+    plt.show()
 
 def forward(x, W1, W2):
     """
@@ -162,6 +198,12 @@ def sgd_test_nn(args):
 
 if __name__ == '__main__':
     args = _parse_args()
+    if args.best_step:
+        best_step_size(args)
+        exit()
+    if args.tip_point != 0.0:
+        tipping_point(args)
+        exit()
     if args.func == "QUAD":
         sgd_test_quadratic(args)
     else:
