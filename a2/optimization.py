@@ -102,6 +102,8 @@ def best_step_size(args):
     plt.plot(steps, iters)
     plt.show()
 
+def ReLU(x):
+    return x * (x > 0)
 def forward(x, W1, W2):
     """
     Forward computation of the neural network defined by parameters W1 and W2: softmax(W2 ReLU(W1 x))
@@ -111,7 +113,7 @@ def forward(x, W1, W2):
     :return: hidden layer activations (after nonlinearity) and output probabilities
     """
     hidden = np.matmul(W1, x)
-    hidden = np.tanh(hidden)
+    hidden = ReLU(hidden)
     final = np.matmul(W2, hidden)
     final_probs = scipy.special.softmax(final)
     return hidden, final_probs
@@ -176,11 +178,44 @@ def sgd_test_nn(args):
     train_ys = np.array([0, 1, 1, 1, 1, 0], dtype=np.int)
     # Inputs are of size 2
     input_vec_size = 2
-    hidden_layer_size = 1
+    hidden_layer_size = 20
     num_output_classes = 2
 
-    W1 = np.zeros([hidden_layer_size, input_vec_size])
-    W2 = np.zeros([num_output_classes, hidden_layer_size])
+    # W1 = np.random.normal(0.1, 0.5, [hidden_layer_size, input_vec_size])
+    # W2 = np.random.normal(0.1, 0.5, [num_output_classes, hidden_layer_size])
+    W1 = [[-0.05485434,  0.17048996],
+        [ 1.4050578   ,0.41822082],
+        [ 0.2502659   ,-0.90215491],
+        [ 0.21868904  ,0.02183059],
+        [-0.34004514  ,-0.11852439],
+        [-0.40287992  ,-0.11863027],
+        [-0.46374172  ,0.31233554],
+        [-0.13021552  ,0.42406104],
+        [ 0.66889081  ,-0.56371325],
+        [ 0.37465822  ,-1.15539007],
+        [-0.28590603  ,0.37990639],
+        [ 0.09632829  ,0.22716575],
+        [ 0.30543349  ,0.35953666],
+        [-0.2324216   ,0.74106603],
+        [ 0.17400249  ,0.37862224],
+        [-0.51398728  ,-0.13046341],
+        [-0.04839951  ,0.14561196],
+        [ 0.65694378  ,-0.02472868],
+        [-0.55536435  ,0.24870385],
+        [ 0.80294017  ,0.87409955]]
+    W2 = [[ 0.08460304, -0.31540261, -0.88104557,  0.73753344,  0.0456759,  -0.64529408,
+  -0.63967859,  0.17569465, -0.38353729, -1.22387646, -0.53191678, -0.04725615,
+   0.03214576,  0.57860568, -0.01804008, 0.45811475, 0.205572, 0.03853517,
+  -0.919939, -0.31148005],
+ [ 0.07325347, -0.49569088, 0.78307286, -0.58137106,  0.84411507, -0.63095534,
+   0.35389338,  0.56889836,  0.46446913,  0.49100368,  0.72550782, -0.15570265,
+  -0.09173428,  0.15939093,  0.40018832, -0.13833023,  0.46456354, -0.12191432,
+   0.56329089, -0.07090368]]
+
+    bestW1, bestW2, min_loss = [None, None, float("inf")]
+    W1 = np.array(W1)
+    W2 = np.array(W2)
+    
     for t in range(0, args.epochs):
         ll = 0.0
         correct = 0
@@ -189,11 +224,16 @@ def sgd_test_nn(args):
             if np.argmax(final_probs) == train_ys[idx]:
                 correct += 1
             ll += -np.log(final_probs[train_ys[idx]])
+            if ll < min_loss:
+                bestW1 = np.array(W1)
+                bestW2 = np.array(W2)
             W1_grad, W2_grad = backward(train_xs[idx], train_ys[idx], hidden, final_probs, W2)
             W1 -= W1_grad * args.lr
             W2 -= W2_grad * args.lr
         print("Accuracy on epoch %i: %i/%i" % (t, correct, train_ys.shape[0]))
         print("Loss (negative log likelihood) on epoch %i: %f" % (t, ll))
+    print(bestW1)
+    print(bestW2)
 
 
 if __name__ == '__main__':
