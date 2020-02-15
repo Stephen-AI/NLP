@@ -7,6 +7,43 @@ import numpy as np
 import random
 from sentiment_data import *
 
+class FFNN(nn.Module):
+    """
+    Defines the core neural network for doing multiclass classification over a single datapoint at a time. This consists
+    of matrix multiplication, tanh nonlinearity, another matrix multiplication, and then
+    a log softmax layer to give the ouputs. Log softmax is numerically more stable. If you take a softmax over
+    [-100, 100], you will end up with [0, 1], which if you then take the log of (to compute log likelihood) will
+    break.
+
+    The forward() function does the important computation. The backward() method is inherited from nn.Module and
+    handles backpropagation.
+    """
+    def __init__(self, inp, hid, out):
+        """
+        Constructs the computation graph by instantiating the various layers and initializing weights.
+
+        :param inp: size of input (integer)
+        :param hid: size of hidden layer(integer)
+        :param out: size of output (integer), which should be the number of classes
+        """
+        super(FFNN, self).__init__()
+        self.V = nn.Linear(inp, hid)
+        self.g = nn.Tanh()
+        self.W = nn.Linear(hid, out)
+        self.log_softmax = nn.LogSoftmax(dim=0)
+        # Initialize weights according to a formula due to Xavier Glorot.
+        nn.init.xavier_uniform_(self.V.weight)
+        nn.init.xavier_uniform_(self.W.weight)
+
+    def forward(self, x):
+        """
+        Runs the neural network on the given data and returns log probabilities of the various classes.
+
+        :param x: a [inp]-sized tensor of input data
+        :return: an [out]-sized tensor of log probabilities. (In general your network can be set up to return either log
+        probabilities or a tuple of (loss, log probability) if you want to pass in y to this function as well
+        """
+        return self.log_softmax(self.W(self.g(self.V(x))))
 
 class SentimentClassifier(object):
     """
