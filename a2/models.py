@@ -18,7 +18,7 @@ class FFNN(nn.Module):
     The forward() function does the important computation. The backward() method is inherited from nn.Module and
     handles backpropagation.
     """
-    def __init__(self, inp, hid, out):
+    def __init__(self, inp, hid, out, embeddings: WordEmbeddings):
         """
         Constructs the computation graph by instantiating the various layers and initializing weights.
 
@@ -31,9 +31,19 @@ class FFNN(nn.Module):
         self.g = nn.Tanh()
         self.W = nn.Linear(hid, out)
         self.log_softmax = nn.LogSoftmax(dim=0)
+        self.embed_vec_size = len(embeddings.vectors[0])
+        self.embedding = nn.Embedding(len(embeddings.vectors), self.embed_vec_size)
+        self.embedding.weight.data.copy_(torch.from_numpy(embeddings.vectors))
+        self.embedding.weight.requires_grad_(False)
         # Initialize weights according to a formula due to Xavier Glorot.
         nn.init.xavier_uniform_(self.V.weight)
         nn.init.xavier_uniform_(self.W.weight)
+    
+    def avg_word_vecs(self, word_idx: List[int]):
+        retval = torch.zeros(self.embed_vec_size)
+        idxs = torch.tensor(word_idx, dtype=torch.long)
+        embeddings = self.embedding(idxs)
+
 
     def forward(self, x):
         """
@@ -73,8 +83,10 @@ class NeuralSentimentClassifier(SentimentClassifier):
     Implement your NeuralSentimentClassifier here. This should wrap an instance of the network with learned weights
     along with everything needed to run it on new data (word embeddings, etc.)
     """
-    def __init__(self):
-        raise NotImplementedError
+    def __init__(self, ffnn: nn.Module, embeddings: WordEmbeddings):
+        self.ffnn = ffnn
+        self.embed = embeddings
+
 
 
 def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_exs: List[SentimentExample], word_embeddings: WordEmbeddings) -> NeuralSentimentClassifier:
@@ -85,5 +97,29 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
     :param word_embeddings: set of loaded word embeddings
     :return: A trained NeuralSentimentClassifier model
     """
+    epochs = args.epochs
+    lr = args.lr
+    input_size = len(word_embeddings.vectors[0])
+    num_classes = 2
+    hidden_layer_size = 10
+    ffnn = FFNN(input_size, hidden_layer_size, num_classes, word_embeddings)
+    optimizer = optim.Adam(ffnn.parameters(), lr=lr)
+    
+    for epoch in range(epochs):
+        total_loss = 0.0
+        for ex in train_exs:
+            avg_vec = avg_word_vecs(ex.words, word_embeddings)
+            ffnn.zero_grad()
+            probs = ffnn.forward(avg_vec)
+            y_onehot = torch.zeros(num_classes)
+            y_onehot.scatter_(0, torch.from_numpy(np.asarray(ex.label,dtype=np.int64)), 1)
+            loss = nn.CrossEntropyLoss()
+            output = loss(probs, y_onehot)
+            total_loss += output
+            loss.backward()
+            optimizer.step()
+        print("[DAN] total loss after epoch {}: {}".format(epoch, total_loss))
+
+            
     raise NotImplementedError
 
