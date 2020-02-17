@@ -38,11 +38,6 @@ class FFNN(nn.Module):
         # Initialize weights according to a formula due to Xavier Glorot.
         nn.init.xavier_uniform_(self.V.weight)
         nn.init.xavier_uniform_(self.W.weight)
-    
-    def avg_word_vecs(self, word_idx: List[int]):
-        retval = torch.zeros(self.embed_vec_size)
-        idxs = torch.tensor(word_idx, dtype=torch.long)
-        embeddings = self.embedding(idxs)
 
 
     def forward(self, x):
@@ -87,7 +82,13 @@ class NeuralSentimentClassifier(SentimentClassifier):
         self.ffnn = ffnn
         self.embed = embeddings
 
-
+def avg_word_vecs(word_idx: List[int], ffnn: FFNN):
+        retval = torch.zeros(ffnn.embed_vec_size)
+        idxs = torch.tensor(word_idx, dtype=torch.long)
+        embeddings = ffnn.embedding(idxs)
+        for vec in embeddings:
+            retval += vec
+        return retval / len(word_idx)
 
 def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_exs: List[SentimentExample], word_embeddings: WordEmbeddings) -> NeuralSentimentClassifier:
     """
