@@ -6,6 +6,12 @@ from torch import optim
 import numpy as np
 import random
 from sentiment_data import *
+import nltk
+import string
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
+stopwrds = set(stopwords.words('english')) | set(string.punctuation)
 
 class FFNN(nn.Module):
     """
@@ -30,14 +36,15 @@ class FFNN(nn.Module):
         self.V = nn.Linear(inp, hid)
         self.g = nn.Tanh()
         self.W = nn.Linear(hid, out)
-        self.log_softmax = nn.LogSoftmax(dim=0)
+        self.log_softmax = nn.LogSoftmax(dim=1)
         self.embed_vec_size = len(embeddings.vectors[0])
         self.embedding = nn.Embedding(len(embeddings.vectors), self.embed_vec_size)
         self.embedding.weight.data.copy_(torch.from_numpy(embeddings.vectors))
         self.embedding.weight.requires_grad_(False)
-        # Initialize weights according to a formula due to Xavier Glorot.
-        nn.init.xavier_uniform_(self.V.weight)
-        nn.init.xavier_uniform_(self.W.weight)
+
+        # # Initialize weights according to a formula due to Xavier Glorot.
+        # nn.init.xavier_uniform_(self.V.weight)
+        # nn.init.xavier_normal_(self.W.weight)
 
 
     def forward(self, x):
@@ -48,7 +55,25 @@ class FFNN(nn.Module):
         :return: an [out]-sized tensor of log probabilities. (In general your network can be set up to return either log
         probabilities or a tuple of (loss, log probability) if you want to pass in y to this function as well
         """
-        return self.log_softmax(self.W(self.g(self.V(x))))
+        x = self.embedding(x)
+        x = x.mean(0)
+        x = x.unsqueeze(0) 
+
+        # print("W", self.W.weight.size())
+        # print("V", self.V.weight.size())
+        # print("x", x.size())
+
+        Vx = self.V(x)
+        # print("Vx", Vx.size())
+        tanh_res = self.g(Vx)
+        # print("g(Vx)",tanh_res.size())
+        res = self.W(tanh_res)
+        # print("Wg(Vx)",res.size())
+        # print("Wg(Vx) =",res)
+        smax = self.log_softmax(res)
+        # print("softmax(Wg(Vx))", smax)
+        # print()
+        return smax
 
 class SentimentClassifier(object):
     """
@@ -82,13 +107,26 @@ class NeuralSentimentClassifier(SentimentClassifier):
         self.ffnn = ffnn
         self.embed = embeddings
 
-def avg_word_vecs(word_idx: List[int], ffnn: FFNN):
-        retval = torch.zeros(ffnn.embed_vec_size)
-        idxs = torch.tensor(word_idx, dtype=torch.long)
-        embeddings = ffnn.embedding(idxs)
-        for vec in embeddings:
-            retval += vec
-        return retval / len(word_idx)
+    def predict(self, ex_words: List[str]):
+        words = [word.lower() for word in ex_words]
+        idxs = get_indices(words, self.embed)
+        probs = self.ffnn(torch.tensor(idxs).long())
+        probs = probs.squeeze(0)
+        if probs[0] > probs[1]:
+            return 0
+        return 1
+
+
+def get_indices(words: List[str], embed: WordEmbeddings):
+    indexer = embed.word_indexer
+    retval = []
+    for word in words:
+        val = indexer.index_of(word)
+        if val >= 0:
+            retval.append(val)
+        else:
+            retval.append(indexer.index_of("UNK"))
+    return retval
 
 def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_exs: List[SentimentExample], word_embeddings: WordEmbeddings) -> NeuralSentimentClassifier:
     """
@@ -98,29 +136,31 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
     :param word_embeddings: set of loaded word embeddings
     :return: A trained NeuralSentimentClassifier model
     """
-    epochs = args.epochs
+    epochs = args.num_epochs
     lr = args.lr
     input_size = len(word_embeddings.vectors[0])
     num_classes = 2
-    hidden_layer_size = 10
+    hidden_layer_size = args.hidden_size
     ffnn = FFNN(input_size, hidden_layer_size, num_classes, word_embeddings)
     optimizer = optim.Adam(ffnn.parameters(), lr=lr)
-    
+    ffnn.train()
+    loss = nn.NLLLoss()
+
     for epoch in range(epochs):
         total_loss = 0.0
         for ex in train_exs:
-            avg_vec = avg_word_vecs(ex.words, word_embeddings)
+            words = [word.lower() for word in ex.words]
+            idxs = get_indices(words, word_embeddings)
             ffnn.zero_grad()
-            probs = ffnn.forward(avg_vec)
-            y_onehot = torch.zeros(num_classes)
-            y_onehot.scatter_(0, torch.from_numpy(np.asarray(ex.label,dtype=np.int64)), 1)
-            loss = nn.CrossEntropyLoss()
-            output = loss(probs, y_onehot)
+            probs = ffnn(torch.tensor(idxs).long())
+            label = torch.tensor(ex.label).unsqueeze(0).long()
+            output = loss(probs, label)
+            # print(probs)
             total_loss += output
-            loss.backward()
+            output.backward()
             optimizer.step()
         print("[DAN] total loss after epoch {}: {}".format(epoch, total_loss))
+    return NeuralSentimentClassifier(ffnn, word_embeddings)
 
             
-    raise NotImplementedError
 
