@@ -147,6 +147,7 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
     loss = nn.NLLLoss()
 
     for epoch in range(epochs):
+        np.random.shuffle(train_exs)
         total_loss = 0.0
         for ex in train_exs:
             words = [word.lower() for word in ex.words]
