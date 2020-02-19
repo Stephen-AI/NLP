@@ -117,16 +117,20 @@ class NeuralSentimentClassifier(SentimentClassifier):
         return 1
 
 
-def get_indices(words: List[str], embed: WordEmbeddings):
+def get_indices(exs: List[SentimentExample], embed: WordEmbeddings):
     indexer = embed.word_indexer
-    retval = []
-    for word in words:
-        val = indexer.index_of(word)
-        if val >= 0:
-            retval.append(val)
-        else:
-            retval.append(indexer.index_of("UNK"))
-    return retval
+    max_len = float("-inf")
+    for ex in exs:
+        max_len = max(max_len, len(ex.words))
+    idxs = torch.LongTensor(len(exs), max_len)
+    for i in range(len(exs)):
+        ex_len = len(ex.words)
+        for j in range(ex_len):
+            idx = indexer.index_of(ex.words[j])
+            idxs[i][j] = idx if idx != -1 else indexer.index_of("UNK")
+        for j in range(ex_len, max_len):
+            idxs[i][j] = indexer.index_of("PAD")
+    return idxs
 
 def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_exs: List[SentimentExample], word_embeddings: WordEmbeddings) -> NeuralSentimentClassifier:
     """
@@ -140,6 +144,7 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
     lr = args.lr
     input_size = len(word_embeddings.vectors[0])
     num_classes = 2
+    batch_size = args.batch_size
     hidden_layer_size = args.hidden_size
     ffnn = FFNN(input_size, hidden_layer_size, num_classes, word_embeddings)
     optimizer = optim.Adam(ffnn.parameters(), lr=lr)
@@ -150,18 +155,18 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
         np.random.shuffle(train_exs)
         total_loss = 0.0
         np.random.shuffle(train_exs)
-        for ex in train_exs:
+        for i in range(0, len(train_exs), batch_size):
+            exs = train_exs[i : i+batch_size]
             words = [word.lower() for word in ex.words]
             idxs = get_indices(words, word_embeddings)
             ffnn.zero_grad()
-            probs = ffnn(torch.tensor(idxs).long())
+            probs = ffnn(torch.tensor(idxs))
             label = torch.tensor(ex.label).unsqueeze(0).long()
             output = loss(probs, label)
-            # print(probs)
             total_loss += output
             output.backward()
             optimizer.step()
-        print("[DAN] total loss after epoch {}: {}".format(epoch, total_loss))
+        print("[DAN] total loss after epoch {}: {}".format(epoch+1, total_loss))
     return NeuralSentimentClassifier(ffnn, word_embeddings)
 
             
