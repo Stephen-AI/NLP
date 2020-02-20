@@ -36,7 +36,7 @@ class FFNN(nn.Module):
         self.V = nn.Linear(inp, hid)
         self.g = nn.Tanh()
         self.W = nn.Linear(hid, out)
-        self.log_softmax = nn.LogSoftmax(dim=1)
+        self.log_softmax = nn.LogSoftmax()
         self.embed_vec_size = len(embeddings.vectors[0])
         self.embedding = nn.Embedding(len(embeddings.vectors), self.embed_vec_size)
         self.embedding.weight.data.copy_(torch.from_numpy(embeddings.vectors))
@@ -63,15 +63,10 @@ class FFNN(nn.Module):
         # print("x", x.size())
 
         Vx = self.V(x)
-        # print("Vx", Vx.size())
         tanh_res = self.g(Vx)
-        # print("g(Vx)",tanh_res.size())
         res = self.W(tanh_res)
-        # print("Wg(Vx)",res.size())
-        # print("Wg(Vx) =",res)
         smax = self.log_softmax(res)
-        # print("softmax(Wg(Vx))", smax)
-        # print()
+        
         return smax
 
 class SentimentClassifier(object):
@@ -115,23 +110,31 @@ class NeuralSentimentClassifier(SentimentClassifier):
             return 0
         return 1
 
+def create2D(m,n):
+    ret = []
+    for i in range(m):
+        ret.append([0] * n)
+    return ret
 
 def get_indices(exs: List[SentimentExample], embed: WordEmbeddings):
     indexer = embed.word_indexer
     max_len = float("-inf")
     for ex in exs:
         max_len = max(max_len, len(ex.words))
-    idxs = torch.LongTensor(len(exs), max_len)
+    idxs = create2D(len(exs), max_len)
     labels = []
     for i in range(len(exs)):
-        ex_len = len(ex.words)
+        ex_len = len(exs[i].words)
         for j in range(ex_len):
-            idx = indexer.index_of(ex.words[j])
-            idxs[i][j] = idx if idx != -1 else indexer.index_of("UNK")
+            idx = indexer.index_of(exs[i].words[j])
+            idx = idx if idx != -1 else 1
+            idxs[i][j] = idx
+            # idxs[i][j] = idx if idx != -1 else indexer.index_of("UNK")
         for j in range(ex_len, max_len):
-            idxs[i][j] = indexer.index_of("PAD")
+            idxs[i][j] = 0
+            # idxs[i][j] = indexer.index_of("PAD")
         labels.append(exs[i].label)
-    return idxs,torch.LongTensor(labels)
+    return torch.LongTensor(idxs),torch.LongTensor(labels)
 
 def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_exs: List[SentimentExample], word_embeddings: WordEmbeddings) -> NeuralSentimentClassifier:
     """
@@ -159,9 +162,9 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
             exs = train_exs[i : i+batch_size]
             idxs, labels = get_indices(exs, word_embeddings)
             ffnn.zero_grad()
-            probs = ffnn(idxs)
+            probs = ffnn.forward(idxs)
             output = loss(probs, labels)
-            total_loss += output
+            total_loss += output.item()
             output.backward()
             optimizer.step()
         print("[DAN] total loss after epoch {}: {}".format(epoch+1, total_loss))
