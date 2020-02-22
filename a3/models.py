@@ -78,7 +78,33 @@ class HmmTaggingModel(object):
         :param sentence: the words to tag
         :return: a LabeledSentence containing the model's predictions. See BadTaggingModel for an example.
         """
-        raise Exception("Implement me")
+        n_tags = len(self.tag_indexer)
+        n_words = len(sentence)
+        vt = np.zeros((n_words, n_tags))
+        backtags = [0] * n_words
+        max_tag_idx = 0
+        max_word_tag = float("-inf")
+        for i in range(n_tags):
+            vt[0][i] = self.score_emission(sentence, i, 0) + self.score_init(i)
+            if vt[0][i] > max_word_tag:
+                max_tag_idx = i
+                max_word_tag = vt[0][i]
+        backtags[0] = self.tag_indexer.get_object(max_tag_idx)
+
+        for i in range(1, n_words):
+            max_word_tag = float("-inf")
+            max_tag_idx = 0
+            for j in range(n_tags):
+                max_prev_tag = float("-inf")
+                for k in range(n_tags):
+                    max_prev_tag = max(max_prev_tag, self.score_transition(k, j) + vt[i-1][k])
+                vt[i][j] = self.score_emission(sentence, j, i) + max_prev_tag
+                if vt[i][j] > max_word_tag:
+                    max_tag_idx = j
+                    max_word_tag = vt[i][j]
+            backtags[i] = self.tag_indexer.get_object(max_tag_idx)
+        return labeled_sent_from_words_tags(sentence, backtags)
+            
 
     def beam_decode(self, sentence: List[str]) -> LabeledSentence:
         """
