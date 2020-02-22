@@ -51,40 +51,26 @@ def sgd_test_quadratic(args, empir=False):
     ylist = np.linspace(-3.0, 3.0, 100)
     X, Y = np.meshgrid(xlist, ylist)
     Z = quadratic(X, Y)
-    if not empir:
-        plt.figure()
-
-    if empir:
-        print("stepsize:", args.lr)
+    plt.figure()
 
     # Track the points visited here
     points_history = []
     curr_point = np.array([0, 0])
     for iter in range(0, args.epochs):
         next_point = curr_point - args.lr * quadratic_grad(curr_point[0], curr_point[1])
-        d = dist_from_optimum(next_point, quadratic(*next_point))
-        if  d <= 0.01:
-            print("We have arrived after epoch:", iter)
-            return iter
         points_history.append(curr_point)
-        if not empir:
-            print("Point after epoch %i: %s" % (iter, repr(next_point)))
-            print("distance from optimum:", d ** 0.5)
+        print("Point after epoch %i: %s" % (iter, repr(next_point)))
         curr_point = next_point
-    if empir:
-        print("Point after epoch %i: %s" % (args.epochs, repr(curr_point)))
-        return args.epochs
         
-    if not empir:
-        points_history.append(curr_point)
-        cp = plt.contourf(X, Y, Z)
-        plt.colorbar(cp)
-        plt.plot([p[0] for p in points_history], [p[1] for p in points_history], color='k', linestyle='-', linewidth=1, marker=".")
-        plt.title('SGD on quadratic')
-        plt.xlabel('x')
-        plt.ylabel('y')
-        plt.show()
-        exit()
+    points_history.append(curr_point)
+    cp = plt.contourf(X, Y, Z)
+    plt.colorbar(cp)
+    plt.plot([p[0] for p in points_history], [p[1] for p in points_history], color='k', linestyle='-', linewidth=1, marker=".")
+    plt.title('SGD on quadratic')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.show()
+    exit()
 
 def tipping_point(args):
     start = args.tip_point
@@ -215,12 +201,6 @@ def sgd_test_nn(args):
 
 if __name__ == '__main__':
     args = _parse_args()
-    if args.best_step:
-        best_step_size(args)
-        exit()
-    if args.tip_point != 0.0:
-        tipping_point(args)
-        exit()
     if args.func == "QUAD":
         sgd_test_quadratic(args)
     else:

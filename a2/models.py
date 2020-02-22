@@ -40,7 +40,7 @@ class FFNN(nn.Module):
         self.embed_vec_size = len(embeddings.vectors[0])
         self.embedding = nn.Embedding(len(embeddings.vectors), self.embed_vec_size)
         self.embedding.weight.data.copy_(torch.from_numpy(embeddings.vectors))
-        self.embedding.weight.requires_grad_(False)
+        # self.embedding.weight.requires_grad_(False)
 
         # # Initialize weights according to a formula due to Xavier Glorot.
         # nn.init.xavier_uniform_(self.V.weight)
@@ -111,12 +111,16 @@ class NeuralSentimentClassifier(SentimentClassifier):
         return 1
 
 def create2D(m,n):
+    """ Create a m x n dimension array"""
     ret = []
-    for i in range(m):
+    for _ in range(m):
         ret.append([0] * n)
     return ret
 
 def get_indices(exs: List[SentimentExample], embed: WordEmbeddings):
+    """
+    Get the indices of a batch of Sentiment examples EXS
+    """
     indexer = embed.word_indexer
     max_len = float("-inf")
     for ex in exs:
@@ -148,7 +152,7 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
     lr = args.lr
     input_size = len(word_embeddings.vectors[0])
     num_classes = 2
-    batch_size = args.batch_size
+    batch_size = 64
     hidden_layer_size = args.hidden_size
     ffnn = FFNN(input_size, hidden_layer_size, num_classes, word_embeddings)
     optimizer = optim.Adam(ffnn.parameters(), lr=lr)
