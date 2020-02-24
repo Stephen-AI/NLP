@@ -103,6 +103,16 @@ class HmmTaggingModel(object):
                     max_tag_idx = j
                     max_word_tag = vt[i][j]
             backtags[i] = self.tag_indexer.get_object(max_tag_idx)
+
+        max_tag_idx = 0
+        max_word_tag = float("-inf")
+        stop_index = self.tag_indexer.index_of("STOP")
+        for i in range(n_tags):
+            vt[n_words - 1][i] += self.score_transition(i, stop_index)
+            if vt[n_words - 1][i] > max_word_tag:
+                max_word_tag = vt[n_words-1][i]
+                max_tag_idx = i
+        backtags[n_words-1] = self.tag_indexer.get_object(max_tag_idx)
         return labeled_sent_from_words_tags(sentence, backtags)
             
 
@@ -113,7 +123,8 @@ class HmmTaggingModel(object):
         """
         raise Exception("Implement me")
 
-
+def train_eisenstein(sentences: List[LabeledSentence]):
+    pass
 def train_hmm_model(sentences: List[LabeledSentence]):
     """
     Uses maximum-likelihood estimation to read an HMM off of a corpus of sentences.
