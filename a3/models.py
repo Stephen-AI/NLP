@@ -4,7 +4,7 @@ from treedata import *
 from utils import *
 from collections import Counter
 from typing import List
-
+from heapq import heapq, heappop
 import numpy as np
 
 
@@ -81,28 +81,23 @@ class HmmTaggingModel(object):
         n_tags = len(self.tag_indexer)
         n_words = len(sentence)
         vt = np.zeros((n_words, n_tags))
-        backtags = [0] * n_words
-        max_tag_idx = 0
-        max_word_tag = float("-inf")
+
+        backtags = np.zeros((n_words, n_tags),dtype=int)
         for i in range(n_tags):
             vt[0][i] = self.score_emission(sentence, i, 0) + self.score_init(i)
-            if vt[0][i] > max_word_tag:
-                max_tag_idx = i
-                max_word_tag = vt[0][i]
-        backtags[0] = self.tag_indexer.get_object(max_tag_idx)
+            
 
         for i in range(1, n_words):
-            max_word_tag = float("-inf")
-            max_tag_idx = 0
             for j in range(n_tags):
                 max_prev_tag = float("-inf")
+                max_prev_idx = 0
                 for k in range(n_tags):
-                    max_prev_tag = max(max_prev_tag, self.score_transition(k, j) + vt[i-1][k])
+                    cur_tag = self.score_transition(k, j) + vt[i-1][k]
+                    if cur_tag > max_prev_tag:
+                        max_prev_tag = cur_tag
+                        max_prev_idx = k
                 vt[i][j] = self.score_emission(sentence, j, i) + max_prev_tag
-                if vt[i][j] > max_word_tag:
-                    max_tag_idx = j
-                    max_word_tag = vt[i][j]
-            backtags[i] = self.tag_indexer.get_object(max_tag_idx)
+                backtags[i][j] = max_prev_idx
 
         max_tag_idx = 0
         max_word_tag = float("-inf")
@@ -112,8 +107,13 @@ class HmmTaggingModel(object):
             if vt[n_words - 1][i] > max_word_tag:
                 max_word_tag = vt[n_words-1][i]
                 max_tag_idx = i
-        backtags[n_words-1] = self.tag_indexer.get_object(max_tag_idx)
-        return labeled_sent_from_words_tags(sentence, backtags)
+        best_tags = [self.tag_indexer.get_object(max_tag_idx)]
+        prev_tag_idx = max_tag_idx
+        for i in range(n_words-1, 0, -1):
+            cur_tag_idx = backtags[i][prev_tag_idx]
+            best_tags.append(self.tag_indexer.get_object(cur_tag_idx))
+            prev_tag_idx = cur_tag_idx
+        return labeled_sent_from_words_tags(sentence, best_tags[::-1])
             
 
     def beam_decode(self, sentence: List[str]) -> LabeledSentence:
