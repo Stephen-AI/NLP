@@ -2,6 +2,8 @@
 
 from typing import List
 import re
+from collections import defaultdict
+import heapq
 
 
 class TaggedToken:
@@ -170,9 +172,47 @@ def read_parse_data(file):
             print("Read %i trees" % len(trees))
     return trees
 
+def find_most_common_parent(node: Tree, parent: Tree, occ_count: defaultdict, target: str, occurs:List[Tree]):
+    if node.label == target:
+        occurs.append(node)
+        if parent:
+            occ_count[parent.label] += 1
+    for child in node.children:
+        find_most_common_parent(child, node, occ_count, target, occurs)
+
+def tree_get_words(node: Tree, wordList: List[str], cnts: defaultdict):
+    if node.is_terminal():
+        wordList.append(node.label)
+    else:
+        if node.label == "IN":
+            cnts[node.children[0].label] += 1
+        for child in node.children:
+            tree_get_words(child, wordList, cnts)
 
 if __name__=="__main__":
     trees = read_parse_data("data/alltrees_dev.mrg.oneline")
-    for i in range(0, 10):
-        print("==========================")
-        print(trees[i].render_pretty())
+    occurrences = defaultdict(int)
+    pp_trees = []
+    for tree in trees:
+        find_most_common_parent(tree, None, occurrences, "PP", pp_trees)
+    occs = [x[::-1] for x in occurrences.items()]
+    top3 = heapq.nlargest(10, occs)
+
+    for idx, tag in enumerate(top3):
+        print("{} {}".format(idx + 1, tag))
+
+    prep_cnt = defaultdict(int)
+
+    for pp in pp_trees:
+        print("====================================")
+        words = []
+        tree_get_words(pp, words, prep_cnt)
+        print(" ".join(words))
+        print(pp.render_pretty())
+
+    print("Preposition counts")
+    for prep, count in prep_cnt.items():
+        print("{} : {}".format(prep, count))    
+    # for i in range(0, 10):
+    #     print("==========================")
+    #     print(trees[i].render_pretty())

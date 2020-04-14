@@ -167,6 +167,7 @@ def train_deep_averaging_network(args, train_exs: List[SentimentExample], dev_ex
             idxs, labels = get_indices(exs, word_embeddings)
             ffnn.zero_grad()
             probs = ffnn.forward(idxs)
+            print(probs)
             output = loss(probs, labels)
             total_loss += output.item()
             output.backward()

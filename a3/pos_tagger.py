@@ -20,6 +20,7 @@ def _parse_args():
     parser = argparse.ArgumentParser(description='pos_tagger.py')
     parser.add_argument('--model', type=str, default='BAD', help='model to run (BAD or HMM)')
     parser.add_argument('--use_beam', dest='use_beam', default=False, action='store_true', help='use beam search instead of Viterbi')
+    parser.add_argument('--beam_size', type=int, default=3, help='The beam size')
     parser.add_argument('--train_path', type=str, default='data/train_sents.conll', help='path to train set (you should not need to modify)')
     parser.add_argument('--dev_path', type=str, default='data/dev_sents.conll', help='path to dev set (you should not need to modify)')
     args = parser.parse_args()
@@ -67,7 +68,8 @@ if __name__ == '__main__':
         decode_start = time.time()
         for dev_ex in dev_sents:
             if args.use_beam:
-                dev_decoded.append(hmm_model.beam_decode(dev_ex.get_words()))
+                beam_size = args.beam_size
+                dev_decoded.append(hmm_model.beam_decode(dev_ex.get_words(), beam_size))
             else:
                 dev_decoded.append(hmm_model.viterbi_decode(dev_ex.get_words()))
             if len(dev_decoded) % 100 == 0:

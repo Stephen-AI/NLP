@@ -4,7 +4,7 @@ from treedata import *
 from utils import *
 from collections import Counter
 from typing import List
-from heapq import heapq, heappop
+from heapq import heappush, heappop
 import numpy as np
 
 
@@ -116,15 +116,58 @@ class HmmTaggingModel(object):
         return labeled_sent_from_words_tags(sentence, best_tags[::-1])
             
 
-    def beam_decode(self, sentence: List[str]) -> LabeledSentence:
+    def beam_decode(self, sentence: List[str], B=3) -> LabeledSentence:
         """
         :param sentence: the words to tag
         :return: a LabeledSentence containing the model's predictions. See BadTaggingModel for an example.
         """
-        raise Exception("Implement me")
+        n_tags = len(self.tag_indexer)
+        n_words = len(sentence)
+        vt = np.full((n_words, n_tags), float("-inf"))
 
-def train_eisenstein(sentences: List[LabeledSentence]):
-    pass
+        backtags = np.zeros((n_words, n_tags),dtype=int)
+        prev_beam = Beam(B)
+
+        # base case 1
+        for i in range(n_tags):
+            vt[0][i] = self.score_emission(sentence, i, 0) + self.score_init(i)
+            prev_beam.add(i, vt[0][i])
+
+        # recurrent step
+        for i in range(1, n_words):
+            beam = Beam(B)
+            for j in range(n_tags):
+                max_prev_tag = float("-inf")
+                max_prev_idx = 0
+                for k in prev_beam.get_elts():
+                    cur_tag = self.score_transition(k, j) + vt[i-1][k]
+                    if cur_tag > max_prev_tag:
+                        max_prev_tag = cur_tag
+                        max_prev_idx = k
+                vt[i][j] = self.score_emission(sentence, j, i) + max_prev_tag
+                beam.add(j, vt[i][j])
+                backtags[i][j] = max_prev_idx
+            prev_beam = beam
+
+        # last word to STOP probs
+        max_tag_idx = 0
+        max_word_tag = float("-inf")
+        stop_index = self.tag_indexer.index_of("STOP")
+        for i in range(n_tags):
+            vt[n_words - 1][i] += self.score_transition(i, stop_index)
+            if vt[n_words - 1][i] > max_word_tag:
+                max_word_tag = vt[n_words-1][i]
+                max_tag_idx = i
+
+        # backtracking
+        best_tags = [self.tag_indexer.get_object(max_tag_idx)]
+        prev_tag_idx = max_tag_idx
+        for i in range(n_words-1, 0, -1):
+            cur_tag_idx = backtags[i][prev_tag_idx]
+            best_tags.append(self.tag_indexer.get_object(cur_tag_idx))
+            prev_tag_idx = cur_tag_idx
+        return labeled_sent_from_words_tags(sentence, best_tags[::-1])                
+
 def train_hmm_model(sentences: List[LabeledSentence]):
     """
     Uses maximum-likelihood estimation to read an HMM off of a corpus of sentences.
