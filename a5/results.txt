@@ -1,0 +1,1298 @@
+Namespace(em_iters=10, en='data/europarl-short.es-en.en', es='data/europarl-short.es-en.es', make_vis=False, max_lines=10000, show_plot=False, unk_threshold=2.0)
+Read 2440 lines of length 15 or less out of 10000 possible
+Kept 1099 words out of 4351 possible
+Kept 1091 words out of 3457 possible
+Spanish and English vocabularies by frequency:
+Counter({'.': 2195.0, 'de': 1002.0, 'la': 868.0, ',': 743.0, 'que': 643.0, 'el': 560.0, 'en': 508.0, 'a': 418.0, 'es': 381.0, 'no': 344.0, 'los': 291.0, 'se': 283.0, 'y': 273.0, 'las': 258.0, 'por': 241.0, 'una': 230.0, 'un': 210.0, 'del': 171.0, 'este': 147.0, 'lo': 140.0, '?': 135.0, ')': 131.0, 'al': 131.0, '(': 129.0, 'con': 129.0, 'su': 125.0, 'para': 121.0, 'ha': 121.0, 'esta': 117.0, 'esto': 110.0, 'comisión': 105.0, 'parlamento': 93.0, 'más': 92.0, 'señor': 89.0, 'también': 86.0, 'me': 83.0, 'hay': 76.0, 'presidente': 68.0, 'debe': 62.0, 'muy': 62.0, 'está': 62.0, 'sobre': 61.0, 'como': 61.0, 'son': 60.0, 'informe': 59.0, 'debemos': 58.0, 'pero': 58.0, '-': 57.0, 'cuestión': 53.0, 'gracias': 52.0, 'ser': 50.0, 'señora': 49.0, 'nos': 49.0, 'creo': 48.0, 'sin': 47.0, 'pregunta': 47.0, 'ya': 46.0, 'debate': 45.0, 'ello': 44.0, 'así': 44.0, 'si': 44.0, 'importante': 43.0, 'europa': 43.0, '!': 43.0, 'presidenta': 42.0, 'han': 42.0, 'ahora': 41.0, 'eso': 41.0, 'hacer': 40.0, 'sr': 39.0, 'lugar': 39.0, 'tiene': 39.0, 'europea': 38.0, 'puede': 38.0, 'mi': 37.0, 'quisiera': 36.0, 'ese': 36.0, 'hemos': 35.0, 'punto': 35.0, 'todos': 35.0, 'algo': 35.0, 'tenemos': 34.0, 'política': 34.0, 'qué': 33.0, 'nosotros': 33.0, 'enmiendas': 33.0, 'queda': 33.0, 'estamos': 33.0, 'comisario': 33.0, 'hoy': 32.0, 'unión': 32.0, 'respecto': 32.0, 'estas': 32.0, 'consejo': 32.0, 'le': 31.0, 'tanto': 31.0, 'aplausos': 31.0, 'podemos': 31.0, 'quiero': 31.0, 'muchas': 31.0, 'bien': 30.0, 'usted': 29.0, 'sólo': 29.0, 'nuestro': 29.0, 'acuerdo': 29.0, 'estos': 29.0, 'sus': 29.0, 'trata': 29.0, 'yo': 29.0, 'dos': 28.0, 'esa': 28.0, 'todo': 27.0, 'grupo': 27.0, 'he': 27.0, 'nº': 27.0, 'deben': 26.0, 'aquí': 26.0, 'parece': 25.0, 'embargo': 25.0, 'programa': 25.0, 'contra': 24.0, 'pues': 24.0, 'europeo': 24.0, 'resolución': 24.0, 'caso': 23.0, ':': 23.0, 'votación': 23.0, 'cerrado': 23.0, 'propuesta': 23.0, 'sea': 23.0, 'directiva': 23.0, 'voy': 23.0, 'hecho': 22.0, 'día': 22.0, '"': 22.0, 'sido': 22.0, 'formulada': 22.0, 'principio': 21.0, 'espero': 21.0, 'favor': 21.0, 'asunto': 21.0, 'sentido': 21.0, 'tendrá': 21.0, 'estados': 21.0, 'algunos': 21.0, 'o': 21.0, 'h': 21.0, 'nuestra': 21.0, 'austria': 21.0, 'seguridad': 20.0, 'horas': 20.0, 'necesario': 20.0, 'necesitamos': 20.0, 'responsabilidad': 20.0, 'nada': 20.0, 'desde': 19.0, 'situación': 19.0, 'demasiado': 19.0, 'mañana': 19.0, 'va': 19.0, 'queremos': 19.0, 'años': 19.0, 'señoría': 18.0, 'orden': 18.0, 'control': 18.0, 'segundo': 18.0, 'miembros': 18.0, 'enmienda': 18.0, 'aún': 18.0, 'tres': 18.0, 'mismo': 18.0, 'algunas': 17.0, 'entre': 17.0, 'están': 17.0, 'último': 17.0, 'estoy': 17.0, 'competencia': 17.0, 'proceso': 17.0, 'aprueba': 17.0, 'a5': 17.0, 'totalmente': 16.0, 'dicho': 16.0, 'futuro': 16.0, 'preguntas': 16.0, 'vez': 16.0, '¿qué': 16.0, 'poco': 16.0, 'comisaria': 16.0, 'porque': 15.0, 'existe': 15.0, 'palabra': 15.0, 'gran': 15.0, 'les': 15.0, 'trabajo': 15.0, 'primer': 15.0, 'ponente': 15.0, 'político': 15.0, 'tema': 15.0, 'sra': 15.0, 'problema': 15.0, 'respuesta': 15.0, 'pueden': 15.0, 'ésta': 15.0, 'siempre': 14.0, 'tengo': 14.0, 'ejemplo': 14.0, 'mucho': 14.0, 'ante': 14.0, 'puedo': 14.0, 'claro': 14.0, 'gustaría': 13.0, 'ni': 13.0, 'otro': 13.0, 'primera': 13.0, 'otra': 13.0, '00': 13.0, 'otros': 13.0, 'señorías': 13.0, 'año': 13.0, 'nuestros': 13.0, 'todavía': 13.0, 'aspecto': 13.0, 'entonces': 13.0, 'además': 13.0, 'tienen': 13.0, 'recursos': 13.0, 'dar': 13.0, 'medio': 13.0, 'objetivos': 13.0, 'cosas': 12.0, 'era': 12.0, 'ue': 12.0, 'sí': 12.0, 'propuestas': 12.0, 'importantes': 12.0, 'posición': 12.0, 'aprobación': 12.0, 'toda': 12.0, 'tener': 12.0, 'refiere': 12.0, 'medidas': 12.0, 'conferencia': 12.0, 'presente': 12.0, 'tiempo': 12.0, 'ampliación': 12.0, '¿por': 11.0, 'observaciones': 11.0, 'importancia': 11.0, 'posible': 11.0, 'normas': 11.0, 'nuevo': 11.0, 'ellos': 11.0, 'muchos': 11.0, 'éste': 11.0, 'objetivo': 11.0, 'sesión': 11.0, 'debería': 11.0, 'presentado': 11.0, 'decir': 11.0, 'ninguna': 11.0, 'cuestiones': 11.0, 'tipo': 11.0, 'ahí': 11.0, '¿quién': 11.0, 'falta': 11.0, 'industria': 11.0, 'parte': 11.0, 'poder': 11.0, 'gobierno': 11.0, 'nombre': 10.0, 'pido': 10.0, 'ustedes': 10.0, 'realmente': 10.0, 'cierto': 10.0, 'forma': 10.0, 'última': 10.0, 'da': 10.0, '12': 10.0, 'transparencia': 10.0, 'especialmente': 10.0, 'puntos': 10.0, 'proyectos': 10.0, 'desarrollo': 10.0, 'problemas': 10.0, 'cultura': 10.0, 'intervenir': 10.0, 'empresas': 10.0, 'cinco': 10.0, 'hace': 10.0, 'sistema': 10.0, 'segunda': 10.0, 'justicia': 10.0, 'intergubernamental': 10.0, 'común': 10.0, 'ciudadanos': 10.0, 'iniciativa': 10.0, 'opinión': 10.0, 'gestión': 10.0, 'cómo': 10.0, 'temas': 10.0, 'costes': 10.0, 'período': 9.0, 'sesiones': 9.0, 'allí': 9.0, 'sabemos': 9.0, 'orador': 9.0, 'subsidiariedad': 9.0, 'cuenta': 9.0, 'nuestras': 9.0, 'permítanme': 9.0, 'obstante': 9.0, 'deseo': 9.0, 'mayor': 9.0, 'mayoría': 9.0, 'papel': 9.0, 'apoyo': 9.0, 'resultados': 9.0, 'mis': 9.0, 'tan': 9.0, 'ayuda': 9.0, 'final': 9.0, 'reforma': 9.0, 'derechos': 9.0, 'jurídica': 9.0, 'necesaria': 9.0, 'reglamento': 9.0, 'tribunal': 9.0, 'lograr': 9.0, 'todas': 9.0, 'hasta': 9.0, 'habrá': 9.0, 'derecho': 9.0, 'cada': 9.0, '2000': 9.0, 'haber': 9.0, 'tal': 9.0, 'texto': 9.0, 'pasado': 9.0, 'referirme': 9.0, 'unos': 9.0, 'organismo': 9.0, 'manera': 9.0, 'prodi': 9.0, 'menos': 9.0, 'automovilística': 9.0, 'decisión': 8.0, 'vamos': 8.0, 'momento': 8.0, 'consiguiente': 8.0, 'hacerlo': 8.0, 'semejante': 8.0, 'tampoco': 8.0, 'considero': 8.0, 'país': 8.0, 'fue': 8.0, 'grandes': 8.0, 'cambios': 8.0, 'mercado': 8.0, 'cuatro': 8.0, 'fondos': 8.0, 'dificultades': 8.0, 'antes': 8.0, 'particular': 8.0, '¿cómo': 8.0, 'acta': 8.0, 'refiero': 8.0, '11': 8.0, 'intervención': 8.0, 'nota': 8.0, 'cuando': 8.0, 'casos': 8.0, 'sería': 8.0, 'realidad': 8.0, 'modo': 8.0, 'inaceptable': 8.0, 'preocupación': 8.0, 'uno': 8.0, 'ésa': 8.0, 'mejor': 8.0, 'será': 8.0, 'compromiso': 8.0, 'comunidad': 8.0, 'deberíamos': 8.0, 'ver': 8.0, 'contrario': 8.0, 'interreg': 8.0, 'procedimiento': 7.0, 'conformidad': 7.0, 'legislación': 7.0, 'condiciones': 7.0, 'petición': 7.0, 'impuesto': 7.0, 'presidencia': 7.0, 'buena': 7.0, 'regiones': 7.0, 'constituye': 7.0, 'cuanto': 7.0, 'misma': 7.0, 'único': 7.0, 'resulta': 7.0, 'sociedad': 7.0, 'alguna': 7.0, 'agradezco': 7.0, 'observación': 7.0, 'propone': 7.0, '¿no': 7.0, 'donde': 7.0, 'verdad': 7.0, 'fin': 7.0, 'luego': 7.0, 'absolutamente': 7.0, 'igual': 7.0, 'atención': 7.0, 'controles': 7.0, 'van': 7.0, 'e': 7.0, 'irlanda': 7.0, 'establecer': 7.0, 'patten': 7.0, 'durante': 7.0, 'comisarios': 7.0, 'ejercicio': 7.0, 'tarea': 7.0, 'diputado': 7.0, 'paz': 7.0, 'manifiesta': 7.0, 'solicitud': 7.0, 'ambiente': 7.0, 'vehículos': 7.0, 'leader': 7.0, 'principios': 6.0, 'buen': 6.0, 'palabras': 6.0, 'existen': 6.0, 'voto': 6.0, 'resultado': 6.0, 'excelente': 6.0, 'unas': 6.0, 'actuar': 6.0, 'consecuencias': 6.0, 'empleo': 6.0, 'central': 6.0, 'recordar': 6.0, 'comprendo': 6.0, 'cooperación': 6.0, 'razonable': 6.0, 'instrumento': 6.0, 'continuación': 6.0, 'necesita': 6.0, 'grave': 6.0, 'justo': 6.0, 'razón': 6.0, 'materia': 6.0, 'económico': 6.0, 'esos': 6.0, 'marco': 6.0, 'examinar': 6.0, 'sé': 6.0, 'esas': 6.0, 'habido': 6.0, 'ningún': 6.0, 'estado': 6.0, 'seguir': 6.0, 'automóviles': 6.0, 'aplicación': 6.0, 'sigue': 6.0, 'países': 6.0, 'especial': 6.0, 'idea': 6.0, 'negociaciones': 6.0, 'veces': 6.0, 'confianza': 6.0, 'serán': 6.0, 'brevemente': 6.0, '1': 6.0, 'creemos': 6.0, 'votaciones': 6.0, 'explicaciones': 6.0, 'interés': 6.0, 'financiera': 6.0, 'desastre': 6.0, 'garantizar': 6.0, 'responsable': 6.0, 'claramente': 6.0, 'mencionar': 6.0, 'habría': 6.0, 'quién': 6.0, 'quienes': 6.0, 'hablar': 6.0, 'aceptar': 6.0, 'políticas': 6.0, 'preciso': 6.0, 'programas': 6.0, 'diálogo': 6.0, 'esencial': 6.0, 'después': 6.0, 'turno': 6.0, 'siguientes': 6.0, 'dado': 6.0, '¿es': 6.0, 'pueblo': 6.0, 'millones': 6.0, 'poner': 6.0, 'doy': 6.0, 'adoptar': 6.0, 'afecta': 6.0, 'número': 6.0, 'funcionarios': 6.0, 'documento': 6.0, 'principales': 6.0, 'asamblea': 6.0, 'sino': 6.0, 'fundamental': 6.0, 'vista': 6.0, 'haya': 6.0, 'podremos': 6.0, 'tobin': 6.0, 'austríaco': 6.0, 'llegado': 6.0, 'economía': 6.0, 'mismos': 5.0, 'ruego': 5.0, 'esté': 5.0, 'rechaza': 5.0, 'lectura': 5.0, 'solamente': 5.0, 'demás': 5.0, 'haciendo': 5.0, 'necesitan': 5.0, 'aspectos': 5.0, 'encontramos': 5.0, 'sean': 5.0, 'colegas': 5.0, 'tarde': 5.0, 'siguen': 5.0, 'regional': 5.0, 'instancia': 5.0, 'graves': 5.0, 'análisis': 5.0, 'levanta': 5.0, 'anterior': 5.0, '¿hay': 5.0, 'profundamente': 5.0, 'continuar': 5.0, 'instituciones': 5.0, 'paso': 5.0, 'presentar': 5.0, 'pleno': 5.0, 'tratado': 5.0, 'deberían': 5.0, 'primero': 5.0, 'siendo': 5.0, 'preocupaciones': 5.0, 'apoyar': 5.0, 'ése': 5.0, 'posibilidades': 5.0, 'justamente': 5.0, 'digo': 5.0, 'pequeña': 5.0, 'otras': 5.0, 'rápidamente': 5.0, 'mejora': 5.0, 'intereses': 5.0, 'empezar': 5.0, 'reformas': 5.0, 'bueno': 5.0, 'efecto': 5.0, 'llegar': 5.0, 'lucha': 5.0, 'nacionales': 5.0, 'bienvenida': 5.0, 'propio': 5.0, 'buenas': 5.0, 'saber': 5.0, 'naturalmente': 5.0, 'estructurales': 5.0, 'actuales': 5.0, 'duda': 5.0, 'paga': 5.0, 'erika': 5.0, 'catástrofe': 5.0, 'formación': 5.0, 'declaración': 5.0, 'medioambiental': 5.0, 'medida': 5.0, 'causa': 5.0, 'internacional': 5.0, 'actualidad': 5.0, 'solidaridad': 5.0, 'contexto': 5.0, 'alimentaria': 5.0, 'previsto': 5.0, 'florenz': 5.0, 'cabo': 5.0, 'relación': 5.0, 'desea': 5.0, 'euros': 5.0, 'quiere': 5.0, 'frente': 5.0, 'cantidad': 5.0, 'soy': 5.0, 'financiero': 5.0, 'documentos': 5.0, 'kinnock': 5.0, 'ámbitos': 5.0, 'éstas': 5.0, 'plenamente': 5.0, 'prácticas': 5.0, 'tercer': 5.0, 'vida': 5.0, 'finalmente': 5.0, 'comunicación': 5.0, 'solo': 5.0, 'propia': 5.0, 'clave': 5.0, 'meses': 5.0, 'cualquier': 5.0, 'incluso': 5.0, 'cig': 5.0, 'absoluto': 5.0, 'éxito': 5.0, 'ciertamente': 5.0, 'asimismo': 5.0, 'añadir': 5.0, 'israel': 5.0, 'competencias': 5.0, 'racismo': 5.0, 'kosovo': 5.0, 'mundo': 5.0, 'supuesto': 5.0, 'haider': 5.0, 'valores': 5.0, 'ambos': 5.0, 'ampliar': 5.0, 'nadie': 5.0, 'dentro': 5.0, 'consideración': 5.0, 'votado': 5.0, 'positivo': 4.0, 'gente': 4.0, 'riesgo': 4.0, 'ocurriendo': 4.0, 'según': 4.0, 'pedir': 4.0, 'transporte': 4.0, 'celebrar': 4.0, 'necesidad': 4.0, 'contribución': 4.0, '1997': 4.0, 'directrices': 4.0, 'crear': 4.0, 'seriamente': 4.0, 'tomamos': 4.0, 'pedimos': 4.0, 'mí': 4.0, 'conclusiones': 4.0, 'próximo': 4.0, 'responsabilidades': 4.0, 'tomado': 4.0, 'eficacia': 4.0, 'comunitaria': 4.0, 'oportunidad': 4.0, 'clara': 4.0, 'justa': 4.0, 'retira': 4.0, 'consideraciones': 4.0, 'ayudas': 4.0, 'fundamentales': 4.0, 'código': 4.0, 'pública': 4.0, 'von': 4.0, 'wogau': 4.0, 'nivel': 4.0, '6': 4.0, 'administración': 4.0, 'comparto': 4.0, 'europeas': 4.0, 'modernización': 4.0, 'particularmente': 4.0, 'contenido': 4.0, 'vía': 4.0, 'introducir': 4.0, 'conjunto': 4.0, 'llevar': 4.0, 'cambio': 4.0, 'estar': 4.0, '¡es': 4.0, 'prohibición': 4.0, 'autorización': 4.0, 'esperamos': 4.0, 'enfoque': 4.0, 'consenso': 4.0, 'imprescindible': 4.0, 'terminar': 4.0, 'decisiones': 4.0, 'considerar': 4.0, 'algún': 4.0, 'quizá': 4.0, 'garantías': 4.0, 'actualmente': 4.0, 'señalar': 4.0, 'requiere': 4.0, 'serio': 4.0, 'es:': 4.0, 'fiscal': 4.0, 'remediar': 4.0, 'general': 4.0, 'expresar': 4.0, 'tratar': 4.0, 'lado': 4.0, 'instrumentos': 4.0, 'precisamente': 4.0, '¿y': 4.0, 'público': 4.0, 'mediante': 4.0, '2': 4.0, 'acción': 4.0, 'podamos': 4.0, 'hacia': 4.0, 'diferente': 4.0, 'social': 4.0, 'cual': 4.0, 'rápida': 4.0, 'unidos': 4.0, 'acceso': 4.0, 'terreno': 4.0, 'podido': 4.0, 'ocasiones': 4.0, 'planteamiento': 4.0, 'procedimientos': 4.0, 'sabe': 4.0, 'grupos': 4.0, 'políticos': 4.0, 'realizar': 4.0, 'pregunto': 4.0, 'responsables': 4.0, 'esperan': 4.0, 'ocasión': 4.0, 'pienso': 4.0, 'contar': 4.0, 'resaltar': 4.0, 'positiva': 4.0, 'blanco': 4.0, 'calendario': 4.0, 'planteado': 4.0, 'referencia': 4.0, 'diferentes': 4.0, 'desgraciadamente': 4.0, 'tíbet': 4.0, 'acerca': 4.0, 'entiendo': 4.0, 'autor': 4.0, 'decae': 4.0, 'contestar': 4.0, 'aplicar': 4.0, 'tomar': 4.0, 'relaciones': 4.0, 'contiene': 4.0, 'posibilidad': 4.0, 'ámbito': 4.0, 'seguimos': 4.0, 'pendientes': 4.0, 'conducta': 4.0, 'claros': 4.0, 'evaluación': 4.0, 'materiales': 4.0, 'aplica': 4.0, 'fondo': 4.0, 'fuera': 4.0, 'alcanzar': 4.0, 'largo': 4.0, '¡no': 4.0, 'basta': 4.0, 'comprensión': 4.0, 'puesto': 4.0, 'contribuir': 4.0, 'portuguesa': 4.0, 'libertad': 4.0, 'iniciativas': 4.0, 'alma': 4.0, 'hacemos': 4.0, 'haga': 4.0, '13': 4.0, 'capital': 4.0, 'tax': 4.0, 'grande': 4.0, 'actitud': 4.0, 'urgencia': 4.0, 'hablando': 4.0, 'precaución': 4.0, 'nuevos': 4.0, 'bruselas': 4.0, 'prioridades': 4.0, 'labor': 4.0, 'turba': 4.0, 'reciclado': 4.0, 'fabricantes': 4.0, 'diputados': 4.0, 'residuos': 4.0, '14': 4.0, '¡la': 4.0, 'significa': 4.0, 'flexibilidad': 4.0, 'observatorio': 4.0, 'medios': 4.0, 'antibióticos': 4.0, 'reanudación': 3.0, 'aplicarse': 3.0, 'relativa': 3.0, 'áreas': 3.0, 'aprobemos': 3.0, 'extremadamente': 3.0, 'trabajos': 3.0, 'modificaciones': 3.0, 'pse': 3.0, 'socialistas': 3.0, 'acuerdos': 3.0, 'determinadas': 3.0, 'felicito': 3.0, 'pena': 3.0, 'puntualizaciones': 3.0, 'lamento': 3.0, 'realizado': 3.0, 'interesa': 3.0, 'norte': 3.0, 'feliz': 3.0, 'apoya': 3.0, 'exclusivamente': 3.0, 'carácter': 3.0, 'hora': 3.0, 'aceptamos': 3.0, 'gales': 3.0, 'reconocimiento': 3.0, 'eficaces': 3.0, 'ciudades': 3.0, 'respecta': 3.0, 'completamente': 3.0, 'desigualdades': 3.0, 'rápido': 3.0, 'conviene': 3.0, 'ciertas': 3.0, '¿cuáles': 3.0, 'solución': 3.0, 'específicos': 3.0, '20': 3.0, '25': 3.0, 'evidente': 3.0, 'aprobada': 3.0, 'camino': 3.0, 'ambas': 3.0, 'soluciones': 3.0, 'públicas': 3.0, 'exactamente': 3.0, 'líneas': 3.0, 'consumidor': 3.0, 'reducir': 3.0, 'gastos': 3.0, 'ejecución': 3.0, 'transparente': 3.0, 'prioridad': 3.0, 'plazo': 3.0, 'beneficios': 3.0, 'error': 3.0, 'responder': 3.0, 'nacional': 3.0, 'francamente': 3.0, '7': 3.0, 'merecen': 3.0, 'desfavorecidos': 3.0, 'partida': 3.0, 'empresa': 3.0, 'argumentos': 3.0, 'persona': 3.0, 'judicial': 3.0, 'monti': 3.0, 'miembro': 3.0, 'encuentra': 3.0, 'supone': 3.0, 'elemento': 3.0, 'respaldo': 3.0, 'intervenciones': 3.0, '30': 3.0, 'actual': 3.0, 'descentralización': 3.0, 'autoridades': 3.0, 'trabajar': 3.0, 'surgido': 3.0, 'experiencia': 3.0, 'proponer': 3.0, '¿se': 3.0, 'simple': 3.0, 'concierne': 3.0, 'objeto': 3.0, 'penal': 3.0, 'entrada': 3.0, 'vigor': 3.0, '15': 3.0, 'actos': 3.0, 'theato': 3.0, 'perfectamente': 3.0, 'creación': 3.0, 'jurídico': 3.0, 'doble': 3.0, 'cumbre': 3.0, 'campo': 3.0, 'europol': 3.0, 'comité': 3.0, 'crítica': 3.0, 'recomendaciones': 3.0, 'ppe': 3.0, 'correcto': 3.0, 'votar': 3.0, 'legislativa': 3.0, 'dicha': 3.0, 'volver': 3.0, 'representan': 3.0, 'comunitarias': 3.0, 'mientras': 3.0, 'aunque': 3.0, 'retraso': 3.0, 'podría': 3.0, 'únicamente': 3.0, 'francia': 3.0, 'alegra': 3.0, 'misión': 3.0, 'europeos': 3.0, 'ecológico': 3.0, 'refieren': 3.0, 'tolerable': 3.0, 'confusión': 3.0, 'máximo': 3.0, 'aguas': 3.0, 'hubiera': 3.0, 'consecuencia': 3.0, 'dudas': 3.0, 'ecológica': 3.0, 'serie': 3.0, 'aclarar': 3.0, 'ocurrió': 3.0, 'dirigir': 3.0, 'buques': 3.0, 'roth': 3.0, 'behrendt': 3.0, 'lista': 3.0, 'crisis': 3.0, 'conocer': 3.0, 'acojo': 3.0, 'prevenir': 3.0, 'comenzar': 3.0, 'esfuerzo': 3.0, 'reacción': 3.0, 'justificada': 3.0, 'opiniones': 3.0, 'regulación': 3.0, 'ingreso': 3.0, 'contamina': 3.0, 'pagar': 3.0, 'afectados': 3.0, 'recibir': 3.0, 'difícil': 3.0, 'nunca': 3.0, 'termino': 3.0, '40': 3.0, 'complejo': 3.0, 'afectadas': 3.0, '¡esto': 3.0, 'evidentemente': 3.0, 'restablecer': 3.0, 'perder': 3.0, 'interrumpe': 3.0, 'oído': 3.0, 'libro': 3.0, '¿cuál': 3.0, 'consumidores': 3.0, 'obtener': 3.0, 'dirigidas': 3.0, 'adhesión': 3.0, 'proyecto': 3.0, 'tales': 3.0, 'mes': 3.0, 'efectos': 3.0, 'pudiera': 3.0, 'información': 3.0, 'piensa': 3.0, 'dejar': 3.0, 'repito': 3.0, 'única': 3.0, 'base': 3.0, 'vitorino': 3.0, 'escuchado': 3.0, 'breve': 3.0, 'discriminación': 3.0, 'espacio': 3.0, 'quede': 3.0, 'asegurar': 3.0, 'veremos': 3.0, 'adoptado': 3.0, 'quería': 3.0, 'ambicioso': 3.0, 'institución': 3.0, 'asuntos': 3.0, 'adecuadamente': 3.0, 'seguro': 3.0, 'deseamos': 3.0, 'felicitar': 3.0, 'anteriores': 3.0, 'independiente': 3.0, 'varios': 3.0, 'hacerse': 3.0, 'demasiados': 3.0, 'jóvenes': 3.0, 'flexible': 3.0, 'generar': 3.0, 'febrero': 3.0, 'democrático': 3.0, 'prueba': 3.0, 'completo': 3.0, 'faltan': 3.0, 'enorme': 3.0, 'quizás': 3.0, 'concepto': 3.0, 'larga': 3.0, 'mejores': 3.0, 'proceder': 3.0, 'progreso': 3.0, 'personas': 3.0, 'éstos': 3.0, 'oriente': 3.0, 'palestinos': 3.0, 'somos': 3.0, 'siria': 3.0, 'semana': 3.0, 'esfuerzos': 3.0, 'perspectivas': 3.0, 'apoyamos': 3.0, 'noticia': 3.0, 'ocurre': 3.0, 'asilo': 3.0, 'convenio': 3.0, 'eurodac': 3.0, 'ciudadano': 3.0, 'euro': 3.0, 'opino': 3.0, 'quedan': 3.0, '¿tiene': 3.0, 'carta': 3.0, 'globalización': 3.0, 'argumento': 3.0, 'presión': 3.0, 'peligro': 3.0, 'minutos': 3.0, 'conjuntamente': 3.0, 'compartir': 3.0, 'permítame': 3.0, 'hipocresía': 3.0, 'reaccionar': 3.0, 'declaraciones': 3.0, 'derecha': 3.0, 'ayer': 3.0, 'deberán': 3.0, 'breves': 3.0, '¿el': 3.0, 'toma': 3.0, 'factores': 3.0, 'carga': 3.0, 'motivo': 3.0, 'afrontar': 3.0, 'días': 3.0, 'legislativo': 3.0, 'mantener': 3.0, 'inseguridad': 3.0, 'retrasos': 3.0, 'disponer': 3.0, 'pagan': 3.0, 'haremos': 3.0, 'altener': 3.0, 'energía': 3.0, 'celebro': 3.0, 'financiación': 3.0, 'vergüenza': 3.0, 'corresponde': 3.0, 'cultural': 3.0, 'útil': 3.0, 'utilización': 3.0, 'coches': 3.0, 'juicio': 3.0, 'desperdicios': 3.0, 'obviamente': 3.0, 'aprobar': 3.0, 'versión': 3.0, 'cuota': 3.0, 'berger': 3.0, 'elecciones': 3.0, 'voluntad': 3.0, 'rural': 3.0, 'urbana': 3.0, 'leader+': 3.0, 'actas': 3.0, 'próximos': 3.0})
+Counter({'.': 2169.0, 'the': 1413.0, 'to': 781.0, ',': 751.0, 'is': 727.0, 'of': 597.0, 'this': 523.0, 'we': 475.0, 'i': 472.0, 'that': 439.0, 'a': 431.0, 'in': 428.0, 'it': 305.0, 'be': 300.0, 'and': 288.0, 'not': 260.0, 'are': 231.0, 'have': 224.0, 'for': 216.0, 'on': 180.0, 'will': 165.0, 'you': 163.0, 'there': 145.0, '?': 139.0, '-': 138.0, 'would': 127.0, ')': 126.0, '(': 124.0, 'must': 123.0, 'mr': 121.0, 'with': 117.0, 'do': 116.0, 'has': 112.0, 'as': 108.0, 'president': 107.0, 'what': 106.0, 'should': 101.0, 'no': 95.0, 'very': 88.0, 'an': 88.0, 'commission': 87.0, 'by': 86.0, 'which': 86.0, 'can': 85.0, 'all': 84.0, 'parliament': 84.0, 'like': 81.0, 'been': 78.0, 'also': 78.0, 'our': 76.0, 'european': 76.0, 'these': 76.0, 'question': 73.0, 'at': 72.0, 'need': 72.0, 'about': 71.0, 'one': 67.0, 'so': 62.0, 'thank': 60.0, 'they': 59.0, 'report': 58.0, 'more': 58.0, 's': 57.0, 'us': 57.0, 'from': 54.0, 'therefore': 53.0, 'my': 51.0, 'important': 51.0, 'but': 51.0, 'now': 50.0, 'point': 49.0, 'take': 49.0, 'your': 48.0, 'commissioner': 48.0, 'however': 45.0, 'am': 45.0, 'was': 44.0, 'want': 44.0, 'only': 43.0, 'europe': 42.0, 'much': 41.0, 'issue': 41.0, 'debate': 41.0, '!': 40.0, 'who': 39.0, 'vote': 39.0, 'too': 38.0, 'me': 37.0, 'amendments': 36.0, 'just': 36.0, 'any': 36.0, 'if': 36.0, 'why': 35.0, 'its': 35.0, 'think': 35.0, 'first': 34.0, 'some': 34.0, 'does': 34.0, 'their': 34.0, 'support': 33.0, 'make': 32.0, 'good': 32.0, 'union': 32.0, 'madam': 31.0, 'applause': 31.0, 'here': 31.0, 'group': 30.0, 'how': 30.0, 'then': 29.0, 'many': 29.0, 'cannot': 29.0, 'shall': 28.0, 'hope': 28.0, 'believe': 28.0, 'place': 28.0, 'say': 28.0, 'people': 27.0, 'member': 27.0, 'today': 27.0, 'two': 27.0, 'into': 26.0, 'them': 26.0, 'closed': 26.0, 'see': 26.0, 'council': 26.0, 'out': 25.0, 'proposal': 25.0, 'made': 25.0, 'policy': 25.0, 'or': 25.0, 'way': 25.0, 'time': 25.0, 'course': 25.0, 'done': 24.0, 'something': 24.0, 'other': 24.0, 'such': 24.0, 'could': 24.0, 'said': 23.0, 'favour': 23.0, 'already': 23.0, 'few': 23.0, 'work': 23.0, 'were': 23.0, 'political': 23.0, 'same': 23.0, 'resolution': 23.0, 'order': 22.0, 'principle': 22.0, 'know': 22.0, '"': 22.0, 'second': 22.0, 'let': 22.0, 'directive': 22.0, 'most': 22.0, 'within': 22.0, 'well': 22.0, 'up': 22.0, ':': 22.0, 'case': 21.0, 'against': 21.0, 'concerns': 21.0, 'new': 21.0, 'states': 21.0, 'mrs': 21.0, 'clear': 21.0, 'h': 21.0, 'programme': 21.0, 'austria': 21.0, 'ask': 20.0, 'present': 20.0, 'fact': 20.0, 'taken': 20.0, 'm': 20.0, 'he': 20.0, 'matter': 19.0, 'his': 19.0, 'tomorrow': 19.0, 'amendment': 19.0, 'great': 19.0, 'questions': 19.0, 'again': 19.0, 'years': 19.0, 'three': 19.0, 'had': 19.0, 'future': 18.0, 'necessary': 18.0, 'still': 18.0, 'deal': 18.0, 'process': 18.0, 'long': 18.0, 'welcome': 18.0, 'situation': 17.0, 'being': 17.0, 'may': 17.0, 'legal': 17.0, 'yet': 17.0, 'put': 17.0, 'problem': 17.0, 'a5': 17.0, 'look': 16.0, 'position': 16.0, 'adopted': 16.0, 'because': 16.0, 'eu': 16.0, 'where': 16.0, 'clearly': 16.0, 'agree': 16.0, 'approved': 16.0, 'continue': 16.0, 'car': 16.0, 'financial': 16.0, 'since': 15.0, 'agenda': 15.0, 'off': 15.0, 'accept': 15.0, 'particular': 15.0, 'community': 15.0, 'than': 15.0, 'understand': 15.0, 'needs': 15.0, 'own': 15.0, 'possible': 15.0, 'under': 15.0, 'without': 15.0, 'those': 15.0, 'next': 15.0, 'number': 15.0, 'always': 14.0, 'another': 14.0, 'able': 14.0, 'both': 14.0, 'aid': 14.0, 'end': 14.0, 'when': 14.0, 'issues': 14.0, 'opinion': 14.0, 'far': 14.0, 'over': 14.0, 'areas': 13.0, 'extremely': 13.0, 'comments': 13.0, 'p': 13.0, 'action': 13.0, 'state': 13.0, 'points': 13.0, 'responsibility': 13.0, 'example': 13.0, 'given': 13.0, 'give': 13.0, 'whether': 13.0, 'serious': 13.0, 'government': 13.0, 'certain': 13.0, 'perhaps': 13.0, 'system': 13.0, 'once': 13.0, 'finally': 13.0, 'last': 13.0, 'agreement': 13.0, 'tax': 12.0, 'kind': 12.0, 'mention': 12.0, 'concerned': 12.0, 'rapporteur': 12.0, 'minutes': 12.0, "'s": 12.0, 'competition': 12.0, 'nothing': 12.0, 'view': 12.0, 'respect': 12.0, 'authority': 12.0, 'justice': 12.0, 'little': 12.0, 'indeed': 12.0, 'answer': 12.0, 'regard': 12.0, 'forward': 12.0, 'absolutely': 11.0, 'ourselves': 11.0, 'ensure': 11.0, 'speaker': 11.0, 'quite': 11.0, 'between': 11.0, 'area': 11.0, 'reform': 11.0, 'public': 11.0, 'find': 11.0, 'industry': 11.0, 'concern': 11.0, 'consider': 11.0, 'court': 11.0, 'get': 11.0, 'committee': 11.0, 'disaster': 11.0, 'right': 11.0, 'wish': 11.0, 'enlargement': 11.0, 'cost': 11.0, 'positive': 10.0, 'legislation': 10.0, 'proposed': 10.0, 'behalf': 10.0, 'result': 10.0, '12': 10.0, 'year': 10.0, 'doing': 10.0, 'itself': 10.0, 'major': 10.0, 'projects': 10.0, 'essential': 10.0, 'role': 10.0, 'come': 10.0, 'development': 10.0, 'sitting': 10.0, 'proposals': 10.0, 'law': 10.0, 'particularly': 10.0, 'five': 10.0, 'set': 10.0, 'making': 10.0, 'conference': 10.0, 'go': 10.0, 'add': 10.0, 'common': 10.0, 'things': 10.0, 'talking': 10.0, 'seems': 9.0, 'procedure': 9.0, 'speak': 9.0, 'subsidiarity': 9.0, 'transparency': 9.0, 'consideration': 9.0, 'means': 9.0, 'social': 9.0, "commission'": 9.0, 'problems': 9.0, 'opportunity': 9.0, '11': 9.0, 'precisely': 9.0, 'culture': 9.0, 'going': 9.0, 'change': 9.0, 'day': 9.0, 'idea': 9.0, 'discussion': 9.0, 'measures': 9.0, 'really': 9.0, 'intergovernmental': 9.0, 'provide': 9.0, 'hand': 9.0, 'past': 9.0, 'before': 9.0, 'rather': 9.0, 'liability': 9.0, 'control': 9.0, 'pay': 9.0, 'initiative': 9.0, 'part': 9.0, 'use': 9.0, 'help': 9.0, 'even': 9.0, 'prodi': 9.0, 'gave': 9.0, 'house': 8.0, 'wishes': 8.0, 'did': 8.0, 'happen': 8.0, 'safety': 8.0, 'him': 8.0, 'rules': 8.0, 'seen': 8.0, 'growing': 8.0, 'economic': 8.0, 'previous': 8.0, 'cases': 8.0, 'costs': 8.0, 'true': 8.0, 'level': 8.0, 'certainty': 8.0, 'share': 8.0, 'secondly': 8.0, 'training': 8.0, 'words': 8.0, 'unacceptable': 8.0, 'taking': 8.0, 'attention': 8.0, '2000': 8.0, 'office': 8.0, 'text': 8.0, 'raised': 8.0, 'resources': 8.0, 'response': 8.0, 'together': 8.0, 'tabled': 8.0, 'citizens': 8.0, 'responsible': 8.0, 'longer': 8.0, 'unfortunately': 8.0, 'cut': 8.0, 'ladies': 8.0, 'gentlemen': 8.0, 'waste': 8.0, 'floor': 8.0, 'following': 8.0, 'recognise': 8.0, 'enough': 8.0, 'thing': 8.0, 'austrian': 8.0, 'vehicles': 8.0, 'interreg': 8.0, 'leader': 8.0, 'session': 7.0, 'everything': 7.0, 'presidency': 7.0, 'account': 7.0, 'congratulate': 7.0, 'sense': 7.0, 'final': 7.0, 'others': 7.0, 'changes': 7.0, 'market': 7.0, 'four': 7.0, 'structural': 7.0, 'guidelines': 7.0, 'mentioned': 7.0, 'totally': 7.0, 'bear': 7.0, 'results': 7.0, 'analysis': 7.0, 'basic': 7.0, 'note': 7.0, 'allow': 7.0, 'mean': 7.0, 'rights': 7.0, 'comes': 7.0, 'approach': 7.0, 'single': 7.0, 'economy': 7.0, 'aspect': 7.0, 'interests': 7.0, 'legislative': 7.0, 'every': 7.0, 'confidence': 7.0, '1': 7.0, 'face': 7.0, 'efforts': 7.0, 'main': 7.0, 'voted': 7.0, 'different': 7.0, 'compromise': 7.0, 'act': 7.0, 'ecological': 7.0, 'type': 7.0, 'fully': 7.0, 'international': 7.0, 'difficult': 7.0, 'asked': 7.0, 'paper': 7.0, 'high': 7.0, 'energy': 7.0, 'raise': 7.0, 'achieve': 7.0, 'decision': 7.0, 'democratic': 7.0, 'life': 7.0, 'igc': 7.0, 'subject': 7.0, 'certainly': 7.0, 'peace': 7.0, 'assent': 7.0, 'objectives': 7.0, 'cars': 7.0, 'urban': 7.0, 'principles': 6.0, 'risk': 6.0, 'relating': 6.0, 'request': 6.0, 'dangerous': 6.0, 'urge': 6.0, 'short': 6.0, 'remains': 6.0, 'period': 6.0, 'job': 6.0, 'greater': 6.0, 'interest': 6.0, 'regions': 6.0, 'technical': 6.0, 'nature': 6.0, 'funds': 6.0, 'difficulties': 6.0, 'employment': 6.0, 'carried': 6.0, 'importance': 6.0, 'regional': 6.0, 'terms': 6.0, 'mind': 6.0, 'specific': 6.0, 'refer': 6.0, 'down': 6.0, 'existing': 6.0, 'less': 6.0, 'relates': 6.0, 'term': 6.0, 'individual': 6.0, 'national': 6.0, 'reason': 6.0, 'remain': 6.0, 'key': 6.0, 'aim': 6.0, 'become': 6.0, 'upon': 6.0, 'brief': 6.0, 'start': 6.0, 'reforms': 6.0, 'practical': 6.0, 'task': 6.0, 'matters': 6.0, 'events': 6.0, 'nevertheless': 6.0, 'ought': 6.0, 'best': 6.0, 'de': 6.0, 'ireland': 6.0, 'motion': 6.0, 'times': 6.0, 'environmental': 6.0, 'negotiations': 6.0, 'programmes': 6.0, 'food': 6.0, 'heard': 6.0, 'dialogue': 6.0, 'patten': 6.0, 'sort': 6.0, 'million': 6.0, 'priority': 6.0, 'commissioners': 6.0, 'move': 6.0, 'kinnock': 6.0, 'circumstances': 6.0, 'based': 6.0, 'document': 6.0, 'free': 6.0, 'real': 6.0, 'please': 6.0, 'tobin': 6.0, 'comment': 6.0, 'concerning': 5.0, 'properly': 5.0, 'hear': 5.0, 'item': 5.0, 'either': 5.0, 'solution': 5.0, 'acceptable': 5.0, 'reading': 5.0, 'excellent': 5.0, 'business': 5.0, 'standards': 5.0, 'addition': 5.0, 'special': 5.0, 'remember': 5.0, 'contribution': 5.0, 'discussing': 5.0, 'makes': 5.0, 'relation': 5.0, 'used': 5.0, 'behind': 5.0, 'asking': 5.0, "parliament'": 5.0, 'thinking': 5.0, 'conclusions': 5.0, 'away': 5.0, 'called': 5.0, 'fair': 5.0, 'fundamental': 5.0, 'reasonable': 5.0, 'institutions': 5.0, 'instrument': 5.0, 'produce': 5.0, 'efficiency': 5.0, 'treaty': 5.0, 'consumer': 5.0, 'force': 5.0, 'back': 5.0, 'supervision': 5.0, 'nos': 5.0, 'views': 5.0, 'currently': 5.0, 'came': 5.0, 'regulation': 5.0, 'various': 5.0, 'context': 5.0, 'whole': 5.0, 'moment': 5.0, 'small': 5.0, 'addressed': 5.0, 'countries': 5.0, 'groups': 5.0, 'quickly': 5.0, 'implementation': 5.0, 'companies': 5.0, 'joint': 5.0, 'criminal': 5.0, 'service': 5.0, '2': 5.0, 'van': 5.0, 'left': 5.0, 'priorities': 5.0, 'erika': 5.0, 'reality': 5.0, 'actually': 5.0, 'immediately': 5.0, 'involving': 5.0, 'statement': 5.0, 'carry': 5.0, 'talk': 5.0, 'topical': 5.0, 'policies': 5.0, 'water': 5.0, 'word': 5.0, 'reference': 5.0, 'florenz': 5.0, 'country': 5.0, 'original': 5.0, 'honourable': 5.0, 'basis': 5.0, 'implemented': 5.0, 'prepared': 5.0, 'limited': 5.0, 'eur': 5.0, 'anyone': 5.0, 'expect': 5.0, 'amount': 5.0, 'conduct': 5.0, 'documents': 5.0, 'through': 5.0, 'draw': 5.0, 'sure': 5.0, 'effect': 5.0, 'especially': 5.0, 'urgent': 5.0, 'officials': 5.0, 'communication': 5.0, 'working': 5.0, 'months': 5.0, 'democracy': 5.0, 'management': 5.0, 'clarify': 5.0, 'proceed': 5.0, 'relevant': 5.0, 'israel': 5.0, 'security': 5.0, 'briefly': 5.0, 'intend': 5.0, '13': 5.0, 'kosovo': 5.0, 'values': 5.0, 'reached': 5.0, 'precautionary': 5.0, 'apply': 5.0, 'environment': 5.0, 'prevent': 5.0, 'version': 5.0, 'resumption': 4.0, 'happening': 4.0, 'rejected': 4.0, 'propose': 4.0, 'call': 4.0, 'transport': 4.0, 'welcomed': 4.0, 'gives': 4.0, 'seem': 4.0, 'road': 4.0, 'regret': 4.0, 'having': 4.0, 'proper': 4.0, 'internal': 4.0, 'ways': 4.0, 'regulations': 4.0, 'flexible': 4.0, 'further': 4.0, '1997': 4.0, 'takes': 4.0, 'fall': 4.0, 'coming': 4.0, 'rapid': 4.0, 'central': 4.0, 'lies': 4.0, 'society': 4.0, 'tell': 4.0, 'regarding': 4.0, 'adoption': 4.0, 'learn': 4.0, 'cooperation': 4.0, 'yes': 4.0, 'due': 4.0, 'code': 4.0, 'administration': 4.0, 'each': 4.0, 'reject': 4.0, 'von': 4.0, 'wogau': 4.0, '6': 4.0, 'deserve': 4.0, 'step': 4.0, 'statements': 4.0, 'reasons': 4.0, 'arguments': 4.0, 'complete': 4.0, 'potential': 4.0, 'giving': 4.0, 'element': 4.0, 'majority': 4.0, 'jobs': 4.0, 'consensus': 4.0, 'expressed': 4.0, 'impact': 4.0, 'paying': 4.0, '15': 4.0, 'sensitive': 4.0, 'her': 4.0, 'politics': 4.0, 'moreover': 4.0, 'reaction': 4.0, 'after': 4.0, 'concentrate': 4.0, 'raises': 4.0, 'required': 4.0, 'voting': 4.0, 'correct': 4.0, 'explanations': 4.0, 'represent': 4.0, 'progress': 4.0, 'pleased': 4.0, 'arrived': 4.0, 'extent': 4.0, 'needed': 4.0, 'party': 4.0, 'lack': 4.0, 'access': 4.0, 'region': 4.0, 'happened': 4.0, 'examine': 4.0, 'independent': 4.0, 'large': 4.0, 'waiting': 4.0, 'wonder': 4.0, 'better': 4.0, 'complex': 4.0, 'solidarity': 4.0, 'knows': 4.0, 'board': 4.0, 'achieved': 4.0, 'concludes': 4.0, 'event': 4.0, 'reply': 4.0, 'tibet': 4.0, 'shared': 4.0, 'repeat': 4.0, 'adopt': 4.0, 'author': 4.0, 'lapses': 4.0, 'grateful': 4.0, 'several': 4.0, 'offer': 4.0, 'possibility': 4.0, 'objective': 4.0, 'discharge': 4.0, 'open': 4.0, 'looks': 4.0, 'practice': 4.0, 'led': 4.0, 'third': 4.0, 'hold': 4.0, 'lead': 4.0, 're': 4.0, 'dealt': 4.0, 'firstly': 4.0, 'desire': 4.0, 'effective': 4.0, 'approval': 4.0, 'huge': 4.0, 'full': 4.0, 'understanding': 4.0, 'palestinian': 4.0, 'nor': 4.0, 'parties': 4.0, 'portuguese': 4.0, 'completely': 4.0, 'stop': 4.0, 'try': 4.0, 'fight': 4.0, 'capital': 4.0, 'argument': 4.0, 'danger': 4.0, 'low': 4.0, 'recycling': 4.0, 'remarks': 4.0, 'united': 4.0, 'haider': 4.0, 'keep': 4.0, 'burden': 4.0, 'brussels': 4.0, 'carefully': 4.0, 'days': 4.0, 'approve': 4.0, 'peat': 4.0, 'cultural': 4.0, '14': 4.0, 'sittings': 4.0, 'flexibility': 4.0, 'observatory': 4.0, 'gmos': 4.0, 'observed': 3.0, 'advice': 3.0, 'light': 3.0, 'improved': 3.0, 'adhere': 3.0, 'follow': 3.0, 'according': 3.0, 'pse': 3.0, 'decisions': 3.0, 'speaking': 3.0, 'declared': 3.0, 'enforcement': 3.0, 'happy': 3.0, 'thought': 3.0, 'funding': 3.0, 'transparent': 3.0, 'consequences': 3.0, 'reports': 3.0, 'focus': 3.0, 'additional': 3.0, 'supports': 3.0, 'might': 3.0, 'using': 3.0, 'product': 3.0, 'per': 3.0, 'speakers': 3.0, 'unemployment': 3.0, 'late': 3.0, 'latter': 3.0, 'build': 3.0, 'alone': 3.0, 'least': 3.0, 'growth': 3.0, 'produced': 3.0, 'sufficient': 3.0, 'surely': 3.0, 'obligation': 3.0, 'encouraging': 3.0, 'situations': 3.0, 'everyone': 3.0, '8': 3.0, '25': 3.0, 'saying': 3.0, 'withdrawn': 3.0, 'along': 3.0, 'plenary': 3.0, 'underlying': 3.0, 'rate': 3.0, 'power': 3.0, 'paid': 3.0, 'referring': 3.0, 'facing': 3.0, "rapporteur'": 3.0, 'themselves': 3.0, 'modernisation': 3.0, 'introduce': 3.0, 'satisfactory': 3.0, 'man': 3.0, 'looking': 3.0, 'monti': 3.0, 'implications': 3.0, 'simply': 3.0, 'figures': 3.0, 'await': 3.0, 'manufacturers': 3.0, 'form': 3.0, '30': 3.0, 'current': 3.0, 'decentralisation': 3.0, 'broad': 3.0, 'experience': 3.0, 'considered': 3.0, 'speech': 3.0, 'consistent': 3.0, 'fear': 3.0, 'justified': 3.0, 'probably': 3.0, 'considerably': 3.0, 'guarantees': 3.0, 'impose': 3.0, 'perfectly': 3.0, 'sometimes': 3.0, 'seriously': 3.0, 'is:': 3.0, 'failed': 3.0, 'general': 3.0, 'liable': 3.0, 'framework': 3.0, 'fine': 3.0, 'establish': 3.0, 'summit': 3.0, 'europol': 3.0, 'wise': 3.0, 'criticism': 3.0, 'wanted': 3.0, 'express': 3.0, 'recommendations': 3.0, 'wholeheartedly': 3.0, 'amended': 3.0, 'affairs': 3.0, 'towards': 3.0, 'meantime': 3.0, 'although': 3.0, 'socialist': 3.0, 'members': 3.0, 'soon': 3.0, 'oil': 3.0, 'conditions': 3.0, 'inspection': 3.0, 'maritime': 3.0, 'never': 3.0, 'tolerable': 3.0, 'thus': 3.0, 'elected': 3.0, 'representative': 3.0, 'natural': 3.0, 'disasters': 3.0, 'human': 3.0, 'doubt': 3.0, 'claim': 3.0, '3': 3.0, 'allowed': 3.0, 'memory': 3.0, 'demands': 3.0, 'roth': 3.0, 'behrendt': 3.0, 'thoughts': 3.0, 'crisis': 3.0, 'procedures': 3.0, 'rigorous': 3.0, 'improve': 3.0, 'cause': 3.0, 'accession': 3.0, 'ultimately': 3.0, 'outside': 3.0, 'answers': 3.0, 'join': 3.0, 'stress': 3.0, '40': 3.0, 'taxation': 3.0, 'wrong': 3.0, 'budget': 3.0, 'line': 3.0, 'none': 3.0, 'meet': 3.0, 'list': 3.0, 'white': 3.0, 'scientific': 3.0, 'visible': 3.0, 'known': 3.0, 'plan': 3.0, 'increase': 3.0, 'study': 3.0, 'information': 3.0, 'chinese': 3.0, 'budgetary': 3.0, 'read': 3.0, 'vitorino': 3.0, 'brought': 3.0, 'combat': 3.0, 'naturally': 3.0, 'received': 3.0, 'furthermore': 3.0, 'enlarge': 3.0, 'discussed': 3.0, 'discrimination': 3.0, 'submitted': 3.0, 'equal': 3.0, 'reaching': 3.0, 'whistle': 3.0, 'requires': 3.0, 'ambitious': 3.0, 'neither': 3.0, 'holds': 3.0, 'excuse': 3.0, 'nuclear': 3.0, 'radical': 3.0, 'otherwise': 3.0, 'introduced': 3.0, 'faith': 3.0, 'resource': 3.0, 'young': 3.0, 'timetable': 3.0, 'person': 3.0, 'staff': 3.0, 'leave': 3.0, 'february': 3.0, 'likely': 3.0, 'during': 3.0, 'awaits': 3.0, 'feel': 3.0, 'tool': 3.0, 'duty': 3.0, 'slightly': 3.0, 'concept': 3.0, 'implement': 3.0, 'disappointed': 3.0, 'middle': 3.0, 'east': 3.0, 'continuation': 3.0, 'count': 3.0, 'conflict': 3.0, 'syria': 3.0, 'week': 3.0, 'involved': 3.0, 'contribute': 3.0, 'diplomatic': 3.0, 'similar': 3.0, 'included': 3.0, 'stand': 3.0, 'asylum': 3.0, 'eurodac': 3.0, 'racism': 3.0, 'freedom': 3.0, 'initiatives': 3.0, 'euro': 3.0, 'threat': 3.0, 'expectations': 3.0, 'tried': 3.0, 'sjöstedt': 3.0, 'tolerated': 3.0, '9': 3.0, 'chamber': 3.0, 'anything': 3.0, 'remark': 3.0, 'informed': 3.0, 'appreciate': 3.0, 'globalisation': 3.0, 'bring': 3.0, 'bolkestein': 3.0, 'hypocrisy': 3.0, 'established': 3.0, 'crucial': 3.0, 'history': 3.0, 'yesterday': 3.0, 'subjects': 3.0, 'ban': 3.0, 'begin': 3.0, 'benefit': 3.0, 'ones': 3.0, 'instruments': 3.0, 'worse': 3.0, 'instance': 3.0, 'insecurity': 3.0, 'close': 3.0, 'contrary': 3.0, '10': 3.0, 'local': 3.0, 'impossible': 3.0, 'considerations': 3.0, 'moving': 3.0, 'altener': 3.0, 'renewable': 3.0, 'sources': 3.0, 'balanced': 3.0, 'ground': 3.0, 'breaking': 3.0, 'manufacturer': 3.0, 'protect': 3.0, 'dismantling': 3.0, 'responsibilities': 3.0, 'substances': 3.0, 'materials': 3.0, 'environmentally': 3.0, 'aims': 3.0, 'reducing': 3.0, 'disappear': 3.0, 'english': 3.0, 'quota': 3.0, 'berger': 3.0, 'treaties': 3.0, 'elections': 3.0, 'ambition': 3.0, 'rural': 3.0, 'assistance': 3.0, 'address': 3.0, 'explanation': 3.0, 'world': 3.0})
+Running EM for 10 iters
+Starting E-step 0
+Starting M-step 0
+Starting E-step 1
+Starting M-step 1
+Starting E-step 2
+Starting M-step 2
+Starting E-step 3
+Starting M-step 3
+Starting E-step 4
+Starting M-step 4
+Starting E-step 5
+Starting M-step 5
+Starting E-step 6
+Starting M-step 6
+Starting E-step 7
+Starting M-step 7
+Starting E-step 8
+Starting M-step 8
+Starting E-step 9
+Starting M-step 9
+Printing a few of the Model 1 parameter values:
+Highest words in the distribution P(w_en|w_es='NULL'): [('.', -0.886392563147754), ('gmos', -1.5288598267099758), ('the', -2.6278005462876166), ('to', -2.7758186572647228), ('is', -2.9363668847784616)]
+Highest words in the distribution P(w_en|w_es='reanudación'): [('resumption', -0.39402505561577184), ('session', -1.21845295189511), ('the', -3.900560211135259), ('of', -4.6312514265336695), ('NULL', -19.91152658081374)]
+Highest words in the distribution P(w_en|w_es='del'): [('the', -0.6936042133335718), ('of', -1.1080804872408416), ('from', -2.9032464107299067), ('gmos', -3.0094369340867573), ('s', -3.4290890600958743)]
+Highest words in the distribution P(w_en|w_es='período'): [('period', -0.5432633608206561), ('over', -1.553637268832357), ('the', -2.6885522333956633), ('urban', -3.3580839440373365), ('of', -3.4514872958407716)]
+Highest words in the distribution P(w_en|w_es='de'): [('of', -0.7371335260459091), ('gmos', -1.802042073194408), ('the', -2.4100013204178197), ('.', -2.689325301017692), ('in', -3.2355683142308305)]
+Highest words in the distribution P(w_en|w_es='sesiones'): [('sittings', -0.895271410508558), ('session', -1.0219843694219723), ('of', -2.5412830566784512), ('i', -2.721226894124698), ('the', -3.5757333324349103)]
+Highest words in the distribution P(w_en|w_es='('): [('(', -0.6329910620646322), (')', -0.7669822156798416), ('off', -6.734856960110147), ('cut', -6.737963771937696), ('speaker', -6.897199504794486)]
+Highest words in the distribution P(w_en|w_es='el'): [('the', -0.3670948341131721), ('gmos', -2.0891498018211077), ('.', -2.580865487341021), ('is', -3.0053632699302595), ('to', -3.8454445510109236)]
+Highest words in the distribution P(w_en|w_es='parlamento'): [('parliament', -0.09088976697576978), ('its', -3.8809882931305113), ('s', -3.8874849975020216), ('house', -4.062420426635531), ('made', -4.307669278453759)]
+Highest words in the distribution P(w_en|w_es=','): [(',', -0.2564160704027154), ('.', -2.5729784369073303), ('gmos', -2.8316201733603164), ('in', -4.091877166907884), ('the', -4.59479614215503)]
+Highest words in the distribution P(w_en|w_es='un'): [('a', -0.4322875710360021), ('is', -2.41612924900448), ('an', -2.546175412932164), ('gmos', -3.4529710544483683), ('.', -3.5396985577871676)]
+Highest words in the distribution P(w_en|w_es=')'): [(')', -0.6153474042178395), ('(', -0.786366290124529), ('off', -6.888232156798639), ('cut', -6.891338968715088), ('speaker', -7.0505746973866605)]
+Highest words in the distribution P(w_en|w_es='señora'): [('madam', -0.8466438992966578), (',', -1.2401381238276805), ('president', -2.299576354291405), ('mrs', -3.5905787561329308), ('i', -4.031622372293936)]
+Highest words in the distribution P(w_en|w_es='presidenta'): [('president', -0.34865508663928413), ('madam', -1.4482218178861954), ('relating', -3.9477740655505795), ('continue', -5.314898421267537), ('favour', -5.314904861977442)]
+Highest words in the distribution P(w_en|w_es='una'): [('a', -0.43178927025188507), ('gmos', -2.3951037750935167), ('an', -2.635850204857793), ('.', -3.4141503485384703), ('is', -3.4471905718736817)]
+Highest words in the distribution P(w_en|w_es='cuestión'): [('issue', -1.0559729563368219), ('question', -1.378264382761985), ('point', -1.8413549264278843), ('matter', -2.5126797118312147), ('subject', -3.6264317923243277)]
+Highest words in the distribution P(w_en|w_es='procedimiento'): [('procedure', -0.8879688352279342), ('order', -1.5325077189474317), ('on', -1.7916024861945063), ('whole', -2.2466339429587863), ('point', -2.547327046050661)]
+Highest words in the distribution P(w_en|w_es='.'): [('.', -0.4262019797400898), ('gmos', -2.1635071259061993), ('to', -3.2677798457500167), ('the', -3.349521047396593), ('is', -3.4881702042743794)]
+Highest words in the distribution P(w_en|w_es='me'): [('i', -0.5657123209368806), ('me', -1.6321567298218809), ('to', -2.304714497844755), ('about', -3.022132913855965), ('am', -3.292254542801796)]
+Highest words in the distribution P(w_en|w_es='gustaría'): [('would', -1.0010450932876975), ('like', -1.1298396479046187), ('want', -2.9969911921236996), ('advice', -3.111433739263438), ('to', -3.1417668331632704)]
+          	reanudación	del  	período	de   	sesiones	NULL 
+resumption	0.999      	0.000	0.001  	0.000	0.000   	0.000
+of        	0.010      	0.347	0.033  	0.503	0.083   	0.024
+the       	0.026      	0.642	0.087  	0.115	0.036   	0.093
+session   	0.438      	0.000	0.030  	0.000	0.533   	0.000
+        	(    	el   	parlamento	,    	de   	pie  	,    	guarda	un   	minuto	de   	silencio	)    	NULL 
+(       	0.538	0.000	0.000     	0.000	0.000	0.000	0.000	0.000 	0.000	0.000 	0.000	0.000   	0.462	0.000
+the     	0.000	0.629	0.001     	0.009	0.082	0.030	0.009	0.030 	0.002	0.030 	0.082	0.030   	0.000	0.066
+house   	0.000	0.000	0.999     	0.000	0.000	0.000	0.000	0.000 	0.000	0.000 	0.000	0.000   	0.000	0.000
+rose    	0.000	0.034	0.000     	0.016	0.046	0.193	0.016	0.193 	0.009	0.193 	0.046	0.193   	0.000	0.060
+and     	0.000	0.079	0.033     	0.235	0.026	0.075	0.235	0.075 	0.053	0.075 	0.026	0.075   	0.000	0.013
+observed	0.068	0.000	0.870     	0.000	0.000	0.000	0.000	0.000 	0.004	0.000 	0.000	0.000   	0.058	0.000
+a       	0.000	0.001	0.000     	0.010	0.026	0.011	0.010	0.011 	0.867	0.011 	0.026	0.011   	0.000	0.013
+minute' 	0.000	0.034	0.000     	0.016	0.046	0.193	0.016	0.193 	0.009	0.193 	0.046	0.193   	0.000	0.060
+s       	0.000	0.070	0.769     	0.000	0.076	0.002	0.000	0.002 	0.000	0.002 	0.076	0.002   	0.000	0.000
+silence 	0.000	0.034	0.000     	0.016	0.046	0.193	0.016	0.193 	0.009	0.193 	0.046	0.193   	0.000	0.060
+)       	0.462	0.000	0.000     	0.000	0.000	0.000	0.000	0.000 	0.000	0.000 	0.000	0.000   	0.538	0.000
+         	señora	presidenta	,    	una  	cuestión	de   	procedimiento	.    	NULL 
+madam    	0.646 	0.354     	0.000	0.000	0.000   	0.000	0.000        	0.000	0.000
+president	0.124 	0.876     	0.000	0.000	0.000   	0.000	0.000        	0.000	0.000
+,        	0.253 	0.001     	0.678	0.003	0.000   	0.017	0.000        	0.022	0.026
+on       	0.051 	0.015     	0.001	0.001	0.121   	0.009	0.789        	0.006	0.006
+a        	0.011 	0.005     	0.011	0.920	0.000   	0.028	0.000        	0.011	0.013
+point    	0.000 	0.000     	0.000	0.000	0.669   	0.000	0.330        	0.000	0.000
+of       	0.001 	0.000     	0.014	0.007	0.043   	0.862	0.014        	0.019	0.041
+order    	0.001 	0.000     	0.000	0.000	0.005   	0.000	0.994        	0.000	0.000
+.        	0.011 	0.000     	0.060	0.026	0.011   	0.053	0.000        	0.514	0.324
+         	señora	presidenta	,    	una  	cuestión	de   	procedimiento	.    	NULL 
+madam    	0.646 	0.354     	0.000	0.000	0.000   	0.000	0.000        	0.000	0.000
+president	0.124 	0.876     	0.000	0.000	0.000   	0.000	0.000        	0.000	0.000
+,        	0.253 	0.001     	0.678	0.003	0.000   	0.017	0.000        	0.022	0.026
+on       	0.051 	0.015     	0.001	0.001	0.121   	0.009	0.789        	0.006	0.006
+a        	0.011 	0.005     	0.011	0.920	0.000   	0.028	0.000        	0.011	0.013
+point    	0.000 	0.000     	0.000	0.000	0.669   	0.000	0.330        	0.000	0.000
+of       	0.001 	0.000     	0.014	0.007	0.043   	0.862	0.014        	0.019	0.041
+order    	0.001 	0.000     	0.000	0.000	0.005   	0.000	0.994        	0.000	0.000
+.        	0.011 	0.000     	0.060	0.026	0.011   	0.053	0.000        	0.514	0.324
+               	me   	gustaría	que  	me   	asesorara	sobre	el   	artículo	143  	concerniente	a    	la   	inadmisibilidad	.    	NULL 
+i              	0.422	0.011   	0.066	0.422	0.003    	0.014	0.000	0.003   	0.003	0.003       	0.042	0.000	0.003          	0.006	0.005
+would          	0.025	0.893   	0.002	0.025	0.006    	0.007	0.000	0.006   	0.006	0.006       	0.018	0.000	0.006          	0.001	0.001
+like           	0.002	0.929   	0.000	0.002	0.000    	0.047	0.000	0.000   	0.000	0.000       	0.020	0.000	0.000          	0.000	0.000
+your           	0.001	0.454   	0.000	0.001	0.000    	0.543	0.000	0.000   	0.000	0.000       	0.000	0.000	0.000          	0.000	0.000
+advice         	0.001	0.997   	0.000	0.001	0.000    	0.000	0.000	0.000   	0.000	0.000       	0.000	0.000	0.000          	0.000	0.000
+about          	0.145	0.000   	0.000	0.145	0.000    	0.710	0.000	0.000   	0.000	0.000       	0.000	0.000	0.000          	0.000	0.000
+rule           	0.000	0.000   	0.006	0.000	0.168    	0.002	0.030	0.168   	0.168	0.168       	0.022	0.022	0.168          	0.028	0.052
+143            	0.000	0.000   	0.006	0.000	0.168    	0.002	0.030	0.168   	0.168	0.168       	0.022	0.022	0.168          	0.028	0.052
+concerning     	0.001	0.500   	0.000	0.001	0.000    	0.499	0.000	0.000   	0.000	0.000       	0.000	0.000	0.000          	0.000	0.000
+inadmissibility	0.000	0.000   	0.006	0.000	0.168    	0.002	0.030	0.168   	0.168	0.168       	0.022	0.022	0.168          	0.028	0.052
+.              	0.002	0.000   	0.027	0.002	0.032    	0.014	0.042	0.032   	0.032	0.032       	0.112	0.046	0.032          	0.363	0.229
+         	el   	informe	estipula	que  	se   	debe 	aplicarse	a    	pesar	del  	principio	de   	estabilidad	relativa	.    	NULL 
+it       	0.002	0.000  	0.025   	0.158	0.282	0.388	0.000    	0.002	0.025	0.000	0.001    	0.017	0.025      	0.001   	0.030	0.045
+says     	0.039	0.003  	0.222   	0.008	0.073	0.000	0.000    	0.029	0.222	0.016	0.007    	0.052	0.222      	0.000   	0.036	0.069
+that     	0.018	0.000  	0.012   	0.643	0.042	0.003	0.158    	0.017	0.012	0.003	0.005    	0.015	0.012      	0.000   	0.031	0.032
+this     	0.007	0.010  	0.029   	0.081	0.325	0.000	0.005    	0.076	0.029	0.001	0.011    	0.052	0.029      	0.011   	0.127	0.206
+should   	0.000	0.000  	0.000   	0.016	0.001	0.964	0.004    	0.000	0.000	0.005	0.000    	0.000	0.000      	0.010   	0.000	0.000
+be       	0.003	0.000  	0.029   	0.168	0.206	0.476	0.030    	0.002	0.029	0.000	0.000    	0.011	0.029      	0.000   	0.007	0.012
+done     	0.000	0.000  	0.000   	0.000	0.000	0.000	0.305    	0.000	0.000	0.000	0.000    	0.000	0.000      	0.695   	0.000	0.000
+despite  	0.039	0.003  	0.222   	0.008	0.073	0.000	0.000    	0.029	0.222	0.016	0.007    	0.052	0.222      	0.000   	0.036	0.069
+the      	0.420	0.000  	0.020   	0.005	0.026	0.004	0.000    	0.060	0.020	0.303	0.001    	0.054	0.020      	0.000   	0.021	0.044
+principle	0.000	0.000  	0.000   	0.000	0.000	0.000	0.000    	0.000	0.000	0.000	1.000    	0.000	0.000      	0.000   	0.000	0.000
+of       	0.008	0.000  	0.016   	0.001	0.006	0.000	0.000    	0.003	0.016	0.277	0.010    	0.402	0.016      	0.215   	0.009	0.019
+relative 	0.039	0.003  	0.222   	0.008	0.073	0.000	0.000    	0.029	0.222	0.016	0.007    	0.052	0.222      	0.000   	0.036	0.069
+stability	0.039	0.003  	0.222   	0.008	0.073	0.000	0.000    	0.029	0.222	0.016	0.007    	0.052	0.222      	0.000   	0.036	0.069
+.        	0.043	0.000  	0.033   	0.027	0.066	0.003	0.000    	0.115	0.033	0.004	0.001    	0.038	0.033      	0.000   	0.370	0.233
+          	todo 	ello 	,    	de   	conformidad	con  	los  	principios	que  	siempre	hemos	apoyado	.    	NULL 
+this      	0.019	0.688	0.007	0.016	0.130      	0.002	0.002	0.000     	0.025	0.000  	0.002	0.009  	0.039	0.063
+is        	0.103	0.407	0.018	0.082	0.002      	0.005	0.010	0.000     	0.078	0.004  	0.000	0.030  	0.096	0.166
+all       	1.000	0.000	0.000	0.000	0.000      	0.000	0.000	0.000     	0.000	0.000  	0.000	0.000  	0.000	0.000
+in        	0.095	0.000	0.134	0.315	0.004      	0.094	0.044	0.040     	0.008	0.018  	0.004	0.078  	0.066	0.102
+accordance	0.001	0.000	0.037	0.105	0.000      	0.086	0.101	0.000     	0.016	0.000  	0.000	0.443  	0.073	0.137
+with      	0.001	0.000	0.000	0.000	0.000      	0.997	0.001	0.000     	0.000	0.000  	0.000	0.000  	0.000	0.000
+the       	0.000	0.001	0.012	0.111	0.000      	0.046	0.630	0.001     	0.011	0.014  	0.000	0.041  	0.043	0.089
+principles	0.000	0.000	0.000	0.000	0.000      	0.000	0.000	1.000     	0.000	0.000  	0.000	0.000  	0.000	0.000
+that      	0.001	0.128	0.001	0.016	0.000      	0.044	0.006	0.000     	0.681	0.043  	0.000	0.012  	0.032	0.034
+we        	0.005	0.134	0.006	0.018	0.000      	0.042	0.007	0.000     	0.096	0.001  	0.635	0.017  	0.015	0.025
+have      	0.098	0.001	0.012	0.003	0.000      	0.003	0.004	0.000     	0.008	0.000  	0.847	0.016  	0.004	0.006
+always    	0.000	0.000	0.000	0.000	0.000      	0.000	0.000	0.000     	0.000	1.000  	0.000	0.000  	0.000	0.000
+upheld    	0.001	0.000	0.037	0.105	0.000      	0.086	0.101	0.000     	0.016	0.000  	0.000	0.443  	0.073	0.137
+.         	0.001	0.004	0.053	0.047	0.000      	0.043	0.034	0.000     	0.034	0.000  	0.000	0.041  	0.456	0.288
+      	gracias	,    	señor	segni	,    	lo   	haré 	de   	muy  	buen 	grado	.    	NULL 
+thank 	0.983  	0.000	0.017	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000
+you   	0.833  	0.007	0.147	0.001	0.007	0.001	0.001	0.000	0.000	0.000	0.001	0.001	0.001
+,     	0.000  	0.392	0.099	0.011	0.392	0.006	0.011	0.010	0.008	0.033	0.011	0.013	0.015
+mr    	0.000  	0.000	1.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000
+segni 	0.000  	0.022	0.000	0.257	0.022	0.002	0.257	0.061	0.001	0.000	0.257	0.042	0.080
+,     	0.000  	0.392	0.099	0.011	0.392	0.006	0.011	0.010	0.008	0.033	0.011	0.013	0.015
+i     	0.000  	0.011	0.038	0.051	0.011	0.303	0.051	0.018	0.116	0.136	0.051	0.118	0.095
+shall 	0.000  	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	1.000	0.000	0.000	0.000
+do    	0.000  	0.000	0.000	0.002	0.000	0.313	0.002	0.000	0.000	0.679	0.002	0.000	0.001
+so    	0.000  	0.000	0.000	0.000	0.000	0.312	0.000	0.000	0.000	0.688	0.000	0.000	0.000
+gladly	0.000  	0.022	0.000	0.257	0.022	0.002	0.257	0.061	0.001	0.000	0.257	0.042	0.080
+.     	0.000  	0.049	0.003	0.037	0.049	0.050	0.037	0.043	0.012	0.000	0.037	0.417	0.263
+         	es   	el   	caso 	de   	alexander	nikitin	.    	NULL 
+it       	0.744	0.003	0.000	0.030	0.044    	0.044  	0.054	0.081
+is       	0.805	0.054	0.002	0.028	0.010    	0.010  	0.033	0.057
+the      	0.003	0.721	0.001	0.094	0.035    	0.035  	0.037	0.075
+case     	0.000	0.000	1.000	0.000	0.000    	0.000  	0.000	0.000
+of       	0.001	0.018	0.003	0.850	0.035    	0.035  	0.018	0.040
+alexander	0.003	0.061	0.001	0.081	0.345    	0.345  	0.057	0.107
+nikitin  	0.003	0.061	0.001	0.081	0.345    	0.345  	0.057	0.107
+.        	0.021	0.056	0.000	0.050	0.043    	0.043  	0.482	0.304
+        	espero	que  	se   	examine	con  	un   	espíritu	positivo	.    	NULL 
+it      	0.000 	0.238	0.424	0.037  	0.005	0.090	0.037   	0.055   	0.046	0.068
+will    	0.825 	0.002	0.084	0.014  	0.055	0.002	0.014   	0.001   	0.001	0.003
+,       	0.000 	0.042	0.122	0.080  	0.078	0.003	0.080   	0.399   	0.090	0.106
+i       	0.711 	0.181	0.002	0.007  	0.062	0.000	0.007   	0.000   	0.017	0.013
+hope    	0.987 	0.000	0.013	0.000  	0.000	0.000	0.000   	0.000   	0.000	0.000
+,       	0.000 	0.042	0.122	0.080  	0.078	0.003	0.080   	0.399   	0.090	0.106
+be      	0.001 	0.366	0.450	0.063  	0.000	0.017	0.063   	0.000   	0.015	0.026
+examined	0.000 	0.012	0.107	0.325  	0.063	0.015	0.325   	0.000   	0.053	0.101
+in      	0.001 	0.007	0.002	0.066  	0.079	0.043	0.066   	0.595   	0.056	0.086
+a       	0.000 	0.008	0.004	0.011  	0.003	0.825	0.011   	0.117   	0.010	0.012
+positive	0.000 	0.000	0.000	0.000  	0.000	0.000	0.000   	1.000   	0.000	0.000
+light   	0.000 	0.000	0.000	0.000  	0.000	0.000	0.000   	1.000   	0.000	0.000
+.       	0.000 	0.034	0.082	0.041  	0.042	0.020	0.041   	0.000   	0.454	0.287
+            	¿por 	qué  	no   	hay  	instrucciones	en   	caso 	de   	incendio	?    	NULL 
+why         	0.877	0.123	0.000	0.000	0.000        	0.000	0.000	0.000	0.000   	0.000	0.000
+are         	0.010	0.027	0.048	0.754	0.027        	0.038	0.000	0.005	0.027   	0.048	0.016
+there       	0.000	0.000	0.018	0.979	0.001        	0.000	0.000	0.000	0.001   	0.000	0.000
+no          	0.107	0.000	0.754	0.000	0.000        	0.000	0.139	0.000	0.000   	0.000	0.000
+fire        	0.000	0.011	0.003	0.002	0.359        	0.067	0.001	0.085	0.359   	0.000	0.111
+instructions	0.000	0.011	0.003	0.002	0.359        	0.067	0.001	0.085	0.359   	0.000	0.111
+?           	0.006	0.145	0.000	0.000	0.000        	0.000	0.000	0.000	0.000   	0.849	0.000
+          	¿por 	qué  	no   	se   	han  	mejorado	las  	escaleras	desde	mi   	accidente	?    	NULL 
+why       	0.876	0.123	0.000	0.000	0.000	0.000   	0.000	0.000    	0.000	0.000	0.000    	0.000	0.000
+have      	0.000	0.000	0.000	0.048	0.846	0.011   	0.007	0.011    	0.061	0.000	0.011    	0.000	0.004
+the       	0.000	0.000	0.001	0.056	0.003	0.043   	0.715	0.043    	0.000	0.000	0.043    	0.001	0.094
+staircases	0.000	0.008	0.003	0.085	0.003	0.258   	0.042	0.258    	0.004	0.001	0.258    	0.000	0.080
+not       	0.100	0.001	0.899	0.000	0.000	0.000   	0.000	0.000    	0.000	0.000	0.000    	0.000	0.000
+been      	0.000	0.000	0.000	0.126	0.581	0.000   	0.000	0.000    	0.293	0.000	0.000    	0.000	0.000
+improved  	0.727	0.001	0.000	0.000	0.000	0.000   	0.000	0.000    	0.272	0.000	0.000    	0.000	0.000
+since     	0.000	0.000	0.000	0.000	0.000	0.000   	0.000	0.000    	1.000	0.000	0.000    	0.000	0.000
+my        	0.000	0.000	0.000	0.000	0.000	0.000   	0.000	0.000    	0.000	1.000	0.000    	0.000	0.000
+accident  	0.000	0.008	0.003	0.085	0.003	0.258   	0.042	0.258    	0.004	0.001	0.258    	0.000	0.080
+?         	0.006	0.145	0.000	0.000	0.000	0.000   	0.000	0.000    	0.000	0.000	0.000    	0.849	0.000
+        	¿por 	qué  	no   	se   	respetan	las  	áreas	de   	no   	fumadores	?    	NULL 
+why     	0.877	0.123	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000    	0.000	0.000
+are     	0.016	0.045	0.081	0.326	0.045   	0.096	0.149	0.008	0.081	0.045    	0.081	0.028
+no      	0.065	0.000	0.458	0.000	0.000   	0.000	0.020	0.000	0.458	0.000    	0.000	0.000
+-       	0.000	0.062	0.000	0.001	0.033   	0.063	0.736	0.071	0.000	0.033    	0.000	0.001
+smoking 	0.000	0.010	0.003	0.107	0.324   	0.053	0.000	0.076	0.003	0.324    	0.000	0.100
+areas   	0.000	0.000	0.000	0.000	0.000   	0.000	1.000	0.000	0.000	0.000    	0.000	0.000
+not     	0.052	0.001	0.473	0.000	0.000   	0.000	0.000	0.000	0.473	0.000    	0.000	0.000
+enforced	0.000	0.010	0.003	0.107	0.324   	0.053	0.000	0.076	0.003	0.324    	0.000	0.100
+?       	0.006	0.145	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000    	0.849	0.000
+           	es   	totalmente	vergonzoso	que  	aprobemos	una  	legislación	y    	no   	la   	cumplamos	ni   	nosotros	mismos	.    	NULL 
+it         	0.340	0.009     	0.020     	0.128	0.012    	0.001	0.047      	0.081	0.045	0.002	0.020    	0.204	0.028   	0.001 	0.025	0.037
+seems      	0.000	0.000     	0.000     	0.000	0.902    	0.000	0.001      	0.000	0.000	0.000	0.000    	0.001	0.000   	0.096 	0.000	0.000
+absolutely 	0.000	0.984     	0.000     	0.000	0.015    	0.000	0.000      	0.000	0.000	0.000	0.000    	0.000	0.000   	0.002 	0.000	0.000
+disgraceful	0.003	0.000     	0.355     	0.013	0.000    	0.046	0.000      	0.009	0.003	0.046	0.355    	0.000	0.001   	0.000 	0.058	0.110
+that       	0.094	0.010     	0.012     	0.674	0.115    	0.001	0.004      	0.003	0.002	0.004	0.012    	0.001	0.003   	0.000 	0.032	0.033
+we         	0.000	0.062     	0.023     	0.134	0.149    	0.011	0.014      	0.012	0.002	0.006	0.023    	0.000	0.509   	0.000 	0.020	0.035
+pass       	0.003	0.000     	0.355     	0.013	0.000    	0.046	0.000      	0.009	0.003	0.046	0.355    	0.000	0.001   	0.000 	0.058	0.110
+legislation	0.000	0.000     	0.000     	0.000	0.000    	0.000	1.000      	0.000	0.000	0.000	0.000    	0.000	0.000   	0.000 	0.000	0.000
+and        	0.000	0.000     	0.001     	0.000	0.000    	0.000	0.000      	0.817	0.000	0.000	0.001    	0.179	0.000   	0.000 	0.000	0.000
+do         	0.000	0.000     	0.001     	0.003	0.009    	0.000	0.000      	0.000	0.511	0.000	0.001    	0.069	0.404   	0.001 	0.000	0.000
+not        	0.000	0.000     	0.000     	0.000	0.000    	0.000	0.000      	0.000	0.856	0.000	0.000    	0.143	0.000   	0.000 	0.000	0.000
+adhere     	0.000	0.000     	0.000     	0.000	0.902    	0.000	0.001      	0.000	0.000	0.000	0.000    	0.001	0.000   	0.096 	0.000	0.000
+to         	0.001	0.000     	0.147     	0.358	0.004    	0.049	0.000      	0.002	0.002	0.036	0.147    	0.000	0.001   	0.000 	0.096	0.157
+it         	0.340	0.009     	0.020     	0.128	0.012    	0.001	0.047      	0.081	0.045	0.002	0.020    	0.204	0.028   	0.001 	0.025	0.037
+ourselves  	0.000	0.000     	0.000     	0.000	0.009    	0.000	0.000      	0.000	0.000	0.000	0.000    	0.000	0.358   	0.633 	0.000	0.000
+.          	0.020	0.003     	0.041     	0.034	0.000    	0.023	0.000      	0.005	0.011	0.059	0.041    	0.002	0.013   	0.000 	0.459	0.289
+          	ruego	que  	se   	reconsidere	esta 	decisión	porque	esto 	no   	es   	así  	.    	NULL 
+i         	0.372	0.453	0.004	0.018      	0.066	0.001   	0.010 	0.002	0.001	0.000	0.000	0.041	0.033
+would     	0.903	0.003	0.001	0.010      	0.000	0.000   	0.000 	0.079	0.000	0.000	0.000	0.002	0.002
+ask       	1.000	0.000	0.000	0.000      	0.000	0.000   	0.000 	0.000	0.000	0.000	0.000	0.000	0.000
+that      	0.000	0.410	0.027	0.007      	0.132	0.000   	0.000 	0.256	0.001	0.057	0.071	0.019	0.020
+they      	0.053	0.000	0.120	0.001      	0.000	0.155   	0.649 	0.000	0.000	0.014	0.008	0.000	0.000
+reconsider	0.000	0.020	0.176	0.533      	0.005	0.000   	0.000 	0.004	0.005	0.005	0.000	0.088	0.165
+,         	0.000	0.045	0.131	0.086      	0.005	0.425   	0.002 	0.002	0.071	0.015	0.008	0.097	0.114
+since     	0.157	0.000	0.000	0.000      	0.000	0.460   	0.383 	0.000	0.000	0.000	0.000	0.000	0.000
+this      	0.000	0.010	0.042	0.004      	0.506	0.000   	0.000 	0.346	0.001	0.017	0.030	0.016	0.027
+is        	0.000	0.020	0.083	0.008      	0.054	0.000   	0.000 	0.131	0.007	0.597	0.033	0.024	0.043
+not       	0.000	0.000	0.000	0.000      	0.000	0.000   	0.000 	0.023	0.975	0.000	0.001	0.000	0.000
+the       	0.000	0.030	0.150	0.114      	0.004	0.003   	0.001 	0.002	0.002	0.010	0.316	0.121	0.249
+case      	0.014	0.000	0.000	0.000      	0.000	0.041   	0.003 	0.000	0.000	0.000	0.942	0.000	0.000
+.         	0.000	0.035	0.085	0.042      	0.009	0.000   	0.000 	0.013	0.012	0.021	0.008	0.475	0.300
+         	señoría	,    	vamos	a    	verificar	todo 	esto 	.    	NULL 
+mr       	1.000  	0.000	0.000	0.000	0.000    	0.000	0.000	0.000	0.000
+berenguer	0.002  	0.050	0.000	0.077	0.588    	0.001	0.004	0.097	0.182
+fuster   	0.002  	0.050	0.000	0.077	0.588    	0.001	0.004	0.097	0.182
+,        	0.000  	0.900	0.000	0.010	0.026    	0.000	0.001	0.029	0.034
+we       	0.000  	0.012	0.749	0.120	0.032    	0.009	0.002	0.028	0.049
+shall    	0.000  	0.000	1.000	0.000	0.000    	0.000	0.000	0.000	0.000
+check    	0.002  	0.050	0.000	0.077	0.588    	0.001	0.004	0.097	0.182
+all      	0.000  	0.000	0.000	0.000	0.000    	0.990	0.010	0.000	0.000
+this     	0.000  	0.007	0.000	0.024	0.009    	0.020	0.836	0.040	0.064
+.        	0.000  	0.054	0.000	0.142	0.041    	0.001	0.012	0.460	0.290
+        	le   	confieso	que  	,    	de   	momento	,    	las  	cosas	me   	parecen	un   	tanto	confusas	.    	NULL 
+i       	0.385	0.003   	0.077	0.001	0.001	0.000  	0.001	0.003	0.000	0.493	0.003  	0.000	0.018	0.003   	0.007	0.006
+admit   	0.010	0.240   	0.009	0.020	0.057	0.000  	0.020	0.039	0.000	0.000	0.240  	0.011	0.001	0.240   	0.039	0.074
+that    	0.002	0.013   	0.734	0.002	0.017	0.000  	0.002	0.000	0.000	0.011	0.013  	0.002	0.120	0.013   	0.035	0.036
+,       	0.000	0.013   	0.007	0.454	0.011	0.000  	0.454	0.001	0.000	0.000	0.013  	0.000	0.000	0.013   	0.015	0.017
+at      	0.000	0.000   	0.000	0.000	0.000	1.000  	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.000   	0.000	0.000
+present 	0.000	0.000   	0.000	0.000	0.000	0.999  	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.000   	0.000	0.000
+,       	0.000	0.013   	0.007	0.454	0.011	0.000  	0.454	0.001	0.000	0.000	0.013  	0.000	0.000	0.013   	0.015	0.017
+the     	0.000	0.037   	0.010	0.011	0.100	0.002  	0.011	0.618	0.000	0.000	0.037  	0.002	0.013	0.037   	0.039	0.081
+matter  	0.000	0.000   	0.000	0.000	0.000	0.012  	0.000	0.000	0.988	0.000	0.000  	0.000	0.000	0.000   	0.000	0.000
+seems   	0.000	0.000   	0.000	0.000	0.000	0.118  	0.000	0.000	0.882	0.000	0.000  	0.000	0.000	0.000   	0.000	0.000
+to      	0.000	0.097   	0.237	0.012	0.048	0.004  	0.012	0.057	0.000	0.166	0.097  	0.004	0.000	0.097   	0.064	0.104
+be      	0.035	0.083   	0.486	0.022	0.031	0.000  	0.022	0.011	0.000	0.000	0.083  	0.022	0.067	0.083   	0.019	0.034
+somewhat	0.010	0.240   	0.009	0.020	0.057	0.000  	0.020	0.039	0.000	0.000	0.240  	0.011	0.001	0.240   	0.039	0.074
+confused	0.010	0.240   	0.009	0.020	0.057	0.000  	0.020	0.039	0.000	0.000	0.240  	0.011	0.001	0.240   	0.039	0.074
+.       	0.017	0.034   	0.028	0.044	0.039	0.000  	0.044	0.086	0.000	0.002	0.034  	0.017	0.010	0.034   	0.376	0.237
+          	por  	consiguiente	,    	vamos	a    	revisarlas	con  	seriedad	para 	que  	todo 	esté 	en   	orden	.    	NULL 
+we        	0.017	0.001       	0.009	0.534	0.085	0.023     	0.057	0.023   	0.005	0.131	0.006	0.000	0.054	0.000	0.020	0.035
+shall     	0.000	0.443       	0.000	0.557	0.000	0.000     	0.000	0.000   	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000
+therefore 	0.138	0.655       	0.000	0.000	0.000	0.000     	0.000	0.000   	0.000	0.000	0.000	0.000	0.000	0.206	0.000	0.000
+look      	0.000	0.002       	0.000	0.827	0.000	0.000     	0.149	0.000   	0.000	0.000	0.000	0.022	0.000	0.000	0.000	0.000
+into      	0.000	0.016       	0.000	0.021	0.000	0.000     	0.004	0.000   	0.000	0.000	0.812	0.147	0.000	0.000	0.000	0.000
+it        	0.114	0.332       	0.016	0.000	0.001	0.024     	0.003	0.024   	0.020	0.150	0.006	0.218	0.013	0.008	0.029	0.043
+properly  	0.000	0.086       	0.000	0.116	0.000	0.000     	0.000	0.000   	0.000	0.000	0.000	0.797	0.000	0.001	0.000	0.000
+to        	0.024	0.000       	0.006	0.000	0.288	0.052     	0.073	0.052   	0.261	0.127	0.005	0.000	0.017	0.003	0.034	0.056
+ensure    	0.000	0.086       	0.000	0.116	0.000	0.000     	0.000	0.000   	0.000	0.000	0.001	0.796	0.000	0.001	0.000	0.000
+that      	0.091	0.017       	0.001	0.000	0.019	0.013     	0.046	0.013   	0.010	0.715	0.001	0.003	0.002	0.000	0.034	0.035
+everything	0.000	0.000       	0.000	0.000	0.000	0.000     	0.000	0.000   	0.000	0.000	1.000	0.000	0.000	0.000	0.000	0.000
+is        	0.053	0.080       	0.025	0.000	0.056	0.042     	0.007	0.042   	0.016	0.108	0.143	0.006	0.037	0.021	0.133	0.231
+as        	0.000	0.000       	0.000	0.000	0.000	0.000     	0.002	0.000   	0.000	0.001	0.000	0.997	0.000	0.000	0.000	0.000
+it        	0.114	0.332       	0.016	0.000	0.001	0.024     	0.003	0.024   	0.020	0.150	0.006	0.218	0.013	0.008	0.029	0.043
+should    	0.035	0.002       	0.000	0.002	0.000	0.001     	0.000	0.001   	0.041	0.028	0.000	0.016	0.000	0.874	0.000	0.000
+be        	0.097	0.007       	0.013	0.202	0.004	0.051     	0.000	0.051   	0.007	0.299	0.000	0.200	0.012	0.023	0.012	0.021
+.         	0.047	0.000       	0.045	0.000	0.118	0.034     	0.036	0.034   	0.004	0.028	0.001	0.000	0.030	0.000	0.382	0.241
+         	como 	ha   	dicho	la   	gente	,    	la   	situación	allí 	es   	extremadamente	precaria	.    	NULL 
+as       	1.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000    	0.000	0.000	0.000         	0.000   	0.000	0.000
+people   	0.000	0.000	0.000	0.000	0.965	0.000	0.000	0.000    	0.002	0.000	0.033         	0.000   	0.000	0.000
+have     	0.000	0.227	0.520	0.000	0.002	0.026	0.000	0.000    	0.000	0.000	0.167         	0.036   	0.008	0.013
+said     	0.000	0.000	1.000	0.000	0.000	0.000	0.000	0.000    	0.000	0.000	0.000         	0.000   	0.000	0.000
+,        	0.018	0.000	0.000	0.009	0.000	0.873	0.009	0.000    	0.000	0.004	0.000         	0.025   	0.028	0.033
+the      	0.003	0.002	0.002	0.448	0.000	0.006	0.448	0.001    	0.001	0.002	0.000         	0.021   	0.022	0.045
+situation	0.000	0.000	0.000	0.000	0.000	0.000	0.000	1.000    	0.000	0.000	0.000         	0.000   	0.000	0.000
+there    	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000    	0.995	0.001	0.002         	0.001   	0.000	0.001
+is       	0.011	0.000	0.000	0.026	0.000	0.006	0.026	0.000    	0.003	0.824	0.000         	0.011   	0.034	0.059
+extremely	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000    	0.000	0.000	1.000         	0.000   	0.000	0.000
+volatile 	0.005	0.018	0.000	0.070	0.000	0.045	0.070	0.000    	0.000	0.005	0.000         	0.534   	0.088	0.165
+.        	0.004	0.006	0.000	0.059	0.000	0.054	0.059	0.000    	0.000	0.020	0.000         	0.041   	0.463	0.292
+        	de   	hecho	,    	existe	el   	riesgo	de   	un   	golpe	militar	en   	el   	futuro	.    	NULL 
+there   	0.000	0.000	0.000	0.578 	0.000	0.419 	0.000	0.001	0.001	0.001  	0.000	0.000	0.000 	0.000	0.000
+is      	0.042	0.000	0.009	0.392 	0.080	0.031 	0.042	0.144	0.016	0.016  	0.014	0.080	0.000 	0.049	0.086
+,       	0.020	0.009	0.792	0.000 	0.001	0.000 	0.020	0.001	0.023	0.023  	0.055	0.001	0.001 	0.026	0.030
+in      	0.047	0.000	0.020	0.147 	0.005	0.000 	0.047	0.008	0.012	0.012  	0.657	0.005	0.017 	0.010	0.015
+fact    	0.000	0.012	0.000	0.000 	0.000	0.988 	0.000	0.000	0.000	0.000  	0.000	0.000	0.000 	0.000	0.000
+,       	0.020	0.009	0.792	0.000 	0.001	0.000 	0.020	0.001	0.023	0.023  	0.055	0.001	0.001 	0.026	0.030
+a       	0.024	0.002	0.009	0.000 	0.001	0.001 	0.024	0.793	0.010	0.010  	0.005	0.001	0.098 	0.009	0.012
+risk    	0.000	0.000	0.000	0.000 	0.000	1.000 	0.000	0.000	0.000	0.000  	0.000	0.000	0.000 	0.000	0.000
+of      	0.442	0.002	0.007	0.000 	0.009	0.000 	0.442	0.004	0.018	0.018  	0.016	0.009	0.001 	0.010	0.021
+a       	0.024	0.002	0.009	0.000 	0.001	0.001 	0.024	0.793	0.010	0.010  	0.005	0.001	0.098 	0.009	0.012
+military	0.065	0.000	0.023	0.000 	0.049	0.000 	0.065	0.013	0.276	0.276  	0.052	0.049	0.000 	0.045	0.086
+coup    	0.065	0.000	0.023	0.000 	0.049	0.000 	0.065	0.013	0.276	0.276  	0.052	0.049	0.000 	0.045	0.086
+in      	0.047	0.000	0.020	0.147 	0.005	0.000 	0.047	0.008	0.012	0.012  	0.657	0.005	0.017 	0.010	0.015
+the     	0.050	0.000	0.006	0.000 	0.387	0.000 	0.050	0.001	0.019	0.019  	0.021	0.387	0.000 	0.020	0.040
+future  	0.000	0.000	0.000	0.000 	0.000	0.000 	0.000	0.000	0.000	0.000  	0.000	0.000	1.000 	0.000	0.000
+.       	0.042	0.001	0.047	0.001 	0.046	0.000 	0.042	0.018	0.036	0.036  	0.032	0.046	0.000 	0.401	0.253
+         	no   	sabemos	lo   	que  	está 	ocurriendo	allí 	.    	NULL 
+we       	0.001	0.547  	0.177	0.128	0.001	0.004     	0.088	0.019	0.034
+do       	0.644	0.114  	0.171	0.004	0.000	0.066     	0.000	0.000	0.000
+not      	0.992	0.000  	0.000	0.000	0.008	0.000     	0.000	0.000	0.000
+know     	0.000	1.000  	0.000	0.000	0.000	0.000     	0.000	0.000	0.000
+what     	0.000	0.001  	0.907	0.000	0.000	0.093     	0.000	0.000	0.000
+is       	0.011	0.000  	0.060	0.032	0.787	0.001     	0.003	0.039	0.067
+happening	0.000	0.000  	0.000	0.000	0.000	1.000     	0.000	0.000	0.000
+.        	0.013	0.000  	0.064	0.039	0.015	0.000     	0.000	0.532	0.336
+      	orden	de   	los  	trabajos	NULL 
+agenda	0.743	0.000	0.000	0.257   	0.000
+          	en   	lo   	relativo	al   	lunes	y    	al   	martes	,    	no   	hay  	modificaciones	.    	NULL 
+no        	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000 	0.000	0.311	0.000	0.689         	0.000	0.000
+amendments	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	1.000         	0.000	0.000
+have      	0.063	0.190	0.095   	0.038	0.095	0.074	0.038	0.095 	0.068	0.001	0.001	0.188         	0.022	0.034
+been      	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	1.000         	0.000	0.000
+proposed  	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	1.000         	0.000	0.000
+relating  	0.000	0.000	0.000   	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	1.000         	0.000	0.000
+to        	0.017	0.008	0.051   	0.363	0.051	0.001	0.363	0.051 	0.006	0.001	0.000	0.000         	0.033	0.054
+monday    	0.046	0.002	0.245   	0.036	0.245	0.006	0.036	0.245 	0.021	0.002	0.001	0.000         	0.040	0.076
+and       	0.000	0.001	0.002   	0.000	0.002	0.988	0.000	0.002 	0.005	0.000	0.000	0.000         	0.000	0.000
+tuesday   	0.046	0.002	0.245   	0.036	0.245	0.006	0.036	0.245 	0.021	0.002	0.001	0.000         	0.040	0.076
+.         	0.034	0.051	0.038   	0.023	0.038	0.005	0.023	0.038 	0.049	0.010	0.002	0.000         	0.423	0.267
+          	miércoles	:    	NULL 
+relating  	0.000    	1.000	0.000
+to        	0.484    	0.000	0.516
+wednesday:	0.739    	0.032	0.229
+         	como 	siempre	,    	escucharemos	a    	un   	orador	a    	favor	y    	a    	otro 	en   	contra	.    	NULL 
+then     	0.000	0.003  	0.000	0.000       	0.000	0.000	0.077 	0.000	0.000	0.000	0.000	0.920	0.000	0.000 	0.000	0.000
+we       	0.002	0.003  	0.015	0.041       	0.154	0.025	0.000 	0.154	0.000	0.021	0.154	0.115	0.099	0.116 	0.036	0.063
+shall    	0.000	0.000  	0.000	0.000       	0.000	0.000	0.005 	0.000	0.000	0.000	0.000	0.000	0.000	0.994 	0.000	0.000
+follow   	0.000	0.039  	0.000	0.000       	0.000	0.000	0.945 	0.000	0.000	0.000	0.000	0.016	0.000	0.000 	0.000	0.000
+the      	0.010	0.022  	0.020	0.065       	0.192	0.004	0.019 	0.192	0.000	0.001	0.192	0.000	0.073	0.000 	0.068	0.141
+usual    	0.004	0.000  	0.038	0.451       	0.059	0.020	0.000 	0.059	0.000	0.011	0.059	0.000	0.084	0.000 	0.074	0.140
+procedure	0.000	0.723  	0.000	0.000       	0.000	0.000	0.273 	0.000	0.000	0.000	0.000	0.004	0.000	0.000 	0.000	0.000
+,        	0.017	0.000  	0.810	0.023       	0.009	0.001	0.000 	0.009	0.000	0.008	0.009	0.000	0.057	0.000 	0.026	0.031
+hearing  	0.004	0.000  	0.038	0.451       	0.059	0.020	0.000 	0.059	0.000	0.011	0.059	0.000	0.084	0.000 	0.074	0.140
+one      	0.000	0.000  	0.000	0.000       	0.000	0.066	0.585 	0.000	0.000	0.000	0.000	0.349	0.000	0.000 	0.000	0.000
+speaker  	0.000	0.000  	0.000	0.000       	0.000	0.000	1.000 	0.000	0.000	0.000	0.000	0.000	0.000	0.000 	0.000	0.000
+in       	0.000	0.003  	0.019	0.011       	0.021	0.007	0.000 	0.021	0.245	0.000	0.021	0.000	0.629	0.000 	0.009	0.014
+favour   	0.000	0.000  	0.000	0.000       	0.000	0.000	0.001 	0.000	0.999	0.000	0.000	0.000	0.000	0.000 	0.000	0.000
+and      	0.001	0.000  	0.005	0.002       	0.000	0.001	0.000 	0.000	0.000	0.989	0.000	0.000	0.000	0.000 	0.000	0.000
+one      	0.000	0.000  	0.000	0.000       	0.000	0.066	0.585 	0.000	0.000	0.000	0.000	0.349	0.000	0.000 	0.000	0.000
+against  	0.000	0.000  	0.000	0.000       	0.000	0.000	0.000 	0.000	0.000	0.000	0.000	0.000	0.000	1.000 	0.000	0.000
+.        	0.003	0.000  	0.040	0.031       	0.106	0.015	0.000 	0.106	0.000	0.004	0.106	0.000	0.027	0.000 	0.344	0.217
+         	según	palabras	de   	su   	presidente	,    	está 	en   	condiciones	de   	hacerlo	.    	NULL 
+according	1.000	0.000   	0.000	0.000	0.000     	0.000	0.000	0.000	0.000      	0.000	0.000  	0.000	0.000
+to       	0.406	0.003   	0.046	0.082	0.002     	0.011	0.006	0.031	0.173      	0.046	0.035  	0.060	0.098
+its      	0.012	0.000   	0.000	0.983	0.000     	0.000	0.000	0.000	0.005      	0.000	0.000  	0.000	0.000
+president	0.000	0.000   	0.000	0.000	1.000     	0.000	0.000	0.000	0.000      	0.000	0.000  	0.000	0.000
+,        	0.000	0.000   	0.019	0.018	0.011     	0.752	0.076	0.053	0.000      	0.019	0.000  	0.024	0.029
+it       	0.000	0.000   	0.025	0.058	0.000     	0.024	0.023	0.020	0.432      	0.025	0.282  	0.045	0.067
+is       	0.000	0.000   	0.034	0.001	0.000     	0.007	0.805	0.011	0.000      	0.034	0.000  	0.040	0.069
+in       	0.000	0.000   	0.054	0.060	0.000     	0.023	0.023	0.758	0.000      	0.054	0.000  	0.011	0.017
+a        	0.023	0.018   	0.240	0.004	0.002     	0.094	0.011	0.048	0.105      	0.240	0.004  	0.094	0.117
+position 	0.700	0.008   	0.000	0.000	0.000     	0.000	0.000	0.000	0.286      	0.000	0.006  	0.000	0.000
+to       	0.406	0.003   	0.046	0.082	0.002     	0.011	0.006	0.031	0.173      	0.046	0.035  	0.060	0.098
+do       	0.000	0.000   	0.000	0.000	0.000     	0.000	0.000	0.000	0.000      	0.000	0.999  	0.000	0.000
+so       	0.003	0.000   	0.000	0.000	0.000     	0.000	0.000	0.000	0.001      	0.000	0.995  	0.000	0.000
+.        	0.000	0.000   	0.048	0.040	0.000     	0.054	0.013	0.037	0.000      	0.048	0.000  	0.465	0.294
+        	(    	aplausos	del  	grupo	pse  	)    	NULL 
+(       	0.514	0.045   	0.000	0.000	0.000	0.441	0.000
+applause	0.000	0.998   	0.000	0.000	0.002	0.000	0.000
+from    	0.000	0.000   	0.107	0.007	0.886	0.000	0.000
+the     	0.000	0.000   	0.855	0.006	0.015	0.000	0.124
+pse     	0.000	0.000   	0.000	0.000	1.000	0.000	0.000
+group   	0.000	0.000   	0.000	0.997	0.003	0.000	0.000
+)       	0.444	0.040   	0.000	0.000	0.000	0.516	0.000
+          	(    	el   	parlamento	rechaza	la   	petición	)    	el   	presidente	.    	NULL 
+(         	0.538	0.000	0.000     	0.000  	0.000	0.000   	0.462	0.000	0.000     	0.000	0.000
+parliament	0.000	0.000	1.000     	0.000  	0.000	0.000   	0.000	0.000	0.000     	0.000	0.000
+rejected  	0.000	0.000	0.000     	1.000  	0.000	0.000   	0.000	0.000	0.000     	0.000	0.000
+the       	0.000	0.313	0.001     	0.000  	0.324	0.000   	0.000	0.313	0.000     	0.016	0.033
+request   	0.000	0.000	0.000     	0.000  	0.000	1.000   	0.000	0.000	0.000     	0.000	0.000
+)         	0.462	0.000	0.000     	0.000  	0.000	0.000   	0.538	0.000	0.000     	0.000	0.000
+president 	0.000	0.000	0.000     	0.000  	0.000	0.000   	0.000	0.000	1.000     	0.000	0.000
+.         	0.000	0.058	0.000     	0.000  	0.064	0.000   	0.000	0.058	0.000     	0.502	0.317
+       	¿algún	colega	tomará	la   	palabra	en   	nombre	del  	grupo	para 	justificar	esta 	petición	?    	NULL 
+is     	0.048 	0.048 	0.048 	0.118	0.001  	0.042	0.000 	0.003	0.000	0.018	0.048     	0.338	0.001   	0.022	0.264
+there  	0.003 	0.003 	0.003 	0.000	0.010  	0.001	0.043 	0.000	0.002	0.000	0.003     	0.001	0.928   	0.001	0.002
+a      	0.082 	0.082 	0.082 	0.015	0.029  	0.037	0.000 	0.000	0.044	0.412	0.082     	0.035	0.010   	0.000	0.091
+member 	0.000 	0.000 	0.000 	0.000	0.214  	0.000	0.035 	0.000	0.000	0.000	0.000     	0.000	0.750   	0.000	0.000
+who    	0.000 	0.000 	0.000 	0.000	0.035  	0.000	0.043 	0.002	0.000	0.000	0.000     	0.000	0.920   	0.000	0.000
+wishes 	0.000 	0.000 	0.000 	0.000	0.014  	0.000	0.044 	0.000	0.000	0.000	0.000     	0.000	0.942   	0.000	0.000
+to     	0.085 	0.085 	0.085 	0.021	0.000  	0.028	0.000 	0.006	0.000	0.426	0.085     	0.082	0.000   	0.004	0.091
+speak  	0.000 	0.000 	0.000 	0.000	0.002  	0.000	0.045 	0.000	0.000	0.000	0.000     	0.000	0.953   	0.000	0.000
+on     	0.008 	0.008 	0.008 	0.009	0.033  	0.089	0.834 	0.000	0.000	0.001	0.008     	0.000	0.000   	0.000	0.003
+behalf 	0.000 	0.000 	0.000 	0.000	0.024  	0.000	0.976 	0.000	0.000	0.000	0.000     	0.000	0.000   	0.000	0.000
+of     	0.036 	0.036 	0.036 	0.069	0.005  	0.032	0.063 	0.608	0.001	0.010	0.036     	0.024	0.000   	0.003	0.042
+this   	0.007 	0.007 	0.007 	0.002	0.000  	0.026	0.000 	0.000	0.001	0.003	0.007     	0.883	0.007   	0.006	0.046
+group  	0.000 	0.000 	0.000 	0.000	0.000  	0.000	0.000 	0.000	1.000	0.000	0.000     	0.000	0.000   	0.000	0.000
+to     	0.085 	0.085 	0.085 	0.021	0.000  	0.028	0.000 	0.006	0.000	0.426	0.085     	0.082	0.000   	0.004	0.091
+propose	0.000 	0.000 	0.000 	0.000	0.214  	0.000	0.035 	0.000	0.000	0.000	0.000     	0.000	0.750   	0.000	0.000
+this   	0.007 	0.007 	0.007 	0.002	0.000  	0.026	0.000 	0.000	0.001	0.003	0.007     	0.883	0.007   	0.006	0.046
+?      	0.000 	0.000 	0.000 	0.000	0.000  	0.000	0.000 	0.000	0.000	0.000	0.000     	0.000	0.000   	1.000	0.000
+          	señora	presidenta	,    	escucho	algunas	risas	entre	los  	socialistas	.    	NULL 
+madam     	0.646 	0.354     	0.000	0.000  	0.000  	0.000	0.000	0.000	0.000      	0.000	0.000
+president 	0.124 	0.876     	0.000	0.000  	0.000  	0.000	0.000	0.000	0.000      	0.000	0.000
+,         	0.232 	0.001     	0.619	0.018  	0.000  	0.018	0.001	0.013	0.055      	0.020	0.024
+i         	0.159 	0.030     	0.007	0.031  	0.595  	0.031	0.000	0.001	0.014      	0.072	0.058
+can       	0.000 	0.000     	0.000	0.000  	0.001  	0.000	0.418	0.000	0.581      	0.000	0.000
+hear      	0.000 	0.000     	0.000	0.000  	0.000  	0.000	0.000	0.000	1.000      	0.000	0.000
+a         	0.028 	0.013     	0.027	0.030  	0.786  	0.030	0.026	0.001	0.000      	0.027	0.033
+ripple    	0.000 	0.000     	0.029	0.342  	0.000  	0.342	0.048	0.078	0.000      	0.056	0.106
+of        	0.003 	0.000     	0.051	0.127  	0.013  	0.127	0.000	0.401	0.063      	0.067	0.147
+laughter  	0.000 	0.000     	0.029	0.342  	0.000  	0.342	0.048	0.078	0.000      	0.056	0.106
+from      	0.000 	0.000     	0.000	0.000  	0.611  	0.000	0.125	0.002	0.261      	0.000	0.000
+the       	0.000 	0.000     	0.015	0.048  	0.000  	0.048	0.004	0.731	0.000      	0.050	0.104
+socialists	0.000 	0.000     	0.029	0.342  	0.000  	0.342	0.048	0.078	0.000      	0.056	0.106
+.         	0.011 	0.000     	0.058	0.044  	0.000  	0.044	0.001	0.036	0.000      	0.494	0.312
+         	también	existen	acuerdos	contra	semejante	impuesto	.    	NULL 
+decisions	0.000  	0.048  	0.948   	0.000 	0.002    	0.002   	0.000	0.000
+have     	0.002  	0.716  	0.243   	0.000 	0.025    	0.000   	0.006	0.009
+also     	1.000  	0.000  	0.000   	0.000 	0.000    	0.000   	0.000	0.000
+been     	0.000  	0.048  	0.948   	0.000 	0.002    	0.002   	0.000	0.000
+adopted  	0.000  	0.048  	0.948   	0.000 	0.002    	0.002   	0.000	0.000
+against  	0.000  	0.084  	0.000   	0.916 	0.000    	0.000   	0.000	0.000
+a        	0.000  	0.024  	0.000   	0.000 	0.906    	0.000   	0.031	0.039
+tax      	0.000  	0.000  	0.000   	0.000 	0.000    	1.000   	0.000	0.000
+of       	0.144  	0.053  	0.002   	0.000 	0.649    	0.000   	0.047	0.104
+this     	0.006  	0.000  	0.000   	0.364 	0.452    	0.000   	0.068	0.110
+kind     	0.000  	0.048  	0.948   	0.000 	0.002    	0.002   	0.000	0.000
+.        	0.009  	0.000  	0.000   	0.000 	0.000    	0.000   	0.608	0.384
+      	por  	consiguiente	,    	mi   	grupo	solicita	que  	se   	suprima	este 	punto	del  	día  	.    	NULL 
+that  	0.079	0.014       	0.001	0.001	0.000	0.011   	0.619	0.040	0.011  	0.091	0.008	0.002	0.062	0.029	0.031
+is    	0.033	0.050       	0.015	0.001	0.000	0.027   	0.068	0.282	0.027  	0.082	0.135	0.001	0.050	0.084	0.145
+why   	0.662	0.331       	0.000	0.000	0.003	0.000   	0.000	0.000	0.000  	0.000	0.002	0.000	0.002	0.000	0.000
+my    	0.000	0.000       	0.000	0.866	0.000	0.000   	0.000	0.000	0.000  	0.000	0.134	0.000	0.000	0.000	0.000
+group 	0.000	0.000       	0.000	0.000	1.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000	0.000	0.000	0.000
+moves 	0.048	0.000       	0.026	0.001	0.000	0.314   	0.012	0.103	0.314  	0.003	0.000	0.022	0.007	0.052	0.097
+that  	0.079	0.014       	0.001	0.001	0.000	0.011   	0.619	0.040	0.011  	0.091	0.008	0.002	0.062	0.029	0.031
+this  	0.001	0.000       	0.004	0.003	0.001	0.005   	0.015	0.060	0.005  	0.838	0.003	0.000	0.002	0.024	0.038
+item  	0.000	0.014       	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000	0.986	0.000	0.000
+be    	0.089	0.006       	0.012	0.025	0.112	0.047   	0.275	0.338	0.047  	0.007	0.000	0.000	0.009	0.011	0.019
+taken 	0.000	0.992       	0.000	0.003	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000	0.005	0.000	0.000
+off   	0.000	0.991       	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.004	0.000	0.005	0.000	0.000
+the   	0.043	0.000       	0.012	0.000	0.004	0.041   	0.011	0.053	0.041  	0.022	0.020	0.614	0.006	0.043	0.089
+agenda	0.000	0.002       	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000	0.998	0.000	0.000
+.     	0.052	0.000       	0.049	0.005	0.000	0.038   	0.031	0.076	0.038  	0.016	0.001	0.005	0.001	0.422	0.266
+          	gracias	,    	señor	poettering	.    	NULL 
+thank     	0.983  	0.000	0.017	0.000     	0.000	0.000
+you       	0.841  	0.007	0.149	0.001     	0.001	0.001
+,         	0.000  	0.740	0.186	0.021     	0.024	0.028
+mr        	0.000  	0.000	1.000	0.000     	0.000	0.000
+poettering	0.000  	0.054	0.000	0.641     	0.105	0.199
+.         	0.000  	0.063	0.004	0.048     	0.542	0.342
+        	escuchemos	ahora	al   	sr   	.    	wurtz	,    	que  	hablará	en   	contra	de   	la   	petición	.    	NULL 
+we      	0.034     	0.298	0.051	0.000	0.030	0.034	0.013	0.198	0.034  	0.082	0.097 	0.037	0.009	0.000   	0.030	0.053
+shall   	0.000     	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.994 	0.000	0.000	0.006   	0.000	0.000
+now     	0.000     	1.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000 	0.000	0.000	0.000   	0.000	0.000
+hear    	0.000     	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000 	0.000	0.000	1.000   	0.000	0.000
+mr      	0.000     	0.000	0.000	1.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000 	0.000	0.000	0.000   	0.000	0.000
+wurtz   	0.224     	0.003	0.032	0.001	0.037	0.224	0.019	0.008	0.224  	0.042	0.000 	0.053	0.029	0.000   	0.037	0.069
+speaking	0.000     	0.000	0.000	0.001	0.000	0.000	0.000	0.000	0.000  	0.000	0.000 	0.000	0.000	0.998   	0.000	0.000
+against 	0.000     	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	1.000 	0.000	0.000	0.000   	0.000	0.000
+this    	0.019     	0.000	0.002	0.004	0.082	0.019	0.014	0.052	0.019  	0.075	0.441 	0.034	0.005	0.019   	0.082	0.133
+request 	0.000     	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000 	0.000	0.000	1.000   	0.000	0.000
+.       	0.026     	0.002	0.015	0.000	0.289	0.026	0.034	0.021	0.026  	0.023	0.000 	0.030	0.037	0.000   	0.289	0.182
+   	no   	es   	pedir	demasiado	.    	NULL 
+it 	0.091	0.683	0.002	0.100    	0.050	0.074
+is 	0.010	0.874	0.000	0.018    	0.036	0.062
+not	1.000	0.000	0.000	0.000    	0.000	0.000
+a  	0.002	0.008	0.925	0.000    	0.029	0.036
+lot	0.020	0.019	0.001	0.000    	0.332	0.627
+to 	0.005	0.003	0.366	0.001    	0.237	0.387
+ask	0.000	0.000	1.000	0.000    	0.000	0.000
+.  	0.014	0.026	0.000	0.000    	0.588	0.371
+     	gracias	.    	NULL 
+thank	1.000  	0.000	0.000
+you  	0.997  	0.001	0.002
+very 	1.000  	0.000	0.000
+much 	1.000  	0.000	0.000
+.    	0.000  	0.613	0.387
+      	mi   	voto 	era  	"    	a    	favor	"    	.    	NULL 
+my    	1.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000
+vote  	0.000	1.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000
+was   	0.000	0.000	1.000	0.000	0.000	0.000	0.000	0.000	0.000
+"     	0.000	0.002	0.000	0.499	0.000	0.000	0.499	0.000	0.000
+in    	0.008	0.000	0.000	0.093	0.058	0.682	0.093	0.026	0.040
+favour	0.000	0.000	0.000	0.000	0.000	1.000	0.000	0.000	0.000
+"     	0.000	0.002	0.000	0.499	0.000	0.000	0.499	0.000	0.000
+.     	0.006	0.000	0.003	0.001	0.158	0.000	0.001	0.510	0.322
+          	señora	presidenta	,    	la   	presidencia	ha   	proclamado	el   	resultado	de   	la   	votación	.    	NULL 
+madam     	0.646 	0.354     	0.000	0.000	0.000      	0.000	0.000     	0.000	0.000    	0.000	0.000	0.000   	0.000	0.000
+president 	0.124 	0.876     	0.000	0.000	0.000      	0.000	0.000     	0.000	0.000    	0.000	0.000	0.000   	0.000	0.000
+,         	0.246 	0.001     	0.657	0.007	0.000      	0.000	0.019     	0.001	0.000    	0.016	0.007	0.000   	0.021	0.025
+the       	0.000 	0.000     	0.004	0.301	0.003      	0.001	0.014     	0.292	0.000    	0.038	0.301	0.001   	0.015	0.030
+presidency	0.000 	0.000     	0.000	0.000	1.000      	0.000	0.000     	0.000	0.000    	0.000	0.000	0.000   	0.000	0.000
+has       	0.000 	0.000     	0.000	0.000	0.000      	1.000	0.000     	0.000	0.000    	0.000	0.000	0.000   	0.000	0.000
+already   	0.000 	0.000     	0.000	0.000	0.525      	0.000	0.000     	0.000	0.475    	0.000	0.000	0.000   	0.000	0.000
+declared  	0.000 	0.000     	0.000	0.000	0.525      	0.000	0.000     	0.000	0.475    	0.000	0.000	0.000   	0.000	0.000
+the       	0.000 	0.000     	0.004	0.301	0.003      	0.001	0.014     	0.292	0.000    	0.038	0.301	0.001   	0.015	0.030
+result    	0.000 	0.000     	0.000	0.000	0.000      	0.000	0.000     	0.000	1.000    	0.000	0.000	0.000   	0.000	0.000
+of        	0.001 	0.000     	0.013	0.060	0.000      	0.001	0.031     	0.016	0.000    	0.766	0.060	0.000   	0.016	0.036
+the       	0.000 	0.000     	0.004	0.301	0.003      	0.001	0.014     	0.292	0.000    	0.038	0.301	0.001   	0.015	0.030
+vote      	0.000 	0.000     	0.000	0.000	0.000      	0.000	0.000     	0.000	0.000    	0.000	0.000	1.000   	0.000	0.000
+.         	0.009 	0.000     	0.050	0.054	0.000      	0.006	0.038     	0.049	0.000    	0.044	0.054	0.005   	0.424	0.267
+          	no   	caben	modificaciones	.    	NULL 
+there     	0.071	0.004	0.922         	0.001	0.002
+is        	0.081	0.092	0.029         	0.292	0.506
+no        	0.311	0.000	0.689         	0.000	0.000
+room      	0.007	0.674	0.000         	0.111	0.209
+for       	0.001	0.030	0.937         	0.013	0.019
+amendments	0.000	0.000	1.000         	0.000	0.000
+.         	0.014	0.051	0.000         	0.573	0.362
+      	esto 	no   	ha   	ocurrido	.    	NULL 
+that  	0.840	0.004	0.002	0.024   	0.064	0.067
+did   	0.001	0.000	0.999	0.000   	0.000	0.000
+not   	0.023	0.977	0.000	0.000   	0.000	0.000
+happen	0.985	0.000	0.015	0.000   	0.000	0.000
+.     	0.015	0.014	0.008	0.050   	0.560	0.354
+         	es   	un   	asunto	importante	.    	NULL 
+this     	0.201	0.177	0.101 	0.001     	0.198	0.322
+is       	0.729	0.087	0.014 	0.087     	0.030	0.052
+an       	0.007	0.353	0.000 	0.640     	0.000	0.000
+important	0.000	0.000	0.000 	1.000     	0.000	0.000
+matter   	0.000	0.000	1.000 	0.000     	0.000	0.000
+.        	0.025	0.026	0.000 	0.002     	0.580	0.366
+      	tampoco	me   	ha   	nombrado	usted	.    	NULL 
+you   	0.000  	0.000	0.000	0.000   	0.999	0.000	0.001
+did   	0.797  	0.000	0.203	0.000   	0.000	0.000	0.000
+not   	1.000  	0.000	0.000	0.000   	0.000	0.000	0.000
+call  	1.000  	0.000	0.000	0.000   	0.000	0.000	0.000
+me    	0.000  	1.000	0.000	0.000   	0.000	0.000	0.000
+either	1.000  	0.000	0.000	0.000   	0.000	0.000	0.000
+.     	0.000  	0.004	0.008	0.051   	0.003	0.573	0.361
+        	creo 	que  	es   	una  	buena	fórmula	.    	NULL 
+this    	0.244	0.085	0.137	0.143	0.006	0.031  	0.135	0.219
+seems   	0.000	0.000	0.000	0.000	1.000	0.000  	0.000	0.000
+to      	0.000	0.441	0.001	0.060	0.004	0.182  	0.118	0.193
+me      	0.000	0.000	0.000	0.000	1.000	0.000  	0.000	0.000
+to      	0.000	0.441	0.001	0.060	0.004	0.182  	0.118	0.193
+be      	0.003	0.727	0.000	0.004	0.061	0.125  	0.029	0.051
+a       	0.000	0.009	0.003	0.950	0.000	0.013  	0.011	0.014
+workable	0.000	0.022	0.006	0.079	0.000	0.606  	0.100	0.188
+solution	0.000	0.000	0.000	0.000	1.000	0.000  	0.000	0.000
+.       	0.000	0.039	0.023	0.027	0.000	0.047  	0.529	0.334
+          	sr   	.    	hänsch	,    	sr   	.    	cox  	,    	¿les 	parece	bien 	?    	NULL 
+mr        	0.500	0.000	0.000 	0.000	0.500	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000
+cox       	0.001	0.043	0.262 	0.022	0.001	0.043	0.262	0.022	0.262	0.000 	0.001	0.000	0.081
+,         	0.000	0.014	0.013 	0.449	0.000	0.014	0.013	0.449	0.013	0.000 	0.018	0.000	0.017
+mr        	0.500	0.000	0.000 	0.000	0.500	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000
+hänsch    	0.001	0.043	0.262 	0.022	0.001	0.043	0.262	0.022	0.262	0.000 	0.001	0.000	0.081
+,         	0.000	0.014	0.013 	0.449	0.000	0.014	0.013	0.449	0.013	0.000 	0.018	0.000	0.017
+would     	0.233	0.005	0.030 	0.007	0.233	0.005	0.030	0.007	0.030	0.408 	0.005	0.001	0.006
+this      	0.004	0.085	0.020 	0.015	0.004	0.085	0.020	0.015	0.020	0.351 	0.227	0.017	0.138
+be        	0.000	0.012	0.052 	0.014	0.000	0.012	0.052	0.014	0.052	0.772 	0.000	0.001	0.021
+acceptable	0.482	0.000	0.000 	0.000	0.482	0.000	0.000	0.000	0.000	0.027 	0.009	0.000	0.000
+to        	0.000	0.081	0.124 	0.015	0.000	0.081	0.124	0.015	0.124	0.281 	0.019	0.006	0.132
+you       	0.360	0.009	0.010 	0.083	0.360	0.009	0.010	0.083	0.010	0.009 	0.003	0.040	0.016
+?         	0.000	0.000	0.000 	0.000	0.000	0.000	0.000	0.000	0.000	0.000 	0.000	1.000	0.000
+         	consejeros	de   	seguridad	para 	el   	transporte	de   	mercancías	peligrosas	NULL 
+safety   	0.000     	0.000	1.000    	0.000	0.000	0.000     	0.000	0.000     	0.000     	0.000
+advisers 	0.245     	0.058	0.000    	0.031	0.043	0.000     	0.058	0.245     	0.245     	0.076
+for      	0.007     	0.015	0.000    	0.942	0.003	0.000     	0.015	0.007     	0.007     	0.004
+the      	0.032     	0.085	0.004    	0.005	0.657	0.000     	0.085	0.032     	0.032     	0.069
+transport	0.000     	0.000	0.000    	0.000	0.000	1.000     	0.000	0.000     	0.000     	0.000
+of       	0.017     	0.424	0.002    	0.005	0.009	0.064     	0.424	0.017     	0.017     	0.020
+dangerous	0.000     	0.000	0.000    	0.000	0.000	1.000     	0.000	0.000     	0.000     	0.000
+goods    	0.245     	0.058	0.000    	0.031	0.043	0.000     	0.058	0.245     	0.245     	0.076
+            	hay  	que  	celebrar	extraordinariamente	todo 	esto 	en   	el   	sentido	de   	la   	subsidiariedad	.    	NULL 
+all         	0.000	0.000	0.000   	0.000              	0.974	0.009	0.000	0.000	0.000  	0.000	0.000	0.017         	0.000	0.000
+of          	0.003	0.002	0.026   	0.030              	0.040	0.008	0.026	0.015	0.000  	0.736	0.057	0.006         	0.016	0.035
+this        	0.000	0.018	0.008   	0.007              	0.014	0.604	0.026	0.002	0.233  	0.012	0.002	0.000         	0.029	0.047
+is          	0.281	0.042	0.000   	0.016              	0.056	0.279	0.014	0.084	0.000  	0.045	0.040	0.000         	0.052	0.090
+in          	0.003	0.001	0.075   	0.013              	0.015	0.001	0.714	0.006	0.039  	0.051	0.009	0.047         	0.011	0.016
+accordance  	0.003	0.016	0.000   	0.442              	0.001	0.003	0.083	0.078	0.002  	0.104	0.058	0.000         	0.073	0.137
+with        	0.001	0.000	0.953   	0.001              	0.002	0.000	0.000	0.000	0.042  	0.000	0.000	0.000         	0.000	0.000
+the         	0.000	0.005	0.000   	0.020              	0.000	0.000	0.022	0.411	0.000  	0.053	0.424	0.000         	0.021	0.043
+principle   	0.000	0.000	0.057   	0.000              	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.943         	0.000	0.000
+of          	0.003	0.002	0.026   	0.030              	0.040	0.008	0.026	0.015	0.000  	0.736	0.057	0.006         	0.016	0.035
+subsidiarity	0.000	0.000	0.000   	0.000              	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	1.000         	0.000	0.000
+and         	0.000	0.000	0.902   	0.014              	0.010	0.000	0.003	0.014	0.000  	0.005	0.004	0.043         	0.003	0.002
+is          	0.281	0.042	0.000   	0.016              	0.056	0.279	0.014	0.084	0.000  	0.045	0.040	0.000         	0.052	0.090
+therefore   	0.000	0.000	0.988   	0.000              	0.000	0.000	0.000	0.000	0.007  	0.000	0.000	0.005         	0.000	0.000
+to          	0.001	0.302	0.117   	0.124              	0.012	0.044	0.041	0.045	0.007  	0.061	0.030	0.001         	0.081	0.132
+be          	0.371	0.203	0.027   	0.035              	0.000	0.000	0.009	0.003	0.311  	0.013	0.001	0.005         	0.008	0.014
+greatly     	0.003	0.016	0.000   	0.442              	0.001	0.003	0.083	0.078	0.002  	0.104	0.058	0.000         	0.073	0.137
+welcomed    	0.000	0.000	0.890   	0.000              	0.000	0.000	0.000	0.000	0.106  	0.000	0.000	0.005         	0.000	0.000
+.           	0.003	0.033	0.000   	0.039              	0.001	0.012	0.035	0.051	0.003  	0.046	0.056	0.000         	0.442	0.279
+              	considero	que  	se   	han  	tenido	satisfactoriamente	en   	cuenta	nuestras	enmiendas	de   	la   	primera	lectura	.    	NULL 
+our           	0.000    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.000 	1.000   	0.000    	0.000	0.000	0.000  	0.000  	0.000	0.000
+amendments    	0.000    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.000 	0.000   	1.000    	0.000	0.000	0.000  	0.000  	0.000	0.000
+from          	0.001    	0.002	0.010	0.079	0.000 	0.000             	0.000	0.002 	0.002   	0.000    	0.000	0.000	0.630  	0.271  	0.000	0.000
+the           	0.000    	0.008	0.040	0.002	0.031 	0.031             	0.035	0.000 	0.000   	0.000    	0.083	0.658	0.004  	0.010  	0.032	0.066
+first         	0.000    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.000 	0.000   	0.000    	0.000	0.000	1.000  	0.000  	0.000	0.000
+reading       	0.000    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.000 	0.000   	0.000    	0.000	0.000	0.000  	1.000  	0.000	0.000
+have          	0.000    	0.006	0.051	0.898	0.012 	0.012             	0.008	0.000 	0.001   	0.004    	0.002	0.000	0.000  	0.000  	0.003	0.004
+,             	0.007    	0.039	0.112	0.000	0.073 	0.073             	0.178	0.001 	0.028   	0.000    	0.064	0.026	0.217  	0.003  	0.082	0.097
+i             	0.681    	0.216	0.002	0.000	0.009 	0.009             	0.005	0.000 	0.038   	0.001    	0.003	0.001	0.000  	0.000  	0.020	0.016
+believe       	0.005    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.009 	0.009   	0.000    	0.000	0.000	0.010  	0.967  	0.000	0.000
+,             	0.007    	0.039	0.112	0.000	0.073 	0.073             	0.178	0.001 	0.028   	0.000    	0.064	0.026	0.217  	0.003  	0.082	0.097
+been          	0.000    	0.000	0.132	0.610	0.000 	0.000             	0.000	0.247 	0.000   	0.011    	0.000	0.000	0.000  	0.000  	0.000	0.000
+taken         	0.000    	0.000	0.000	0.401	0.000 	0.000             	0.000	0.592 	0.000   	0.000    	0.000	0.000	0.000  	0.007  	0.000	0.000
+into          	0.000    	0.000	0.000	0.002	0.000 	0.000             	0.000	0.996 	0.000   	0.001    	0.000	0.000	0.000  	0.001  	0.000	0.000
+account       	0.000    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.000 	0.946   	0.000    	0.000	0.000	0.001  	0.053  	0.000	0.000
+very          	0.002    	0.000	0.000	0.000	0.000 	0.000             	0.000	0.562 	0.429   	0.000    	0.000	0.000	0.000  	0.007  	0.000	0.000
+satisfactorily	0.000    	0.011	0.097	0.004	0.293 	0.293             	0.055	0.000 	0.000   	0.000    	0.069	0.038	0.000  	0.000  	0.048	0.091
+.             	0.000    	0.031	0.075	0.003	0.037 	0.037             	0.033	0.000 	0.000   	0.000    	0.044	0.054	0.000  	0.000  	0.419	0.265
+       	pido 	la   	conformidad	de   	ustedes	.    	NULL 
+i      	0.881	0.002	0.000      	0.005	0.051  	0.034	0.027
+would  	0.988	0.000	0.007      	0.000	0.000  	0.002	0.002
+urge   	0.488	0.000	0.512      	0.000	0.001  	0.000	0.000
+you    	0.006	0.000	0.000      	0.000	0.992  	0.001	0.002
+to     	0.009	0.062	0.367      	0.126	0.000  	0.165	0.271
+endorse	0.000	0.156	0.000      	0.280	0.000  	0.195	0.368
+this   	0.003	0.008	0.447      	0.055	0.135  	0.134	0.218
+.      	0.000	0.069	0.000      	0.056	0.000  	0.537	0.339
+              	en   	determinadas	localidades	de   	mi   	país 	se   	produjo	realmente	una  	situación	caótica	.    	NULL 
+in            	0.564	0.000       	0.010      	0.040	0.003	0.040	0.000	0.010  	0.286    	0.000	0.015    	0.010  	0.008	0.013
+fact          	0.000	0.014       	0.000      	0.000	0.000	0.000	0.000	0.000  	0.986    	0.000	0.000    	0.000  	0.000	0.000
+,             	0.231	0.002       	0.094      	0.083	0.000	0.009	0.144	0.094  	0.000    	0.016	0.000    	0.094  	0.106	0.126
+all           	0.000	0.979       	0.000      	0.000	0.000	0.021	0.000	0.000  	0.000    	0.000	0.000    	0.000  	0.000	0.000
+hell          	0.043	0.000       	0.228      	0.054	0.001	0.006	0.075	0.228  	0.002    	0.030	0.000    	0.228  	0.037	0.071
+broke         	0.043	0.000       	0.228      	0.054	0.001	0.006	0.075	0.228  	0.002    	0.030	0.000    	0.228  	0.037	0.071
+loose         	0.043	0.000       	0.228      	0.054	0.001	0.006	0.075	0.228  	0.002    	0.030	0.000    	0.228  	0.037	0.071
+in            	0.564	0.000       	0.010      	0.040	0.003	0.040	0.000	0.010  	0.286    	0.000	0.015    	0.010  	0.008	0.013
+some          	0.000	0.979       	0.000      	0.000	0.000	0.021	0.000	0.000  	0.000    	0.000	0.000    	0.000  	0.000	0.000
+municipalities	0.043	0.000       	0.228      	0.054	0.001	0.006	0.075	0.228  	0.002    	0.030	0.000    	0.228  	0.037	0.071
+in            	0.564	0.000       	0.010      	0.040	0.003	0.040	0.000	0.010  	0.286    	0.000	0.015    	0.010  	0.008	0.013
+my            	0.000	0.000       	0.000      	0.000	0.982	0.000	0.000	0.000  	0.018    	0.000	0.000    	0.000  	0.000	0.000
+province      	0.043	0.000       	0.228      	0.054	0.001	0.006	0.075	0.228  	0.002    	0.030	0.000    	0.228  	0.037	0.071
+.             	0.034	0.000       	0.038      	0.045	0.005	0.000	0.077	0.038  	0.000    	0.022	0.000    	0.038  	0.430	0.272
+            	le   	felicito	por  	su   	excelente	informe	.    	NULL 
+i           	0.550	0.143   	0.102	0.186	0.000    	0.000  	0.010	0.008
+congratulate	0.000	0.356   	0.000	0.000	0.644    	0.000  	0.000	0.000
+him         	0.497	0.503   	0.000	0.000	0.000    	0.000  	0.000	0.000
+on          	0.000	0.646   	0.071	0.047	0.220    	0.002  	0.007	0.007
+his         	0.023	0.749   	0.000	0.192	0.000    	0.035  	0.000	0.000
+excellent   	0.000	0.003   	0.000	0.000	0.997    	0.000  	0.000	0.000
+report      	0.000	0.000   	0.000	0.000	0.000    	1.000  	0.000	0.000
+.           	0.024	0.000   	0.065	0.045	0.000    	0.000  	0.531	0.335
+         	señora	presidenta	,    	quisiera	hacer	algunas	observaciones	.    	NULL 
+madam    	0.646 	0.354     	0.000	0.000   	0.000	0.000  	0.000        	0.000	0.000
+president	0.124 	0.876     	0.000	0.000   	0.000	0.000  	0.000        	0.000	0.000
+,        	0.259 	0.001     	0.691	0.000   	0.000	0.000  	0.000        	0.022	0.026
+i        	0.043 	0.008     	0.002	0.619   	0.001	0.160  	0.132        	0.019	0.016
+would    	0.000 	0.000     	0.002	0.789   	0.000	0.003  	0.202        	0.002	0.002
+like     	0.000 	0.000     	0.000	0.991   	0.000	0.006  	0.003        	0.000	0.000
+to       	0.000 	0.000     	0.015	0.123   	0.640	0.000  	0.000        	0.084	0.137
+make     	0.000 	0.000     	0.000	0.000   	0.096	0.266  	0.638        	0.000	0.000
+a        	0.025 	0.011     	0.024	0.001   	0.146	0.706  	0.032        	0.024	0.030
+few      	0.000 	0.000     	0.000	0.000   	0.006	0.633  	0.361        	0.000	0.000
+comments 	0.000 	0.000     	0.000	0.000   	0.000	0.000  	1.000        	0.000	0.000
+.        	0.012 	0.000     	0.066	0.000   	0.001	0.000  	0.000        	0.564	0.356
+     	es   	una  	pena 	en   	cierto	sentido	.    	NULL 
+this 	0.073	0.076	0.009	0.065	0.012 	0.579  	0.071	0.116
+is   	0.763	0.033	0.106	0.009	0.004 	0.000  	0.031	0.054
+a    	0.003	0.948	0.017	0.006	0.000 	0.001  	0.011	0.014
+pity 	0.012	0.162	0.000	0.232	0.000 	0.005  	0.204	0.385
+,    	0.015	0.015	0.002	0.218	0.488 	0.044  	0.100	0.118
+in   	0.001	0.000	0.000	0.914	0.000 	0.050  	0.013	0.021
+a    	0.003	0.948	0.017	0.006	0.000 	0.001  	0.011	0.014
+sense	0.000	0.000	0.204	0.000	0.000 	0.795  	0.000	0.000
+.    	0.024	0.028	0.000	0.044	0.001 	0.004  	0.551	0.348
+         	dicho	de   	otra 	forma	,    	es   	de   	gran 	importancia	.    	NULL 
+in       	0.098	0.178	0.000	0.374	0.076	0.002	0.178	0.000	0.000      	0.037	0.057
+short    	0.009	0.000	0.048	0.394	0.000	0.000	0.000	0.042	0.508      	0.000	0.000
+,        	0.000	0.020	0.000	0.093	0.803	0.004	0.020	0.003	0.000      	0.026	0.031
+the      	0.008	0.287	0.032	0.000	0.032	0.009	0.287	0.002	0.000      	0.112	0.231
+issue    	0.020	0.000	0.760	0.047	0.000	0.000	0.000	0.113	0.061      	0.000	0.000
+is       	0.000	0.027	0.036	0.011	0.006	0.781	0.027	0.000	0.024      	0.032	0.056
+an       	0.001	0.001	0.004	0.034	0.000	0.017	0.001	0.899	0.044      	0.000	0.000
+important	0.000	0.000	0.000	0.001	0.000	0.000	0.000	0.000	0.999      	0.000	0.000
+one      	0.000	0.006	0.462	0.225	0.000	0.000	0.006	0.023	0.278      	0.000	0.000
+.        	0.000	0.052	0.000	0.000	0.058	0.022	0.052	0.001	0.001      	0.499	0.315
+           	las  	reglas	están	,    	ahora	queda	el   	control	.    	NULL 
+the        	0.344	0.021 	0.000	0.006	0.033	0.096	0.432	0.001  	0.022	0.045
+work       	0.000	0.000 	0.052	0.000	0.068	0.205	0.000	0.675  	0.000	0.000
+is         	0.003	0.020 	0.003	0.012	0.095	0.592	0.101	0.003  	0.063	0.109
+done       	0.000	0.000 	0.023	0.000	0.001	0.001	0.000	0.975  	0.000	0.000
+.          	0.101	0.039 	0.000	0.051	0.004	0.035	0.051	0.000  	0.440	0.278
+all        	0.000	0.000 	0.038	0.000	0.002	0.910	0.000	0.051  	0.000	0.000
+that       	0.001	0.044 	0.023	0.005	0.000	0.621	0.066	0.003  	0.116	0.121
+remains    	0.000	0.000 	0.007	0.000	0.000	0.984	0.000	0.009  	0.000	0.000
+is         	0.003	0.020 	0.003	0.012	0.095	0.592	0.101	0.003  	0.063	0.109
+the        	0.344	0.021 	0.000	0.006	0.033	0.096	0.432	0.001  	0.022	0.045
+business   	0.000	0.000 	0.001	0.000	0.000	0.998	0.000	0.001  	0.000	0.000
+of         	0.321	0.127 	0.001	0.051	0.184	0.003	0.064	0.037  	0.066	0.146
+enforcement	0.000	0.000 	0.030	0.000	0.000	0.002	0.000	0.968  	0.000	0.000
+.          	0.101	0.039 	0.000	0.051	0.004	0.035	0.051	0.000  	0.440	0.278
+       	permítanme	que  	mencione	una  	última	cuestión	.    	NULL 
+i      	0.005     	0.747	0.030   	0.000	0.008 	0.086   	0.068	0.055
+would  	0.000     	0.004	0.012   	0.007	0.933 	0.039   	0.002	0.002
+like   	0.000     	0.000	0.000   	0.000	0.995 	0.005   	0.000	0.000
+to     	0.056     	0.410	0.169   	0.056	0.001 	0.019   	0.110	0.180
+mention	0.062     	0.000	0.000   	0.000	0.938 	0.000   	0.000	0.000
+one    	0.000     	0.002	0.000   	0.148	0.848 	0.002   	0.000	0.000
+final  	0.000     	0.000	0.000   	0.000	1.000 	0.000   	0.000	0.000
+point  	0.000     	0.000	0.000   	0.000	0.052 	0.948   	0.000	0.000
+.      	0.000     	0.040	0.048   	0.027	0.001 	0.011   	0.536	0.338
+           	esto 	les  	da   	una  	ventaja	competitiva	temporal	.    	NULL 
+this       	0.825	0.004	0.000	0.041	0.009  	0.009      	0.009   	0.039	0.064
+gives      	0.000	0.006	0.994	0.000	0.000  	0.000      	0.000   	0.000	0.000
+them       	0.000	0.225	0.775	0.000	0.000  	0.000      	0.000   	0.000	0.000
+a          	0.000	0.000	0.000	0.938	0.012  	0.012      	0.012   	0.011	0.014
+competitive	0.002	0.000	0.002	0.036	0.276  	0.276      	0.276   	0.045	0.086
+edge       	0.002	0.000	0.002	0.036	0.276  	0.276      	0.276   	0.045	0.086
+for        	0.003	0.403	0.304	0.166	0.030  	0.030      	0.030   	0.014	0.019
+the        	0.002	0.002	0.257	0.001	0.119  	0.119      	0.119   	0.125	0.258
+interim    	0.002	0.000	0.002	0.036	0.276  	0.276      	0.276   	0.045	0.086
+period     	0.000	0.006	0.994	0.000	0.000  	0.000      	0.000   	0.000	0.000
+.          	0.013	0.000	0.000	0.025	0.045  	0.045      	0.045   	0.506	0.319
+        	esto 	,    	no   	obstante	,    	no   	fue  	posible	.    	NULL 
+this    	0.870	0.007	0.004	0.000   	0.007	0.004	0.000	0.000  	0.041	0.067
+,       	0.000	0.470	0.011	0.005   	0.470	0.011	0.000	0.000  	0.015	0.018
+however 	0.000	0.000	0.000	1.000   	0.000	0.000	0.000	0.000  	0.000	0.000
+,       	0.000	0.470	0.011	0.005   	0.470	0.011	0.000	0.000  	0.015	0.018
+does    	0.000	0.000	0.087	0.006   	0.000	0.087	0.798	0.022  	0.000	0.000
+not     	0.012	0.000	0.494	0.000   	0.000	0.494	0.000	0.000  	0.000	0.000
+seem    	0.000	0.000	0.000	0.007   	0.000	0.000	0.966	0.027  	0.000	0.000
+feasible	0.010	0.125	0.014	0.000   	0.125	0.014	0.004	0.000  	0.245	0.461
+.       	0.014	0.060	0.013	0.000   	0.060	0.013	0.000	0.000  	0.515	0.325
+        	deseo	hacer	solamente	unas 	puntualizaciones	.    	NULL 
+i       	0.819	0.001	0.000    	0.139	0.002           	0.022	0.018
+should  	0.375	0.595	0.003    	0.004	0.023           	0.000	0.000
+like    	0.331	0.001	0.049    	0.003	0.616           	0.000	0.000
+to      	0.009	0.663	0.000    	0.099	0.000           	0.087	0.142
+make    	0.000	0.082	0.001    	0.910	0.007           	0.000	0.000
+just    	0.003	0.616	0.038    	0.049	0.293           	0.000	0.000
+a       	0.701	0.165	0.000    	0.044	0.028           	0.027	0.034
+few     	0.000	0.007	0.000    	0.417	0.576           	0.000	0.000
+comments	0.000	0.000	0.000    	0.068	0.932           	0.000	0.000
+.       	0.001	0.001	0.000    	0.000	0.000           	0.612	0.386
+          	el   	segundo	punto	también	ha   	sido 	mencionado	ya:  	las  	normas	mínimas	.    	NULL 
+my        	0.000	0.434  	0.566	0.000  	0.000	0.000	0.000     	0.000	0.000	0.000 	0.000  	0.000	0.000
+second    	0.000	1.000  	0.000	0.000  	0.000	0.000	0.000     	0.000	0.000	0.000 	0.000  	0.000	0.000
+point     	0.000	0.109  	0.890	0.000  	0.001	0.000	0.000     	0.000	0.000	0.000 	0.000  	0.000	0.000
+has       	0.000	0.000  	0.000	0.000  	0.905	0.095	0.000     	0.000	0.000	0.000 	0.000  	0.000	0.000
+already   	0.000	0.974  	0.000	0.000  	0.000	0.001	0.000     	0.000	0.000	0.025 	0.000  	0.000	0.000
+been      	0.000	0.000  	0.000	0.000  	0.294	0.706	0.000     	0.000	0.000	0.000 	0.000  	0.000	0.000
+mentioned:	0.046	0.000  	0.000	0.003  	0.009	0.005	0.258     	0.258	0.042	0.000 	0.258  	0.042	0.080
+it        	0.004	0.000  	0.000	0.006  	0.173	0.224	0.061     	0.061	0.000	0.225 	0.061  	0.074	0.111
+concerns  	0.000	0.911  	0.041	0.000  	0.000	0.002	0.000     	0.000	0.000	0.046 	0.000  	0.000	0.000
+the       	0.465	0.000  	0.011	0.003  	0.002	0.008	0.022     	0.022	0.371	0.000 	0.022  	0.024	0.049
+minimum   	0.046	0.000  	0.000	0.003  	0.009	0.005	0.258     	0.258	0.042	0.000 	0.258  	0.042	0.080
+standards 	0.000	0.000  	0.000	0.000  	0.000	0.000	0.000     	0.000	0.000	1.000 	0.000  	0.000	0.000
+.         	0.051	0.000  	0.001	0.006  	0.006	0.002	0.039     	0.039	0.101	0.000 	0.039  	0.438	0.277
+      	el   	debate	queda	cerrado	.    	NULL 
+the   	0.690	0.033 	0.153	0.017  	0.035	0.072
+debate	0.000	0.946 	0.019	0.035  	0.000	0.000
+is    	0.068	0.080 	0.399	0.338  	0.042	0.073
+closed	0.000	0.066 	0.066	0.867  	0.000	0.000
+.     	0.062	0.009 	0.043	0.009  	0.538	0.339
+        	la   	votación	tendrá	lugar	mañana	a    	las  	12   	.    	00   	horas	.    	NULL 
+the     	0.463	0.001   	0.000 	0.021	0.000 	0.064	0.358	0.000	0.023	0.000	0.000	0.023	0.047
+vote    	0.000	0.881   	0.036 	0.010	0.023 	0.000	0.000	0.002	0.000	0.045	0.003	0.000	0.000
+will    	0.000	0.112   	0.531 	0.040	0.229 	0.063	0.000	0.001	0.000	0.021	0.001	0.000	0.001
+take    	0.000	0.069   	0.183 	0.235	0.100 	0.000	0.000	0.023	0.000	0.360	0.030	0.000	0.000
+place   	0.000	0.056   	0.137 	0.348	0.085 	0.000	0.000	0.021	0.000	0.328	0.026	0.000	0.000
+tomorrow	0.000	0.014   	0.045 	0.012	0.651 	0.000	0.000	0.002	0.000	0.269	0.007	0.000	0.000
+at      	0.000	0.024   	0.070 	0.237	0.045 	0.004	0.000	0.023	0.000	0.120	0.476	0.000	0.000
+12      	0.000	0.000   	0.000 	0.000	0.000 	0.000	0.000	0.994	0.000	0.005	0.001	0.000	0.000
+p       	0.000	0.001   	0.001 	0.000	0.001 	0.000	0.000	0.753	0.000	0.019	0.225	0.000	0.000
+.       	0.034	0.003   	0.006 	0.090	0.005 	0.082	0.061	0.000	0.265	0.003	0.017	0.265	0.168
+m       	0.000	0.014   	0.040 	0.011	0.017 	0.000	0.000	0.036	0.000	0.221	0.661	0.000	0.000
+.       	0.034	0.003   	0.006 	0.090	0.005 	0.082	0.061	0.000	0.265	0.003	0.017	0.265	0.168
+         	transporte	de   	mercancías	peligrosas	por  	carretera	NULL 
+transport	1.000     	0.000	0.000     	0.000     	0.000	0.000    	0.000
+of       	0.113     	0.751	0.031     	0.031     	0.008	0.031    	0.036
+dangerous	1.000     	0.000	0.000     	0.000     	0.000	0.000    	0.000
+goods    	0.000     	0.064	0.270     	0.270     	0.042	0.270    	0.084
+by       	0.072     	0.000	0.000     	0.000     	0.927	0.000    	0.000
+road     	1.000     	0.000	0.000     	0.000     	0.000	0.000    	0.000
+       	lamento	esto 	,    	pues 	debemos	actuar	porque	otros	no   	han  	realizado	su   	trabajo	.    	NULL 
+i      	0.545  	0.001	0.002	0.000	0.000  	0.000 	0.005 	0.000	0.000	0.000	0.001    	0.405	0.000  	0.022	0.018
+regret 	1.000  	0.000	0.000	0.000	0.000  	0.000 	0.000 	0.000	0.000	0.000	0.000    	0.000	0.000  	0.000	0.000
+this   	0.000  	0.838	0.007	0.002	0.001  	0.004 	0.000 	0.000	0.004	0.037	0.002    	0.000	0.000  	0.040	0.065
+since  	0.589  	0.000	0.000	0.038	0.000  	0.025 	0.259 	0.000	0.000	0.000	0.088    	0.000	0.000  	0.000	0.000
+we     	0.000  	0.001	0.007	0.132	0.798  	0.000 	0.000 	0.013	0.001	0.000	0.000    	0.000	0.000  	0.017	0.030
+are    	0.611  	0.005	0.001	0.011	0.027  	0.026 	0.005 	0.112	0.074	0.000	0.092    	0.001	0.000  	0.010	0.025
+having 	0.839  	0.000	0.000	0.000	0.000  	0.036 	0.000 	0.000	0.000	0.000	0.126    	0.000	0.000  	0.000	0.000
+to     	0.000  	0.055	0.019	0.015	0.265  	0.223 	0.000 	0.009	0.002	0.000	0.000    	0.139	0.001  	0.102	0.168
+take   	0.794  	0.000	0.000	0.053	0.000  	0.034 	0.000 	0.000	0.000	0.000	0.119    	0.000	0.000  	0.000	0.000
+action 	0.000  	0.000	0.000	0.000	0.000  	1.000 	0.000 	0.000	0.000	0.000	0.000    	0.000	0.000  	0.000	0.000
+because	0.000  	0.000	0.000	0.002	0.000  	0.000 	0.998 	0.000	0.000	0.000	0.000    	0.000	0.000  	0.000	0.000
+others 	0.004  	0.000	0.000	0.000	0.000  	0.000 	0.000 	0.996	0.000	0.000	0.001    	0.000	0.000  	0.000	0.000
+have   	0.000  	0.000	0.007	0.000	0.027  	0.020 	0.000 	0.147	0.000	0.782	0.000    	0.009	0.000  	0.002	0.004
+not    	0.000  	0.023	0.000	0.000	0.000  	0.000 	0.000 	0.000	0.976	0.000	0.000    	0.000	0.000  	0.000	0.000
+done   	0.005  	0.000	0.000	0.000	0.000  	0.000 	0.000 	0.000	0.000	0.000	0.995    	0.000	0.000  	0.000	0.000
+their  	0.521  	0.000	0.000	0.000	0.000  	0.022 	0.041 	0.000	0.000	0.000	0.078    	0.337	0.000  	0.000	0.000
+job    	0.004  	0.000	0.000	0.025	0.000  	0.000 	0.000 	0.000	0.000	0.000	0.971    	0.000	0.000  	0.000	0.000
+.      	0.000  	0.014	0.061	0.005	0.001  	0.000 	0.000 	0.000	0.013	0.004	0.000    	0.045	0.000  	0.525	0.331
+            	por  	lo   	demás	se   	alude	también	a    	la   	necesidad	de   	una  	mayor	transparencia	.    	NULL 
+in          	0.006	0.061	0.001	0.001	0.033	0.003  	0.063	0.023	0.593    	0.135	0.001	0.000	0.008        	0.028	0.044
+addition    	0.000	0.000	0.442	0.000	0.000	0.000  	0.000	0.000	0.552    	0.000	0.000	0.003	0.003        	0.000	0.000
+,           	0.111	0.065	0.010	0.178	0.117	0.024  	0.045	0.041	0.000    	0.102	0.020	0.001	0.000        	0.131	0.155
+the         	0.030	0.008	0.000	0.038	0.029	0.004  	0.087	0.629	0.000    	0.079	0.000	0.000	0.000        	0.031	0.064
+need        	0.000	0.000	0.012	0.000	0.000	0.000  	0.000	0.000	0.015    	0.000	0.000	0.000	0.972        	0.000	0.000
+for         	0.747	0.011	0.000	0.009	0.009	0.000  	0.010	0.008	0.131    	0.020	0.047	0.000	0.000        	0.004	0.005
+greater     	0.000	0.000	0.021	0.000	0.000	0.000  	0.000	0.000	0.026    	0.000	0.000	0.575	0.378        	0.000	0.000
+transparency	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000	0.000	1.000        	0.000	0.000
+has         	0.000	0.000	0.326	0.001	0.000	0.000  	0.000	0.000	0.408    	0.000	0.064	0.003	0.199        	0.000	0.000
+been        	0.000	0.000	0.078	0.319	0.000	0.000  	0.000	0.000	0.097    	0.000	0.000	0.001	0.505        	0.000	0.000
+pointed     	0.059	0.003	0.000	0.126	0.384	0.005  	0.050	0.050	0.000    	0.091	0.050	0.000	0.000        	0.063	0.119
+out         	0.000	0.000	0.211	0.000	0.000	0.000  	0.000	0.000	0.264    	0.000	0.000	0.002	0.523        	0.000	0.000
+.           	0.045	0.044	0.000	0.065	0.032	0.005  	0.113	0.046	0.000    	0.038	0.018	0.000	0.000        	0.364	0.229
+        	esto 	interesa	especialmente	a    	las  	regiones	del  	norte	de   	europa	.    	NULL 
+this    	0.843	0.000   	0.002        	0.024	0.000	0.000   	0.000	0.010	0.016	0.000 	0.040	0.065
+is      	0.412	0.185   	0.070        	0.032	0.003	0.000   	0.001	0.000	0.066	0.021 	0.077	0.133
+in      	0.002	0.002   	0.623        	0.071	0.003	0.001   	0.009	0.006	0.153	0.049 	0.032	0.049
+the     	0.000	0.000   	0.000        	0.073	0.409	0.000   	0.370	0.000	0.067	0.000 	0.026	0.054
+special 	0.000	0.255   	0.000        	0.000	0.000	0.000   	0.000	0.745	0.000	0.000 	0.000	0.000
+interest	0.000	0.255   	0.000        	0.000	0.000	0.000   	0.000	0.745	0.000	0.000 	0.000	0.000
+of      	0.005	0.000   	0.000        	0.004	0.053	0.001   	0.354	0.003	0.513	0.032 	0.011	0.024
+northern	0.006	0.000   	0.006        	0.118	0.147	0.000   	0.063	0.019	0.212	0.001 	0.148	0.279
+european	0.000	0.255   	0.000        	0.000	0.000	0.000   	0.000	0.745	0.000	0.000 	0.000	0.000
+regions 	0.000	0.001   	0.000        	0.000	0.000	0.997   	0.000	0.002	0.000	0.000 	0.000	0.000
+.       	0.011	0.000   	0.000        	0.134	0.099	0.000   	0.005	0.000	0.045	0.001 	0.432	0.273
+          	señor	presidente	,    	señorías	,    	feliz	año  	nuevo	y    	feliz	milenio	.    	NULL 
+mr        	0.824	0.176     	0.000	0.000   	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000
+president 	0.016	0.984     	0.000	0.000   	0.000	0.000	0.000	0.000	0.000	0.000	0.000  	0.000	0.000
+,         	0.106	0.006     	0.420	0.000   	0.420	0.000	0.001	0.000	0.004	0.000	0.012  	0.014	0.016
+colleagues	0.000	0.000     	0.050	0.000   	0.050	0.001	0.001	0.000	0.015	0.001	0.598  	0.098	0.185
+,         	0.106	0.006     	0.420	0.000   	0.420	0.000	0.001	0.000	0.004	0.000	0.012  	0.014	0.016
+a         	0.000	0.001     	0.026	0.000   	0.026	0.425	0.009	0.000	0.000	0.425	0.029  	0.026	0.032
+happy     	0.000	0.000     	0.000	0.000   	0.000	0.500	0.000	0.000	0.000	0.500	0.000  	0.000	0.000
+new       	0.000	0.000     	0.000	0.000   	0.000	0.001	0.000	0.999	0.000	0.001	0.000  	0.000	0.000
+year      	0.000	0.000     	0.000	0.000   	0.000	0.000	1.000	0.000	0.000	0.000	0.000  	0.000	0.000
+and       	0.000	0.000     	0.004	0.204   	0.004	0.000	0.000	0.017	0.768	0.000	0.001  	0.000	0.000
+millennium	0.000	0.000     	0.050	0.000   	0.050	0.001	0.001	0.000	0.015	0.001	0.598  	0.098	0.185
+to        	0.001	0.005     	0.026	0.000   	0.026	0.115	0.001	0.129	0.003	0.115	0.213  	0.139	0.227
+you       	0.231	0.000     	0.011	0.102   	0.011	0.301	0.000	0.038	0.000	0.301	0.001  	0.001	0.002
+all       	0.000	0.000     	0.000	0.000   	0.000	0.500	0.000	0.000	0.000	0.500	0.000  	0.000	0.000
+.         	0.004	0.000     	0.059	0.000   	0.059	0.000	0.000	0.000	0.006	0.000	0.045  	0.506	0.320
+        	también	en   	laponia	se   	apoya	a    	la   	ue   	,    	así  	que  	acordémonos	de   	ellos	.    	NULL 
+there   	0.347  	0.001	0.003  	0.001	0.630	0.000	0.000	0.000	0.001	0.004	0.007	0.003      	0.000	0.000	0.001	0.002
+is      	0.011  	0.019	0.021  	0.227	0.221	0.028	0.052	0.000	0.012	0.090	0.055	0.021      	0.058	0.000	0.067	0.117
+support 	0.000  	0.000	0.000  	0.000	0.999	0.000	0.000	0.000	0.000	0.000	0.000	0.000      	0.000	0.001	0.000	0.000
+for     	0.000  	0.010	0.025  	0.024	0.491	0.028	0.022	0.268	0.017	0.000	0.008	0.025      	0.056	0.000	0.011	0.015
+the     	0.003  	0.030	0.026  	0.034	0.000	0.078	0.561	0.000	0.008	0.072	0.007	0.026      	0.071	0.000	0.028	0.057
+eu      	0.000  	0.000	0.000  	0.000	0.000	0.000	0.000	1.000	0.000	0.000	0.000	0.000      	0.000	0.000	0.000	0.000
+in      	0.001  	0.810	0.014  	0.000	0.010	0.027	0.010	0.000	0.024	0.000	0.001	0.014      	0.057	0.000	0.012	0.019
+lapland 	0.003  	0.052	0.276  	0.091	0.000	0.036	0.036	0.000	0.023	0.000	0.010	0.276      	0.065	0.001	0.045	0.085
+also    	0.910  	0.000	0.000  	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000	0.000      	0.000	0.090	0.000	0.000
+,       	0.004  	0.053	0.022  	0.033	0.000	0.008	0.008	0.000	0.763	0.002	0.012	0.022      	0.019	0.000	0.025	0.029
+so      	0.000  	0.000	0.000  	0.000	0.267	0.000	0.000	0.000	0.000	0.732	0.000	0.000      	0.000	0.000	0.000	0.000
+let     	0.000  	0.000	0.003  	0.000	0.938	0.000	0.000	0.000	0.000	0.053	0.000	0.003      	0.000	0.000	0.001	0.001
+us      	0.000  	0.000	0.004  	0.000	0.984	0.000	0.000	0.000	0.000	0.004	0.001	0.004      	0.000	0.001	0.001	0.001
+remember	0.000  	0.000	0.000  	0.000	0.999	0.000	0.000	0.000	0.000	0.000	0.000	0.000      	0.000	0.001	0.000	0.000
+them    	0.000  	0.000	0.000  	0.000	0.001	0.000	0.000	0.000	0.000	0.000	0.000	0.000      	0.000	0.999	0.000	0.000
+.       	0.005  	0.028	0.032  	0.063	0.000	0.109	0.045	0.000	0.041	0.006	0.026	0.032      	0.037	0.000	0.353	0.223
+             	espero	que  	mi   	propuesta	sea  	tomada	en   	cuenta	en   	la   	votación	de   	mañana	.    	NULL 
+i            	0.490 	0.125	0.348	0.000    	0.000	0.005 	0.003	0.000 	0.003	0.001	0.000   	0.002	0.003 	0.011	0.009
+hope         	1.000 	0.000	0.000	0.000    	0.000	0.000 	0.000	0.000 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+my           	0.000 	0.000	0.997	0.000    	0.003	0.000 	0.000	0.000 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+proposal     	0.000 	0.000	0.000	1.000    	0.000	0.000 	0.000	0.000 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+will         	0.308 	0.001	0.002	0.054    	0.002	0.005 	0.000	0.000 	0.000	0.000	0.205   	0.000	0.420 	0.000	0.001
+be           	0.001 	0.345	0.031	0.000    	0.454	0.059 	0.014	0.000 	0.014	0.001	0.000   	0.022	0.019 	0.014	0.024
+taken        	0.000 	0.000	0.002	0.000    	0.000	0.000 	0.000	0.997 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+into         	0.000 	0.000	0.000	0.170    	0.000	0.000 	0.000	0.830 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+consideration	0.000 	0.000	0.000	0.006    	0.001	0.000 	0.000	0.993 	0.000	0.000	0.000   	0.000	0.000 	0.000	0.000
+in           	0.000 	0.001	0.002	0.000    	0.000	0.008 	0.466	0.000 	0.466	0.006	0.000   	0.033	0.000 	0.007	0.011
+tomorrow'    	0.000 	0.015	0.002	0.000    	0.051	0.421 	0.079	0.000 	0.079	0.055	0.000   	0.099	0.000 	0.069	0.130
+s            	0.010 	0.000	0.002	0.119    	0.602	0.001 	0.001	0.219 	0.001	0.007	0.007   	0.029	0.001 	0.000	0.000
+vote         	0.000 	0.000	0.000	0.000    	0.000	0.000 	0.000	0.000 	0.000	0.000	0.974   	0.000	0.026 	0.000	0.000
+.            	0.000 	0.033	0.005	0.000    	0.011	0.040 	0.035	0.000 	0.035	0.057	0.005   	0.046	0.009 	0.444	0.280
+       	lo   	he   	encontrado	magnífico	.    	NULL 
+i      	0.038	0.922	0.006     	0.006    	0.015	0.012
+thought	0.000	1.000	0.000     	0.000    	0.000	0.000
+that   	0.384	0.003	0.083     	0.083    	0.219	0.229
+it     	0.432	0.003	0.112     	0.112    	0.137	0.204
+was    	0.000	1.000	0.000     	0.000    	0.000	0.000
+quite  	0.001	0.999	0.000     	0.000    	0.000	0.000
+superb 	0.003	0.000	0.403     	0.403    	0.066	0.125
+.      	0.062	0.000	0.046     	0.046    	0.518	0.327
+            	esta 	directiva	es   	una  	contribución	a    	ello 	.    	NULL 
+this        	0.569	0.007    	0.019	0.020	0.000       	0.011	0.326	0.018	0.030
+directive   	0.000	1.000    	0.000	0.000	0.000       	0.000	0.000	0.000	0.000
+is          	0.063	0.000    	0.695	0.030	0.000       	0.012	0.122	0.029	0.050
+a           	0.005	0.001    	0.003	0.922	0.000       	0.023	0.022	0.011	0.014
+contribution	0.000	0.000    	0.000	0.000	1.000       	0.000	0.000	0.000	0.000
+to          	0.106	0.000    	0.001	0.037	0.000       	0.608	0.058	0.072	0.118
+this        	0.569	0.007    	0.019	0.020	0.000       	0.011	0.326	0.018	0.030
+.           	0.009	0.000    	0.021	0.024	0.000       	0.150	0.004	0.485	0.306
+           	lo   	que  	estamos	haciendo	hoy  	constituye	un   	escándalo	.    	NULL 
+what       	0.997	0.000	0.001  	0.002   	0.000	0.000     	0.000	0.000    	0.000	0.000
+we         	0.148	0.107	0.670  	0.001   	0.000	0.000     	0.011	0.018    	0.016	0.028
+are        	0.002	0.012	0.748  	0.130   	0.090	0.000     	0.000	0.010    	0.002	0.006
+doing      	0.000	0.000	0.230  	0.769   	0.000	0.001     	0.000	0.000    	0.000	0.000
+today      	0.000	0.000	0.000  	0.000   	1.000	0.000     	0.000	0.000    	0.000	0.000
+is         	0.088	0.046	0.000  	0.000   	0.010	0.519     	0.165	0.018    	0.056	0.098
+essentially	0.005	0.023	0.000  	0.000   	0.000	0.021     	0.028	0.626    	0.103	0.194
+a          	0.000	0.007	0.000  	0.000   	0.000	0.268     	0.697	0.009    	0.008	0.010
+nuisance   	0.005	0.023	0.000  	0.000   	0.000	0.021     	0.028	0.626    	0.103	0.194
+.          	0.061	0.038	0.000  	0.000   	0.001	0.002     	0.023	0.045    	0.509	0.321
+          	señor	presidente	,    	el   	informe	que  	estamos	tratando	no   	representa	grandes	cambios	.    	NULL 
+mr        	0.824	0.176     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.000  	0.000  	0.000	0.000
+president 	0.016	0.984     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.000  	0.000  	0.000	0.000
+,         	0.176	0.010     	0.697	0.001	0.000  	0.011	0.000  	0.020   	0.016	0.020     	0.000  	0.000  	0.023	0.027
+the       	0.000	0.001     	0.011	0.780	0.001  	0.010	0.000  	0.037   	0.001	0.037     	0.001  	0.000  	0.040	0.081
+report    	0.000	0.000     	0.000	0.000	1.000  	0.000	0.000  	0.000   	0.000	0.000     	0.000  	0.000  	0.000	0.000
+we        	0.000	0.000     	0.008	0.000	0.000  	0.123	0.773  	0.021   	0.001	0.021     	0.000  	0.000  	0.019	0.033
+are       	0.000	0.000     	0.000	0.000	0.000  	0.015	0.929  	0.012   	0.021	0.012     	0.000  	0.000  	0.003	0.007
+discussing	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.880  	0.120  	0.000	0.000
+here      	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.987  	0.013  	0.000	0.000
+does      	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.101	0.000     	0.791  	0.108  	0.000	0.000
+not       	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	1.000	0.000     	0.000  	0.000  	0.000	0.000
+,         	0.176	0.010     	0.697	0.001	0.000  	0.011	0.000  	0.020   	0.016	0.020     	0.000  	0.000  	0.023	0.027
+in        	0.000	0.002     	0.169	0.046	0.012  	0.010	0.005  	0.098   	0.001	0.098     	0.000  	0.347  	0.083	0.128
+itself    	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.880  	0.120  	0.000	0.000
+,         	0.176	0.010     	0.697	0.001	0.000  	0.011	0.000  	0.020   	0.016	0.020     	0.000  	0.000  	0.023	0.027
+entail    	0.000	0.000     	0.030	0.063	0.005  	0.013	0.000  	0.357   	0.003	0.357     	0.000  	0.000  	0.059	0.111
+any       	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.003  	0.997  	0.000	0.000
+major     	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	1.000  	0.000  	0.000	0.000
+changes   	0.000	0.000     	0.000	0.000	0.000  	0.000	0.000  	0.000   	0.000	0.000     	0.000  	1.000  	0.000	0.000
+.         	0.004	0.000     	0.054	0.054	0.000  	0.034	0.000  	0.042   	0.011	0.042     	0.000  	0.000  	0.465	0.294
+          	la   	mayoría	de   	las  	enmiendas	son  	exclusivamente	de   	carácter	técnico	.    	NULL 
+most      	0.000	1.000  	0.000	0.000	0.000    	0.000	0.000         	0.000	0.000   	0.000  	0.000	0.000
+of        	0.032	0.007  	0.406	0.042	0.000    	0.061	0.001         	0.406	0.001   	0.017  	0.009	0.019
+the       	0.447	0.000  	0.056	0.345	0.000    	0.007	0.000         	0.056	0.000   	0.021  	0.022	0.045
+proposed  	0.000	0.000  	0.000	0.000	0.000    	0.000	0.568         	0.000	0.432   	0.000  	0.000	0.000
+amendments	0.000	0.000  	0.000	0.000	1.000    	0.000	0.000         	0.000	0.000   	0.000  	0.000	0.000
+are       	0.000	0.009  	0.002	0.020	0.000    	0.951	0.000         	0.002	0.000   	0.009  	0.002	0.006
+of        	0.032	0.007  	0.406	0.042	0.000    	0.061	0.001         	0.406	0.001   	0.017  	0.009	0.019
+a         	0.009	0.006  	0.117	0.002	0.000    	0.002	0.568         	0.117	0.024   	0.051  	0.046	0.057
+purely    	0.058	0.000  	0.105	0.073	0.000    	0.003	0.000         	0.105	0.000   	0.445  	0.073	0.138
+technical 	0.000	0.711  	0.000	0.000	0.000    	0.000	0.164         	0.000	0.125   	0.000  	0.000	0.000
+nature    	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000         	0.000	1.000   	0.000  	0.000	0.000
+.         	0.056	0.000  	0.045	0.100	0.000    	0.003	0.000         	0.045	0.000   	0.039  	0.436	0.275
+         	se   	necesitan	normas	que  	regulen	este 	transporte	.    	NULL 
+this     	0.061	0.000    	0.000 	0.015	0.006  	0.854	0.000     	0.024	0.039
+makes    	0.000	0.596    	0.002 	0.000	0.000  	0.000	0.402     	0.000	0.000
+it       	0.445	0.001    	0.145 	0.249	0.039  	0.000	0.001     	0.048	0.072
+necessary	0.000	0.596    	0.002 	0.000	0.000  	0.000	0.402     	0.000	0.000
+to       	0.078	0.000    	0.157 	0.357	0.147  	0.010	0.000     	0.096	0.156
+have     	0.325	0.311    	0.001 	0.037	0.073  	0.000	0.210     	0.017	0.026
+proper   	0.000	0.596    	0.002 	0.000	0.000  	0.000	0.402     	0.000	0.000
+rules    	0.000	0.103    	0.828 	0.000	0.000  	0.000	0.069     	0.000	0.000
+governing	0.178	0.000    	0.000 	0.020	0.540  	0.005	0.000     	0.089	0.168
+transport	0.000	0.000    	0.000 	0.000	0.000  	0.000	1.000     	0.000	0.000
+of       	0.048	0.004    	0.001 	0.011	0.130  	0.112	0.477     	0.068	0.150
+this     	0.061	0.000    	0.000 	0.015	0.006  	0.854	0.000     	0.024	0.039
+kind     	0.000	0.596    	0.002 	0.000	0.000  	0.000	0.402     	0.000	0.000
+.        	0.089	0.000    	0.000 	0.037	0.044  	0.018	0.000     	0.497	0.314
+             	esto 	también	es   	importante	en   	cuanto	a    	las  	condiciones	para 	el   	mercado	interior	.    	NULL 
+this         	0.789	0.003  	0.038	0.000     	0.034	0.000 	0.022	0.000	0.000      	0.004	0.002	0.000  	0.009   	0.037	0.061
+is           	0.138	0.004  	0.628	0.075     	0.007	0.000 	0.011	0.001	0.000      	0.003	0.042	0.011  	0.008   	0.026	0.045
+also         	0.000	1.000  	0.000	0.000     	0.000	0.000 	0.000	0.000	0.000      	0.000	0.000	0.000  	0.000   	0.000	0.000
+important    	0.000	0.000  	0.000	1.000     	0.000	0.000 	0.000	0.000	0.000      	0.000	0.000	0.000  	0.000   	0.000	0.000
+where        	0.000	0.000  	0.000	0.000     	0.000	0.243 	0.000	0.000	0.645      	0.000	0.000	0.112  	0.000   	0.000	0.000
+the          	0.000	0.003  	0.002	0.000     	0.024	0.000 	0.064	0.356	0.001      	0.004	0.447	0.009  	0.021   	0.023	0.047
+prerequisites	0.003	0.005  	0.004	0.000     	0.082	0.000 	0.057	0.071	0.000      	0.056	0.077	0.000  	0.437   	0.072	0.135
+for          	0.000	0.000  	0.000	0.000     	0.002	0.292 	0.005	0.026	0.000      	0.663	0.002	0.000  	0.005   	0.002	0.003
+the          	0.000	0.003  	0.002	0.000     	0.024	0.000 	0.064	0.356	0.001      	0.004	0.447	0.009  	0.021   	0.023	0.047
+internal     	0.000	0.000  	0.000	0.000     	0.000	0.243 	0.000	0.000	0.645      	0.000	0.000	0.112  	0.000   	0.000	0.000
+market       	0.000	0.000  	0.000	0.000     	0.000	0.000 	0.000	0.000	0.000      	0.000	0.000	1.000  	0.000   	0.000	0.000
+are          	0.004	0.000  	0.000	0.000     	0.043	0.000 	0.005	0.066	0.820      	0.001	0.001	0.000  	0.031   	0.008	0.019
+concerned    	0.000	0.000  	0.000	0.000     	0.000	0.243 	0.000	0.000	0.645      	0.000	0.000	0.112  	0.000   	0.000	0.000
+.            	0.010	0.006  	0.017	0.001     	0.031	0.000 	0.121	0.090	0.000      	0.004	0.045	0.000  	0.035   	0.392	0.247
+             	las  	condiciones	de   	los  	estados	miembros	difieren	entre	sí   	en   	muchos	aspectos	.    	NULL 
+in           	0.001	0.000      	0.058	0.008	0.006  	0.001   	0.014   	0.000	0.062	0.818	0.001 	0.000   	0.012	0.019
+many         	0.000	0.000      	0.000	0.000	0.000  	0.000   	0.000   	0.000	0.000	0.000	1.000 	0.000   	0.000	0.000
+ways         	0.000	0.192      	0.000	0.000	0.000  	0.000   	0.000   	0.000	0.003	0.000	0.062 	0.743   	0.000	0.000
+,            	0.008	0.000      	0.067	0.057	0.009  	0.017   	0.077   	0.003	0.092	0.187	0.294 	0.000   	0.086	0.102
+the          	0.411	0.002      	0.067	0.380	0.002  	0.001   	0.025   	0.002	0.000	0.028	0.002 	0.000   	0.026	0.054
+prerequisites	0.067	0.000      	0.096	0.093	0.003  	0.000   	0.407   	0.057	0.000	0.076	0.008 	0.000   	0.067	0.126
+differ       	0.067	0.000      	0.096	0.093	0.003  	0.000   	0.407   	0.057	0.000	0.076	0.008 	0.000   	0.067	0.126
+from         	0.000	0.167      	0.000	0.003	0.010  	0.009   	0.000   	0.160	0.003	0.000	0.001 	0.646   	0.000	0.000
+one          	0.000	0.202      	0.012	0.000	0.000  	0.000   	0.000   	0.000	0.003	0.000	0.001 	0.781   	0.000	0.000
+member       	0.000	0.000      	0.000	0.000	0.307  	0.693   	0.000   	0.000	0.000	0.000	0.000 	0.000   	0.000	0.000
+state        	0.000	0.204      	0.000	0.000	0.000  	0.000   	0.000   	0.000	0.003	0.000	0.001 	0.791   	0.000	0.000
+to           	0.071	0.225      	0.059	0.183	0.073  	0.021   	0.120   	0.001	0.000	0.040	0.000 	0.001   	0.078	0.128
+another      	0.000	0.202      	0.000	0.000	0.000  	0.000   	0.000   	0.011	0.003	0.000	0.001 	0.782   	0.000	0.000
+.            	0.104	0.000      	0.047	0.033	0.001  	0.000   	0.040   	0.001	0.000	0.036	0.000 	0.000   	0.452	0.285
+            	señor	presidente	,    	tenemos	que  	ser  	flexibles	a    	la   	hora 	de   	dictar	normas	.    	NULL 
+it          	0.000	0.000     	0.026	0.191  	0.249	0.097	0.039    	0.002	0.004	0.061	0.027	0.039 	0.145 	0.048	0.072
+is          	0.000	0.000     	0.021	0.065  	0.094	0.010	0.036    	0.048	0.089	0.187	0.099	0.036 	0.000 	0.115	0.200
+good        	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000	0.999	0.000	0.000 	0.001 	0.000	0.000
+that        	0.000	0.000     	0.002	0.000  	0.801	0.044	0.014    	0.021	0.005	0.001	0.019	0.014 	0.000 	0.038	0.040
+,           	0.169	0.010     	0.670	0.000  	0.010	0.024	0.019    	0.007	0.007	0.000	0.017	0.019 	0.000 	0.022	0.026
+in          	0.000	0.001     	0.129	0.000  	0.008	0.025	0.075    	0.141	0.053	0.003	0.304	0.075 	0.025 	0.063	0.098
+establishing	0.000	0.000     	0.027	0.000  	0.012	0.002	0.323    	0.042	0.042	0.000	0.076	0.323 	0.000 	0.053	0.100
+the         	0.000	0.001     	0.009	0.000  	0.008	0.002	0.030    	0.090	0.651	0.000	0.082	0.030 	0.000 	0.032	0.066
+present     	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000	0.999	0.000	0.000 	0.001 	0.000	0.000
+regulations 	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000	0.926	0.000	0.000 	0.074 	0.000	0.000
+,           	0.169	0.010     	0.670	0.000  	0.010	0.024	0.019    	0.007	0.007	0.000	0.017	0.019 	0.000 	0.022	0.026
+we          	0.000	0.000     	0.007	0.692  	0.111	0.005	0.019    	0.073	0.005	0.001	0.021	0.019 	0.000 	0.017	0.030
+can         	0.000	0.000     	0.000	0.000  	0.015	0.000	0.000    	0.000	0.000	0.984	0.000	0.000 	0.001 	0.000	0.000
+also        	0.000	0.000     	0.000	0.007  	0.000	0.000	0.000    	0.000	0.000	0.981	0.000	0.000 	0.011 	0.000	0.000
+be          	0.000	0.000     	0.004	0.000  	0.086	0.738	0.015    	0.001	0.000	0.000	0.005	0.015 	0.126 	0.003	0.006
+flexible    	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000	0.999	0.000	0.000 	0.001 	0.000	0.000
+.           	0.003	0.000     	0.045	0.000  	0.029	0.007	0.035    	0.121	0.050	0.000	0.040	0.035 	0.000 	0.389	0.246
+          	tengo	la   	esperanza	de   	que  	la   	comisión	acepte	esta 	enmienda	.    	NULL 
+i         	0.704	0.001	0.008    	0.003	0.209	0.001	0.000   	0.008 	0.030	0.000   	0.019	0.015
+hope      	0.793	0.000	0.000    	0.000	0.002	0.000	0.000   	0.000 	0.000	0.204   	0.000	0.000
+that      	0.000	0.004	0.012    	0.016	0.670	0.004	0.000   	0.012 	0.216	0.001   	0.032	0.033
+the       	0.000	0.398	0.019    	0.050	0.005	0.398	0.052   	0.019 	0.001	0.000   	0.020	0.040
+commission	0.000	0.000	0.000    	0.000	0.000	0.000	1.000   	0.000 	0.000	0.000   	0.000	0.000
+is        	0.000	0.087	0.036    	0.097	0.092	0.087	0.006   	0.036 	0.251	0.000   	0.113	0.196
+able      	0.795	0.000	0.000    	0.000	0.000	0.000	0.000   	0.000 	0.000	0.205   	0.000	0.000
+to        	0.005	0.030	0.123    	0.061	0.299	0.030	0.000   	0.123 	0.118	0.000   	0.080	0.131
+accept    	0.795	0.000	0.000    	0.000	0.000	0.000	0.000   	0.000 	0.000	0.205   	0.000	0.000
+the       	0.000	0.398	0.019    	0.050	0.005	0.398	0.052   	0.019 	0.001	0.000   	0.020	0.040
+present   	0.782	0.000	0.000    	0.000	0.000	0.000	0.000   	0.000 	0.016	0.202   	0.000	0.000
+amendment 	0.000	0.000	0.000    	0.000	0.000	0.000	0.000   	0.000 	0.000	1.000   	0.000	0.000
+.         	0.000	0.056	0.039    	0.046	0.033	0.056	0.001   	0.039 	0.008	0.000   	0.442	0.279
+          	aceptamos	,    	pues 	,    	las  	cuatro	enmiendas	que  	nos  	han  	sido 	propuestas	.    	NULL 
+we        	0.023    	0.007	0.121	0.007	0.000	0.003 	0.000    	0.103	0.576	0.000	0.000	0.118     	0.016	0.027
+therefore 	0.000    	0.000	1.000	0.000	0.000	0.000 	0.000    	0.000	0.000	0.000	0.000	0.000     	0.000	0.000
+accept    	0.988    	0.000	0.000	0.000	0.000	0.012 	0.000    	0.000	0.000	0.000	0.000	0.000     	0.000	0.000
+the       	0.000    	0.014	0.000	0.014	0.784	0.001 	0.000    	0.012	0.000	0.004	0.018	0.000     	0.050	0.103
+four      	0.000    	0.000	0.000	0.000	0.000	1.000 	0.000    	0.000	0.000	0.000	0.000	0.000     	0.000	0.000
+amendments	0.000    	0.000	0.000	0.000	0.000	0.000 	1.000    	0.000	0.000	0.000	0.000	0.000     	0.000	0.000
+which     	0.511    	0.000	0.000	0.000	0.088	0.000 	0.026    	0.178	0.001	0.000	0.194	0.001     	0.000	0.000
+have      	0.000    	0.007	0.000	0.007	0.006	0.000 	0.003    	0.005	0.001	0.740	0.219	0.006     	0.002	0.003
+been      	0.000    	0.000	0.000	0.000	0.000	0.001 	0.005    	0.000	0.000	0.287	0.707	0.000     	0.000	0.000
+proposed  	0.988    	0.000	0.000	0.000	0.000	0.012 	0.000    	0.000	0.000	0.000	0.000	0.000     	0.000	0.000
+.         	0.000    	0.053	0.004	0.053	0.104	0.001 	0.000    	0.034	0.002	0.004	0.002	0.000     	0.455	0.287
+      	el   	debate	queda	cerrado	.    	NULL 
+the   	0.690	0.033 	0.153	0.017  	0.035	0.072
+debate	0.000	0.946 	0.019	0.035  	0.000	0.000
+is    	0.068	0.080 	0.399	0.338  	0.042	0.073
+closed	0.000	0.066 	0.066	0.867  	0.000	0.000
+.     	0.062	0.009 	0.043	0.009  	0.538	0.339
+        	la   	votación	tendrá	lugar	mañana	a    	las  	12   	.    	00   	horas	.    	NULL 
+the     	0.463	0.001   	0.000 	0.021	0.000 	0.064	0.358	0.000	0.023	0.000	0.000	0.023	0.047
+vote    	0.000	0.881   	0.036 	0.010	0.023 	0.000	0.000	0.002	0.000	0.045	0.003	0.000	0.000
+will    	0.000	0.112   	0.531 	0.040	0.229 	0.063	0.000	0.001	0.000	0.021	0.001	0.000	0.001
+take    	0.000	0.069   	0.183 	0.235	0.100 	0.000	0.000	0.023	0.000	0.360	0.030	0.000	0.000
+place   	0.000	0.056   	0.137 	0.348	0.085 	0.000	0.000	0.021	0.000	0.328	0.026	0.000	0.000
+tomorrow	0.000	0.014   	0.045 	0.012	0.651 	0.000	0.000	0.002	0.000	0.269	0.007	0.000	0.000
+at      	0.000	0.024   	0.070 	0.237	0.045 	0.004	0.000	0.023	0.000	0.120	0.476	0.000	0.000
+12      	0.000	0.000   	0.000 	0.000	0.000 	0.000	0.000	0.994	0.000	0.005	0.001	0.000	0.000
+p       	0.000	0.001   	0.001 	0.000	0.001 	0.000	0.000	0.753	0.000	0.019	0.225	0.000	0.000
+.       	0.034	0.003   	0.006 	0.090	0.005 	0.082	0.061	0.000	0.265	0.003	0.017	0.265	0.168
+m       	0.000	0.014   	0.040 	0.011	0.017 	0.000	0.000	0.036	0.000	0.221	0.661	0.000	0.000
+.       	0.034	0.003   	0.006 	0.090	0.005 	0.082	0.061	0.000	0.265	0.003	0.017	0.265	0.168
+            	coordinación	fondos	estructurales/fondo	de   	cohesión	NULL 
+structural  	0.000       	1.000 	0.000              	0.000	0.000   	0.000
+funds       	0.000       	1.000 	0.000              	0.000	0.000   	0.000
+-           	0.049       	0.744 	0.049              	0.106	0.049   	0.001
+cohesion    	0.282       	0.001 	0.282              	0.066	0.282   	0.087
+fund        	0.282       	0.001 	0.282              	0.066	0.282   	0.087
+coordination	0.282       	0.001 	0.282              	0.066	0.282   	0.087
+       	podemos	apreciar	el   	aumento	de   	la   	pobreza	en   	gales	,    	sobre	todo 	desde	1997 	.    	NULL 
+we     	0.726  	0.023   	0.000	0.023  	0.025	0.006	0.023  	0.056	0.000	0.009	0.044	0.007	0.002	0.000	0.020	0.036
+have   	0.000  	0.058   	0.000	0.058  	0.011	0.000	0.058  	0.039	0.011	0.042	0.000	0.352	0.328	0.007	0.013	0.021
+seen   	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.605	0.000	0.000	0.000	0.000	0.395	0.000	0.000
+poverty	0.000  	0.231   	0.041	0.231  	0.055	0.030	0.231  	0.043	0.000	0.019	0.003	0.000	0.004	0.000	0.038	0.072
+growing	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.605	0.000	0.000	0.000	0.000	0.395	0.000	0.000
+in     	0.000  	0.014   	0.007	0.014  	0.057	0.010	0.014  	0.809	0.001	0.024	0.000	0.017	0.001	0.000	0.012	0.019
+wales; 	0.000  	0.231   	0.041	0.231  	0.055	0.030	0.231  	0.043	0.000	0.019	0.003	0.000	0.004	0.000	0.038	0.072
+and    	0.002  	0.015   	0.016	0.015  	0.005	0.004	0.015  	0.003	0.099	0.047	0.002	0.011	0.004	0.757	0.004	0.003
+growing	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.605	0.000	0.000	0.000	0.000	0.395	0.000	0.000
+still  	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.432	0.000	0.000	0.000	0.287	0.282	0.000	0.000
+further	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.605	0.000	0.000	0.000	0.000	0.395	0.000	0.000
+since  	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.000	0.000	0.000	0.000	0.837	0.162	0.000	0.000
+1997   	0.000  	0.000   	0.000	0.000  	0.000	0.000	0.000  	0.000	0.000	0.000	0.000	0.000	0.000	1.000	0.000	0.000
+.      	0.000  	0.036   	0.047	0.036  	0.042	0.051	0.036  	0.032	0.000	0.047	0.016	0.001	0.002	0.000	0.402	0.254
+       	se   	ha   	ensanchado	el   	abismo	entre	ricos	y    	pobres	.    	NULL 
+we     	0.007	0.000	0.127     	0.001	0.127 	0.111	0.127	0.066	0.127 	0.112	0.195
+have   	0.220	0.309	0.049     	0.000	0.049 	0.205	0.049	0.039	0.049 	0.011	0.018
+seen   	0.000	0.000	0.000     	0.000	0.000 	1.000	0.000	0.000	0.000 	0.000	0.000
+the    	0.044	0.003	0.034     	0.704	0.034 	0.003	0.034	0.001	0.034 	0.036	0.073
+gap    	0.064	0.007	0.193     	0.034	0.193 	0.027	0.193	0.005	0.193 	0.032	0.060
+between	0.000	0.000	0.000     	0.000	0.000 	1.000	0.000	0.000	0.000 	0.000	0.000
+rich   	0.064	0.007	0.193     	0.034	0.193 	0.027	0.193	0.005	0.193 	0.032	0.060
+and    	0.002	0.027	0.002     	0.002	0.002 	0.000	0.002	0.962	0.002 	0.000	0.000
+poor   	0.064	0.007	0.193     	0.034	0.193 	0.027	0.193	0.005	0.193 	0.032	0.060
+widen  	0.064	0.007	0.193     	0.034	0.193 	0.027	0.193	0.005	0.193 	0.032	0.060
+.      	0.078	0.006	0.039     	0.050	0.039 	0.001	0.039	0.005	0.039 	0.433	0.273
+            	tristemente	,    	es   	sólo 	un   	reconocimiento	de   	las  	grandes	dificultades	que  	está 	atravesando	gales	.    	NULL 
+it          	0.024      	0.016	0.407	0.070	0.058	0.000         	0.016	0.000	0.000  	0.140       	0.154	0.015	0.024      	0.000	0.030	0.044
+is          	0.006      	0.003	0.460	0.001	0.055	0.000         	0.016	0.001	0.000  	0.000       	0.015	0.384	0.006      	0.000	0.019	0.033
+sadly       	0.322      	0.027	0.003	0.012	0.015	0.000         	0.076	0.053	0.000  	0.000       	0.012	0.005	0.322      	0.000	0.053	0.100
+only        	0.000      	0.000	0.000	1.000	0.000	0.000         	0.000	0.000	0.000  	0.000       	0.000	0.000	0.000      	0.000	0.000	0.000
+a           	0.012      	0.011	0.003	0.000	0.897	0.000         	0.027	0.000	0.005  	0.000       	0.009	0.001	0.012      	0.000	0.011	0.013
+recognition 	0.322      	0.027	0.003	0.012	0.015	0.000         	0.076	0.053	0.000  	0.000       	0.012	0.005	0.322      	0.000	0.053	0.100
+of          	0.032      	0.013	0.001	0.000	0.007	0.000         	0.778	0.081	0.000  	0.000       	0.003	0.001	0.032      	0.000	0.017	0.037
+the         	0.037      	0.011	0.003	0.001	0.002	0.004         	0.099	0.611	0.001  	0.000       	0.010	0.066	0.037      	0.000	0.039	0.080
+very        	0.000      	0.000	0.000	0.000	0.000	0.001         	0.000	0.000	0.396  	0.096       	0.000	0.000	0.000      	0.506	0.000	0.000
+great       	0.000      	0.000	0.000	0.000	0.000	0.003         	0.000	0.000	0.192  	0.000       	0.000	0.000	0.000      	0.805	0.000	0.000
+difficulties	0.000      	0.000	0.000	0.000	0.000	0.000         	0.000	0.000	0.000  	1.000       	0.000	0.000	0.000      	0.000	0.000	0.000
+that        	0.009      	0.001	0.074	0.146	0.002	0.000         	0.012	0.000	0.000  	0.111       	0.529	0.054	0.009      	0.000	0.025	0.026
+wales       	0.322      	0.027	0.003	0.012	0.015	0.000         	0.076	0.053	0.000  	0.000       	0.012	0.005	0.322      	0.000	0.053	0.100
+faces       	0.322      	0.027	0.003	0.012	0.015	0.000         	0.076	0.053	0.000  	0.000       	0.012	0.005	0.322      	0.000	0.053	0.100
+.           	0.036      	0.048	0.018	0.001	0.018	0.000         	0.042	0.094	0.000  	0.000       	0.030	0.011	0.036      	0.000	0.408	0.257
+             	contamos	con  	que  	la   	comisión	tenga	en   	cuenta	los  	puntos	relacionados	con  	la   	adicionalidad	.    	NULL 
+we           	0.048   	0.122	0.281	0.012	0.000   	0.048	0.117	0.000 	0.022	0.000 	0.048       	0.122	0.012	0.048        	0.043	0.075
+look         	0.000   	0.296	0.000	0.000	0.000   	0.000	0.000	0.319 	0.000	0.090 	0.000       	0.296	0.000	0.000        	0.000	0.000
+to           	0.062   	0.087	0.151	0.015	0.000   	0.062	0.021	0.000 	0.095	0.174 	0.062       	0.087	0.015	0.062        	0.040	0.066
+the          	0.014   	0.015	0.004	0.299	0.039   	0.014	0.016	0.000 	0.213	0.000 	0.014       	0.015	0.299	0.014        	0.015	0.030
+commission   	0.000   	0.000	0.000	0.000	1.000   	0.000	0.000	0.000 	0.000	0.000 	0.000       	0.000	0.000	0.000        	0.000	0.000
+to           	0.062   	0.087	0.151	0.015	0.000   	0.062	0.021	0.000 	0.095	0.174 	0.062       	0.087	0.015	0.062        	0.040	0.066
+deal         	0.000   	0.000	0.000	0.000	0.000   	0.000	0.000	0.781 	0.000	0.219 	0.000       	0.000	0.000	0.000        	0.000	0.000
+with         	0.000   	0.500	0.000	0.000	0.000   	0.000	0.000	0.000 	0.000	0.000 	0.000       	0.500	0.000	0.000        	0.000	0.000
+points       	0.000   	0.000	0.000	0.000	0.000   	0.000	0.000	0.000 	0.000	1.000 	0.000       	0.000	0.000	0.000        	0.000	0.000
+in           	0.015   	0.018	0.002	0.010	0.000   	0.015	0.843	0.000 	0.008	0.000 	0.015       	0.018	0.010	0.015        	0.012	0.019
+relation     	0.000   	0.021	0.000	0.000	0.000   	0.000	0.000	0.748 	0.000	0.210 	0.000       	0.021	0.000	0.000        	0.000	0.000
+to           	0.062   	0.087	0.151	0.015	0.000   	0.062	0.021	0.000 	0.095	0.174 	0.062       	0.087	0.015	0.062        	0.040	0.066
+additionality	0.179   	0.035	0.007	0.023	0.000   	0.179	0.034	0.000 	0.041	0.000 	0.179       	0.035	0.023	0.179        	0.029	0.056
+.            	0.034   	0.035	0.028	0.048	0.000   	0.034	0.030	0.000 	0.028	0.000 	0.034       	0.035	0.048	0.034        	0.376	0.237
+          	contamos	con  	que  	la   	comisión	también	asegure	que  	existen	fondos	ajustados	a    	los  	proyectos	.    	NULL 
+we        	0.041   	0.103	0.238	0.010	0.000   	0.000  	0.041  	0.238	0.014  	0.000 	0.041    	0.155	0.018	0.000    	0.036	0.063
+look      	0.000   	0.224	0.000	0.000	0.000   	0.000  	0.000  	0.000	0.612  	0.133 	0.000    	0.000	0.000	0.032    	0.000	0.000
+to        	0.053   	0.074	0.130	0.013	0.000   	0.027  	0.053  	0.130	0.000  	0.000 	0.053    	0.293	0.082	0.000    	0.035	0.057
+the       	0.020   	0.022	0.005	0.425	0.055   	0.003  	0.020  	0.005	0.000  	0.001 	0.020    	0.059	0.303	0.000    	0.021	0.043
+commission	0.000   	0.000	0.000	0.000	1.000   	0.000  	0.000  	0.000	0.000  	0.000 	0.000    	0.000	0.000	0.000    	0.000	0.000
+also      	0.000   	0.000	0.000	0.000	0.000   	1.000  	0.000  	0.000	0.000  	0.000 	0.000    	0.000	0.000	0.000    	0.000	0.000
+to        	0.053   	0.074	0.130	0.013	0.000   	0.027  	0.053  	0.130	0.000  	0.000 	0.053    	0.293	0.082	0.000    	0.035	0.057
+ensure    	0.000   	0.000	0.000	0.000	0.000   	0.000  	0.000  	0.000	0.788  	0.171 	0.000    	0.000	0.000	0.041    	0.000	0.000
+that      	0.008   	0.028	0.441	0.003	0.000   	0.004  	0.008  	0.441	0.000  	0.000 	0.008    	0.012	0.004	0.000    	0.021	0.022
+there     	0.001   	0.000	0.003	0.000	0.000   	0.134  	0.001  	0.003	0.754  	0.102 	0.001    	0.000	0.000	0.000    	0.000	0.001
+is        	0.042   	0.007	0.109	0.103	0.007   	0.023  	0.042  	0.109	0.000  	0.080 	0.042    	0.056	0.014	0.000    	0.133	0.232
+matched   	0.235   	0.046	0.009	0.031	0.000   	0.003  	0.235  	0.009	0.000  	0.001 	0.235    	0.031	0.054	0.000    	0.039	0.073
+funding   	0.000   	0.000	0.000	0.000	0.000   	0.000  	0.000  	0.000	0.788  	0.171 	0.000    	0.000	0.000	0.041    	0.000	0.000
+for       	0.034   	0.004	0.011	0.031	0.000   	0.000  	0.034  	0.011	0.103  	0.512 	0.034    	0.039	0.018	0.133    	0.015	0.021
+projects  	0.000   	0.000	0.000	0.000	0.000   	0.000  	0.000  	0.000	0.000  	0.000 	0.000    	0.000	0.000	1.000    	0.000	0.000
+.         	0.033   	0.035	0.028	0.048	0.000   	0.005  	0.033  	0.028	0.000  	0.000 	0.033    	0.116	0.028	0.000    	0.375	0.237
+           	en   	este 	parlamento	hay  	demasiadas	cosas	que  	no   	son  	transparentes	.    	NULL 
+too        	0.000	0.000	0.000     	0.007	0.000     	0.993	0.000	0.000	0.000	0.000        	0.000	0.000
+much       	0.000	0.000	0.000     	0.000	0.000     	1.000	0.000	0.000	0.000	0.000        	0.000	0.000
+of         	0.093	0.092	0.000     	0.010	0.107     	0.000	0.009	0.014	0.389	0.107        	0.056	0.123
+what       	0.000	0.000	0.000     	0.000	0.000     	0.962	0.000	0.000	0.038	0.000        	0.000	0.000
+takes      	0.000	0.000	0.000     	0.000	0.000     	1.000	0.000	0.000	0.000	0.000        	0.000	0.000
+place      	0.000	0.000	0.000     	0.000	0.000     	1.000	0.000	0.000	0.000	0.000        	0.000	0.000
+within     	0.001	0.000	0.000     	0.000	0.000     	0.997	0.000	0.000	0.002	0.000        	0.000	0.000
+this       	0.022	0.883	0.000     	0.000	0.006     	0.000	0.016	0.002	0.000	0.006        	0.025	0.040
+parliament 	0.000	0.000	1.000     	0.000	0.000     	0.000	0.000	0.000	0.000	0.000        	0.000	0.000
+is         	0.020	0.069	0.000     	0.384	0.023     	0.005	0.058	0.020	0.205	0.023        	0.071	0.123
+not        	0.000	0.000	0.000     	0.000	0.000     	0.000	0.000	1.000	0.000	0.000        	0.000	0.000
+transparent	0.000	0.000	0.000     	0.000	0.000     	1.000	0.000	0.000	0.000	0.000        	0.000	0.000
+.          	0.039	0.018	0.000     	0.003	0.044     	0.000	0.036	0.012	0.004	0.044        	0.490	0.310
+          	este 	es   	un   	asunto	que  	propiciará	la   	amistad	de   	la   	comisión	y    	gales	.    	NULL 
+this      	0.842	0.024	0.021	0.012 	0.015	0.005     	0.001	0.005  	0.010	0.001	0.000   	0.000	0.000	0.024	0.038
+is        	0.028	0.688	0.083	0.014 	0.023	0.009     	0.022	0.009  	0.024	0.022	0.001   	0.000	0.000	0.028	0.049
+one       	0.000	0.001	0.242	0.517 	0.003	0.000     	0.000	0.000  	0.011	0.000	0.000   	0.000	0.227	0.000	0.000
+area      	0.000	0.000	0.000	0.000 	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000   	0.000	1.000	0.000	0.000
+in        	0.404	0.002	0.037	0.000 	0.006	0.057     	0.040	0.057  	0.229	0.040	0.000   	0.001	0.006	0.048	0.074
+which     	0.000	0.001	0.012	0.001 	0.518	0.002     	0.000	0.002  	0.000	0.000	0.002   	0.000	0.463	0.000	0.000
+i         	0.001	0.000	0.000	0.172 	0.649	0.026     	0.004	0.026  	0.009	0.004	0.000   	0.001	0.001	0.059	0.048
+believe   	0.000	0.000	0.000	0.000 	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000   	0.000	1.000	0.000	0.000
+the       	0.010	0.002	0.001	0.000 	0.005	0.018     	0.393	0.018  	0.049	0.393	0.051   	0.000	0.000	0.019	0.040
+commission	0.000	0.000	0.000	0.000 	0.000	0.000     	0.000	0.000  	0.000	0.000	1.000   	0.000	0.000	0.000	0.000
+can       	0.000	0.000	0.000	0.001 	0.015	0.000     	0.000	0.000  	0.000	0.000	0.000   	0.000	0.984	0.000	0.000
+be        	0.015	0.000	0.025	0.127 	0.540	0.093     	0.002	0.093  	0.034	0.002	0.000   	0.007	0.003	0.022	0.038
+a         	0.001	0.003	0.900	0.008 	0.009	0.012     	0.002	0.012  	0.027	0.002	0.000   	0.000	0.000	0.011	0.013
+very      	0.000	0.000	0.000	0.285 	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000   	0.000	0.715	0.000	0.000
+great     	0.000	0.000	0.000	0.000 	0.000	0.000     	0.000	0.000  	0.000	0.000	0.000   	0.000	1.000	0.000	0.000
+friend    	0.003	0.003	0.015	0.000 	0.012	0.323     	0.042	0.323  	0.076	0.042	0.000   	0.008	0.000	0.053	0.100
+to        	0.009	0.001	0.005	0.032 	0.324	0.133     	0.033	0.133  	0.066	0.033	0.000   	0.002	0.000	0.087	0.142
+wales     	0.003	0.003	0.015	0.000 	0.012	0.323     	0.042	0.323  	0.076	0.042	0.000   	0.008	0.000	0.053	0.100
+.         	0.016	0.018	0.019	0.000 	0.031	0.038     	0.054	0.038  	0.044	0.054	0.001   	0.005	0.000	0.420	0.265
+          	antes	la   	pobreza	y    	la   	riqueza	dependían	de   	las  	estructuras	de   	las  	actividades	económicas	.    	NULL 
+poverty   	0.000	0.017	0.132  	0.003	0.017	0.132  	0.132    	0.031	0.022	0.132      	0.031	0.022	0.132      	0.132     	0.022	0.041
+and       	0.000	0.000	0.002  	0.984	0.000	0.002  	0.002    	0.001	0.001	0.002      	0.001	0.001	0.002      	0.002     	0.000	0.000
+wealth    	0.000	0.017	0.132  	0.003	0.017	0.132  	0.132    	0.031	0.022	0.132      	0.031	0.022	0.132      	0.132     	0.022	0.041
+used      	1.000	0.000	0.000  	0.000	0.000	0.000  	0.000    	0.000	0.000	0.000      	0.000	0.000	0.000      	0.000     	0.000	0.000
+to        	0.077	0.022	0.089  	0.001	0.022	0.089  	0.089    	0.044	0.052	0.089      	0.044	0.052	0.089      	0.089     	0.058	0.095
+depend    	0.000	0.017	0.132  	0.003	0.017	0.132  	0.132    	0.031	0.022	0.132      	0.031	0.022	0.132      	0.132     	0.022	0.041
+more      	1.000	0.000	0.000  	0.000	0.000	0.000  	0.000    	0.000	0.000	0.000      	0.000	0.000	0.000      	0.000     	0.000	0.000
+on        	0.686	0.024	0.022  	0.000	0.024	0.022  	0.022    	0.011	0.050	0.022      	0.011	0.050	0.022      	0.022     	0.007	0.007
+means     	1.000	0.000	0.000  	0.000	0.000	0.000  	0.000    	0.000	0.000	0.000      	0.000	0.000	0.000      	0.000     	0.000	0.000
+of        	0.034	0.028	0.015  	0.000	0.028	0.015  	0.015    	0.361	0.037	0.015      	0.361	0.037	0.015      	0.015     	0.008	0.017
+livelihood	0.000	0.017	0.132  	0.003	0.017	0.132  	0.132    	0.031	0.022	0.132      	0.031	0.022	0.132      	0.132     	0.022	0.041
+.         	0.000	0.041	0.029  	0.004	0.041	0.029  	0.029    	0.034	0.074	0.029      	0.034	0.074	0.029      	0.029     	0.323	0.204
+            	las  	consecuencias	no   	se   	hacen	esperar	.    	NULL 
+the         	0.688	0.041        	0.001	0.054	0.041	0.041  	0.044	0.090
+consequences	0.000	1.000        	0.000	0.000	0.000	0.000  	0.000	0.000
+do          	0.000	0.160        	0.836	0.000	0.002	0.002  	0.000	0.001
+not         	0.000	0.000        	1.000	0.000	0.000	0.000  	0.000	0.000
+inspire     	0.055	0.000        	0.003	0.111	0.336	0.336  	0.055	0.104
+hope        	0.000	0.948        	0.000	0.052	0.000	0.000  	0.000	0.000
+.           	0.102	0.000        	0.011	0.080	0.040	0.040  	0.446	0.281
+           	la   	agricultura	solamente	proporciona	un   	5    	,    	5%   	del  	empleo	de   	esta 	misma	unión	.    	NULL 
+agriculture	0.026	0.198      	0.000    	0.198      	0.009	0.198	0.017	0.198	0.014	0.000 	0.047	0.002	0.000	0.000	0.033	0.061
+only       	0.000	0.000      	1.000    	0.000      	0.000	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	0.000	0.000	0.000
+provides   	0.026	0.198      	0.000    	0.198      	0.009	0.198	0.017	0.198	0.014	0.000 	0.047	0.002	0.000	0.000	0.033	0.061
+5          	0.026	0.198      	0.000    	0.198      	0.009	0.198	0.017	0.198	0.014	0.000 	0.047	0.002	0.000	0.000	0.033	0.061
+.          	0.053	0.037      	0.000    	0.037      	0.018	0.037	0.048	0.037	0.005	0.000 	0.043	0.007	0.000	0.000	0.415	0.262
+5%         	0.026	0.198      	0.000    	0.198      	0.009	0.198	0.017	0.198	0.014	0.000 	0.047	0.002	0.000	0.000	0.033	0.061
+of         	0.038	0.020      	0.000    	0.020      	0.004	0.020	0.008	0.020	0.332	0.000 	0.481	0.013	0.009	0.004	0.010	0.023
+employment 	0.000	0.000      	0.000    	0.000      	0.000	0.000	0.000	0.000	0.000	1.000 	0.000	0.000	0.000	0.000	0.000	0.000
+in         	0.035	0.050      	0.000    	0.050      	0.033	0.050	0.087	0.050	0.012	0.000 	0.204	0.036	0.001	0.282	0.042	0.066
+the        	0.442	0.021      	0.000    	0.021      	0.001	0.021	0.006	0.021	0.309	0.000 	0.056	0.001	0.000	0.037	0.022	0.045
+union      	0.000	0.000      	0.000    	0.000      	0.000	0.000	0.000	0.000	0.000	0.000 	0.000	0.000	0.000	1.000	0.000	0.000
+.          	0.053	0.037      	0.000    	0.037      	0.018	0.037	0.048	0.037	0.005	0.000 	0.043	0.007	0.000	0.000	0.415	0.262
+         	creo 	que  	es   	un   	trabajo	muy  	bien 	realizado	.    	NULL 
+i        	0.780	0.174	0.000	0.000	0.000  	0.016	0.000	0.001    	0.016	0.013
+think    	1.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.000    	0.000	0.000
+that     	0.029	0.773	0.107	0.003	0.000  	0.012	0.000	0.000    	0.037	0.038
+this     	0.171	0.060	0.096	0.084	0.000  	0.087	0.251	0.005    	0.094	0.153
+work     	0.000	0.000	0.000	0.000	1.000  	0.000	0.000	0.000    	0.000	0.000
+has      	0.000	0.000	0.000	0.000	0.006  	0.000	0.000	0.994    	0.000	0.000
+been     	0.000	0.000	0.000	0.000	0.004  	0.000	0.069	0.927    	0.000	0.000
+carried  	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	1.000    	0.000	0.000
+out      	0.000	0.000	0.000	0.000	0.002  	0.000	0.995	0.002    	0.000	0.000
+extremely	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.999    	0.000	0.000
+well     	0.000	0.000	0.000	0.000	0.000  	0.000	0.976	0.024    	0.000	0.000
+.        	0.000	0.040	0.024	0.024	0.000  	0.016	0.003	0.000    	0.547	0.345
+          	mi   	grupo	ha   	hecho	importantes	enmiendas	a    	los  	dos  	informes	que  	se   	debaten	hoy  	.    	NULL 
+my        	1.000	0.000	0.000	0.000	0.000      	0.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000
+group     	0.000	1.000	0.000	0.000	0.000      	0.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000
+has       	0.000	0.000	0.999	0.001	0.000      	0.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000
+made      	0.000	0.022	0.072	0.867	0.008      	0.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.032	0.000	0.000
+extensive 	0.001	0.000	0.011	0.000	0.000      	0.000    	0.040	0.070	0.000	0.309   	0.011	0.102	0.309  	0.000	0.051	0.096
+amendments	0.000	0.000	0.000	0.000	0.000      	1.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	0.000	0.000	0.000
+to        	0.001	0.000	0.000	0.000	0.005      	0.000    	0.376	0.105	0.057	0.068   	0.166	0.036	0.068  	0.000	0.045	0.073
+both      	0.001	0.007	0.000	0.017	0.825      	0.000    	0.000	0.000	0.149	0.000   	0.000	0.000	0.000  	0.001	0.000	0.000
+reports   	0.001	0.008	0.000	0.020	0.967      	0.000    	0.000	0.000	0.002	0.000   	0.000	0.000	0.000  	0.001	0.000	0.000
+up        	0.001	0.130	0.000	0.017	0.788      	0.000    	0.000	0.000	0.001	0.000   	0.000	0.000	0.000  	0.063	0.000	0.000
+for       	0.004	0.096	0.460	0.000	0.163      	0.001    	0.050	0.023	0.000	0.044   	0.014	0.043	0.044  	0.010	0.020	0.028
+debate    	0.003	0.008	0.000	0.020	0.965      	0.000    	0.000	0.000	0.002	0.000   	0.000	0.000	0.000  	0.001	0.000	0.000
+today     	0.000	0.000	0.000	0.000	0.000      	0.000    	0.000	0.000	0.000	0.000   	0.000	0.000	0.000  	1.000	0.000	0.000
+.         	0.005	0.000	0.006	0.001	0.000      	0.000    	0.125	0.030	0.001	0.036   	0.030	0.072	0.036  	0.001	0.404	0.255
+          	quiero	que  	nos  	centremos	en   	el   	importante	papel	que  	desempeñan	las  	directrices	.    	NULL 
+i         	0.654 	0.150	0.000	0.006    	0.003	0.000	0.000     	0.000	0.150	0.006     	0.006	0.000      	0.014	0.011
+want      	0.998 	0.000	0.000	0.000    	0.000	0.000	0.000     	0.000	0.000	0.000     	0.000	0.001      	0.000	0.000
+to        	0.186 	0.172	0.109	0.071    	0.024	0.026	0.001     	0.005	0.172	0.071     	0.042	0.000      	0.046	0.076
+focus     	0.000 	0.000	0.000	0.000    	0.000	0.000	0.000     	0.076	0.000	0.000     	0.000	0.924      	0.000	0.000
+our       	0.000 	0.000	0.000	0.000    	0.000	0.000	0.000     	0.868	0.000	0.000     	0.000	0.132      	0.000	0.000
+minds     	0.000 	0.012	0.001	0.325    	0.061	0.057	0.000     	0.000	0.012	0.325     	0.053	0.000      	0.053	0.101
+on        	0.066 	0.007	0.000	0.046    	0.521	0.027	0.000     	0.011	0.007	0.046     	0.105	0.134      	0.015	0.016
+the       	0.000 	0.006	0.000	0.023    	0.025	0.470	0.000     	0.001	0.006	0.023     	0.374	0.000      	0.024	0.049
+essential 	0.000 	0.000	0.000	0.000    	0.000	0.000	0.000     	0.076	0.000	0.000     	0.000	0.924      	0.000	0.000
+role      	0.000 	0.000	0.000	0.000    	0.000	0.000	0.000     	1.000	0.000	0.000     	0.000	0.000      	0.000	0.000
+of        	0.000 	0.010	0.001	0.126    	0.110	0.063	0.000     	0.025	0.010	0.126     	0.318	0.000      	0.066	0.145
+the       	0.000 	0.006	0.000	0.023    	0.025	0.470	0.000     	0.001	0.006	0.023     	0.374	0.000      	0.024	0.049
+guidelines	0.000 	0.000	0.000	0.000    	0.000	0.000	0.000     	0.000	0.000	0.000     	0.000	1.000      	0.000	0.000
+.         	0.000 	0.031	0.002	0.037    	0.033	0.048	0.002     	0.000	0.031	0.037     	0.096	0.000      	0.418	0.264
+           	no   	deben	crear	capas	de   	burocracia	y    	papeleos	adicionales	.    	NULL 
+they       	0.000	0.379	0.618	0.001	0.000	0.001     	0.000	0.001   	0.001      	0.000	0.000
+should     	0.000	0.620	0.378	0.000	0.000	0.000     	0.000	0.000   	0.000      	0.000	0.000
+not        	1.000	0.000	0.000	0.000	0.000	0.000     	0.000	0.000   	0.000      	0.000	0.000
+be         	0.002	0.724	0.001	0.054	0.020	0.054     	0.004	0.054   	0.054      	0.013	0.022
+about      	0.000	0.000	1.000	0.000	0.000	0.000     	0.000	0.000   	0.000      	0.000	0.000
+creating   	0.002	0.001	0.004	0.210	0.049	0.210     	0.005	0.210   	0.210      	0.034	0.065
+additional 	0.000	0.000	1.000	0.000	0.000	0.000     	0.000	0.000   	0.000      	0.000	0.000
+layers     	0.002	0.001	0.004	0.210	0.049	0.210     	0.005	0.210   	0.210      	0.034	0.065
+of         	0.004	0.005	0.001	0.033	0.803	0.033     	0.000	0.033   	0.033      	0.017	0.038
+bureaucracy	0.002	0.001	0.004	0.210	0.049	0.210     	0.005	0.210   	0.210      	0.034	0.065
+and        	0.000	0.003	0.000	0.002	0.001	0.002     	0.989	0.002   	0.002      	0.000	0.000
+red        	0.002	0.001	0.004	0.210	0.049	0.210     	0.005	0.210   	0.210      	0.034	0.065
+tape       	0.002	0.001	0.004	0.210	0.049	0.210     	0.005	0.210   	0.210      	0.034	0.065
+.          	0.011	0.001	0.000	0.042	0.049	0.042     	0.005	0.042   	0.042      	0.469	0.296
+      	ahora	nos  	encontramos	seriamente	retrasados	en   	esta 	cuestión	.    	NULL 
+we    	0.151	0.565	0.179      	0.004     	0.017     	0.042	0.000	0.000   	0.015	0.027
+are   	0.046	0.360	0.502      	0.003     	0.028     	0.038	0.000	0.000   	0.007	0.017
+badly 	0.007	0.002	0.000      	0.000     	0.593     	0.111	0.005	0.001   	0.097	0.184
+behind	0.000	0.000	0.228      	0.772     	0.000     	0.000	0.000	0.000   	0.000	0.000
+now   	1.000	0.000	0.000      	0.000     	0.000     	0.000	0.000	0.000   	0.000	0.000
+in    	0.000	0.001	0.001      	0.000     	0.016     	0.935	0.012	0.000   	0.014	0.021
+this  	0.000	0.001	0.000      	0.000     	0.007     	0.026	0.891	0.000   	0.029	0.047
+matter	0.000	0.000	0.000      	0.691     	0.000     	0.000	0.000	0.309   	0.000	0.000
+.     	0.004	0.003	0.000      	0.000     	0.048     	0.043	0.010	0.011   	0.540	0.341
+           	hay  	que  	conseguir	que  	los  	proyectos	sean 	más  	eficaces	,    	flexibles	y    	productivos	.    	NULL 
+projects   	0.000	0.000	0.000    	0.000	0.000	1.000    	0.000	0.000	0.000   	0.000	0.000    	0.000	0.000      	0.000	0.000
+have       	0.000	0.013	0.025    	0.013	0.006	0.000    	0.068	0.095	0.679   	0.018	0.025    	0.019	0.025      	0.006	0.009
+to         	0.001	0.211	0.087    	0.211	0.133	0.000    	0.010	0.011	0.000   	0.010	0.087    	0.001	0.087      	0.057	0.093
+be         	0.232	0.127	0.022    	0.127	0.002	0.007    	0.372	0.044	0.001   	0.006	0.022    	0.002	0.022      	0.005	0.009
+carried    	0.000	0.000	0.000    	0.000	0.000	0.000    	0.091	0.000	0.909   	0.000	0.000    	0.000	0.000      	0.000	0.000
+out        	0.000	0.000	0.000    	0.000	0.000	0.000    	0.091	0.000	0.909   	0.000	0.000    	0.000	0.000      	0.000	0.000
+more       	0.000	0.000	0.000    	0.000	0.000	0.000    	0.002	0.976	0.022   	0.000	0.000    	0.000	0.000      	0.000	0.000
+efficiently	0.001	0.009	0.248    	0.009	0.057	0.000    	0.000	0.032	0.000   	0.021	0.248    	0.006	0.248      	0.041	0.077
+,          	0.009	0.012	0.023    	0.012	0.017	0.000    	0.001	0.008	0.000   	0.806	0.023    	0.008	0.023      	0.026	0.031
+more       	0.000	0.000	0.000    	0.000	0.000	0.000    	0.002	0.976	0.022   	0.000	0.000    	0.000	0.000      	0.000	0.000
+flexibly   	0.001	0.009	0.248    	0.009	0.057	0.000    	0.000	0.032	0.000   	0.021	0.248    	0.006	0.248      	0.041	0.077
+and        	0.000	0.000	0.002    	0.000	0.000	0.000    	0.002	0.032	0.000   	0.005	0.002    	0.955	0.002      	0.000	0.000
+they       	0.000	0.000	0.001    	0.000	0.000	0.000    	0.091	0.000	0.907   	0.000	0.001    	0.000	0.001      	0.000	0.000
+have       	0.000	0.013	0.025    	0.013	0.006	0.000    	0.068	0.095	0.679   	0.018	0.025    	0.019	0.025      	0.006	0.009
+to         	0.001	0.211	0.087    	0.211	0.133	0.000    	0.010	0.011	0.000   	0.010	0.087    	0.001	0.087      	0.057	0.093
+be         	0.232	0.127	0.022    	0.127	0.002	0.007    	0.372	0.044	0.001   	0.006	0.022    	0.002	0.022      	0.005	0.009
+made       	0.009	0.000	0.000    	0.000	0.000	0.000    	0.090	0.000	0.900   	0.000	0.000    	0.000	0.000      	0.000	0.000
+more       	0.000	0.000	0.000    	0.000	0.000	0.000    	0.002	0.976	0.022   	0.000	0.000    	0.000	0.000      	0.000	0.000
+productive 	0.001	0.009	0.248    	0.009	0.057	0.000    	0.000	0.032	0.000   	0.021	0.248    	0.006	0.248      	0.041	0.077
+.          	0.002	0.032	0.039    	0.032	0.032	0.000    	0.000	0.020	0.000   	0.051	0.039    	0.005	0.039      	0.435	0.274
+        	este 	informe	es   	estupendo	y    	cuenta	con  	el   	apoyo	de   	nuestro	grupo	.    	NULL 
+this    	0.886	0.002  	0.025	0.006    	0.000	0.000 	0.001	0.001	0.000	0.010	0.003  	0.001	0.025	0.040
+report  	0.000	1.000  	0.000	0.000    	0.000	0.000 	0.000	0.000	0.000	0.000	0.000  	0.000	0.000	0.000
+is      	0.031	0.000  	0.786	0.010    	0.000	0.000 	0.002	0.052	0.000	0.028	0.001  	0.000	0.032	0.056
+very    	0.000	0.000  	0.000	0.000    	0.000	0.927 	0.051	0.000	0.022	0.000	0.000  	0.000	0.000	0.000
+good    	0.000	0.000  	0.000	0.000    	0.000	0.679 	0.000	0.000	0.320	0.000	0.000  	0.000	0.000	0.000
+and     	0.000	0.000  	0.000	0.002    	0.968	0.000 	0.004	0.002	0.000	0.001	0.000  	0.023	0.000	0.000
+our     	0.000	0.000  	0.000	0.000    	0.000	0.000 	0.000	0.000	0.000	0.000	1.000  	0.000	0.000	0.000
+group   	0.000	0.000  	0.000	0.000    	0.000	0.000 	0.000	0.000	0.000	0.000	0.000  	1.000	0.000	0.000
+supports	0.000	0.000  	0.000	0.000    	0.000	0.679 	0.000	0.000	0.320	0.000	0.000  	0.000	0.000	0.000
+it      	0.000	0.001  	0.649	0.038    	0.155	0.004 	0.005	0.003	0.001	0.026	0.000  	0.000	0.047	0.070
+.       	0.017	0.000  	0.021	0.042    	0.005	0.000 	0.044	0.054	0.000	0.049	0.002  	0.000	0.469	0.296
+          	si   	tomamos	como 	único	indicador	el   	producto	interior	bruto	por  	habitante	,    	podemos	equivocarnos	.    	NULL 
+we        	0.017	0.346  	0.001	0.000	0.016    	0.000	0.016   	0.016   	0.016	0.012	0.016    	0.006	0.486  	0.016       	0.014	0.024
+might     	0.000	0.847  	0.000	0.150	0.000    	0.000	0.000   	0.000   	0.000	0.000	0.000    	0.000	0.003  	0.000       	0.000	0.000
+be        	0.020	0.000  	0.159	0.000	0.092    	0.008	0.092   	0.092   	0.092	0.175	0.092    	0.024	0.000  	0.092       	0.021	0.037
+mistaken  	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+in        	0.101	0.001  	0.002	0.000	0.085    	0.040	0.085   	0.085   	0.085	0.015	0.085    	0.147	0.000  	0.085       	0.072	0.111
+using     	0.000	0.850  	0.000	0.150	0.000    	0.000	0.000   	0.000   	0.000	0.000	0.000    	0.000	0.000  	0.000       	0.000	0.000
+the       	0.000	0.000  	0.005	0.007	0.031    	0.655	0.031   	0.031   	0.031	0.033	0.031    	0.010	0.000  	0.031       	0.033	0.068
+gross     	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+domestic  	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+product   	0.000	0.850  	0.000	0.150	0.000    	0.000	0.000   	0.000   	0.000	0.000	0.000    	0.000	0.000  	0.000       	0.000	0.000
+per       	0.000	0.850  	0.000	0.150	0.000    	0.000	0.000   	0.000   	0.000	0.000	0.000    	0.000	0.000  	0.000       	0.000	0.000
+inhabitant	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+as        	0.000	0.000  	1.000	0.000	0.000    	0.000	0.000   	0.000   	0.000	0.000	0.000    	0.000	0.000  	0.000       	0.000	0.000
+the       	0.000	0.000  	0.005	0.007	0.031    	0.655	0.031   	0.031   	0.031	0.033	0.031    	0.010	0.000  	0.031       	0.033	0.068
+sole      	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+indicator 	0.000	0.000  	0.001	0.000	0.145    	0.026	0.145   	0.145   	0.145	0.022	0.145    	0.012	0.000  	0.145       	0.024	0.045
+.         	0.000	0.000  	0.003	0.000	0.035    	0.046	0.035   	0.035   	0.035	0.048	0.035    	0.046	0.000  	0.035       	0.395	0.249
