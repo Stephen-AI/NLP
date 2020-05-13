@@ -3,6 +3,7 @@ from data import QADataset
 from typing import List, Dict
 from enum import Enum
 from json import dump
+from utils import save_datatset, load_dataset, split_dataset
 import requests
 import argparse
 import becas
@@ -92,8 +93,9 @@ def get_tags(strs: List[str]):
 
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # dataset = QADataset(args, args.train_path)
+    args = parser.parse_args()
+    split_dataset(args.train_path)
+    # meta, samples = load_dataset(args.train_path)
     # print(becas.SEMANTIC_GROUPS)
     # text = "The phosphorylation of Hdm2 by MK2 promotes the ubiquitination of p53."
     # email = "stephenaigbomian@gmail.com"
@@ -106,4 +108,5 @@ if __name__ == "__main__":
     #         p_tags = get_tags(passage)
     #         entities[qid] = create_string_json(p_tags, q_tags)
     #     dump(entities, fi)
-    print(len(Tags))
+    # out_path = "datasets/oherbio.jsonl.gz"
+    # save_datatset(out_path, meta, samples)

@@ -8,6 +8,7 @@ import os
 import json
 import gzip
 import pickle
+import copy
 
 import torch
 from tqdm import tqdm
@@ -60,6 +61,28 @@ def load_dataset(path):
         ]
     meta, samples = elems[0], elems[1:]
     return (meta, samples)
+
+def save_datatset(path, meta, samples):
+    with gzip.open(path, "wt") as fi:
+        json.dump(meta, fi)
+        for sample in samples:
+            fi.write("\n")
+            json.dump(sample, fi)
+
+def split_dataset(path):
+    meta, samples = load_dataset(path)
+    test_cnt = int(0.1 * len(samples))
+    test_meta = copy.deepcopy(meta)
+    meta["split"] = "train"
+    new_path = path.split()
+    file_name = new_path[-1]
+    file_name = file_name.split(".jsonl.gz")[0]
+    new_path[-1] = file_name + "_test.jsonl.gz"
+    save_datatset("/".join(new_path), test_meta, samples[-test_cnt:])
+    new_path[-1] = file_name + "_train.jsonl.gz"
+    save_datatset("/".join(new_path), meta, samples[:len(samples)-test_cnt])
+
+
 
 
 def load_cached_embeddings(path):

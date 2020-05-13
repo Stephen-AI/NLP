@@ -13,6 +13,7 @@ from random import shuffle
 from utils import cuda, load_dataset
 from enum import Enum
 from json import load
+from typing import List, Dict
 
 
 PAD_TOKEN = '[PAD]'
@@ -153,12 +154,12 @@ def get_qid_entities(qid: str, strs: List[str], is_passage=True):
 
     if is_passage:
         for ent in pass_dict["passage_entities"]:
-            idx = BioNEREntities[ent["entity"]]
+            idx = BioNEREntities[ent["entity"]].value
             for i in range(ent["entity_start"], ent["entity_end"]):
                 ents[pos_to_idx[i]] = idx
     else:
         for ent in pass_dict["question_entities"]:
-            idx = BioNEREntities[ent["entity"]]
+            idx = BioNEREntities[ent["entity"]].value
             for i in range(ent["entity_start"], ent["entity_end"]):
                 ents[pos_to_idx[i]] = idx
     return ents
@@ -339,11 +340,15 @@ class QADataset(Dataset):
             # index is other than 0.
             padded_passages = torch.zeros(bsz, max_passage_length)
             padded_questions = torch.zeros(bsz, max_question_length)
+            padded_pass_ents = torch.zeros(bsz, max_passage_length)
+            padded_quest_ents = torch.zeros(bsz, max_question_length)
             # Pad passages and questions
             for iii, passage_question_ents in enumerate(zip(passages, questions, psg_entities, qst_entities)):
-                passage, question, psg_entity,  = passage_question_ents
+                passage, question, psg_entity, qst_entity = passage_question_ents
                 padded_passages[iii][:len(passage)] = passage
                 padded_questions[iii][:len(question)] = question
+                padded_pass_ents[iii][:len(psg_entity)] = psg_entity
+                padded_quest_ents[iii][:len(qst_entity)] = qst_entity
 
             # Create an input dictionary
             batch_dict = {
@@ -351,8 +356,8 @@ class QADataset(Dataset):
                 'questions': cuda(self.args, padded_questions).long(),
                 'start_positions': cuda(self.args, start_positions).long(),
                 'end_positions': cuda(self.args, end_positions).long(),
-                'question_entities': cuda(self.args, psg_entities).long(),
-                'passage-entities': cuda(self.args, qst_entities).long()
+                'question_entities': cuda(self.args, padded_quest_ents).long(),
+                'passage-entities': cuda(self.args, padded_pass_ents).long()
             }
 
             if no_more_data:
