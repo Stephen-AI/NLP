@@ -7,7 +7,6 @@ Author:
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from saber.saber import Saber
 
 from utils import cuda, load_cached_embeddings
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence

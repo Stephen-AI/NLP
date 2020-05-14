@@ -155,13 +155,17 @@ def get_qid_entities(qid: str, strs: List[str], is_passage=True):
     if is_passage:
         for ent in pass_dict["passage_entities"]:
             idx = BioNEREntities[ent["entity"]].value
-            for i in range(ent["entity_start"], ent["entity_end"]):
+       	    i = int(ent["entity_start"])
+            while i < int(ent["entity_end"]):
                 ents[pos_to_idx[i]] = idx
+                i += len(strs[pos_to_idx[i]]) + 1
     else:
         for ent in pass_dict["question_entities"]:
             idx = BioNEREntities[ent["entity"]].value
-            for i in range(ent["entity_start"], ent["entity_end"]):
+            i = int(ent["entity_start"])
+            while i < int(ent["entity_end"]):
                 ents[pos_to_idx[i]] = idx
+                i += len(strs[pos_to_idx[i]]) + 1
     return ents
 
 
