@@ -1,5 +1,5 @@
 # from saber.saber import Saber
-from data import QADataset
+from data import QADataset, entity_dict
 from typing import List, Dict
 from enum import Enum
 from json import dump
@@ -93,8 +93,9 @@ def get_tags(strs: List[str]):
 
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-    split_dataset(args.train_path)
+    print(entity_dict)
+    # args = parser.parse_args()
+    # split_dataset(args.train_path)
     # meta, samples = load_dataset(args.train_path)
     # print(becas.SEMANTIC_GROUPS)
     # text = "The phosphorylation of Hdm2 by MK2 promotes the ubiquitination of p53."

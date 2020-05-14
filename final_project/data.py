@@ -357,7 +357,7 @@ class QADataset(Dataset):
                 'start_positions': cuda(self.args, start_positions).long(),
                 'end_positions': cuda(self.args, end_positions).long(),
                 'question_entities': cuda(self.args, padded_quest_ents).long(),
-                'passage-entities': cuda(self.args, padded_pass_ents).long()
+                'passage_entities': cuda(self.args, padded_pass_ents).long()
             }
 
             if no_more_data:

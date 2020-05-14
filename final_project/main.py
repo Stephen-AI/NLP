@@ -79,6 +79,14 @@ parser.add_argument(
     required=True,
     help='training dataset path',
 )
+
+# added
+parser.add_argument(
+    '--use_ner',
+    action='store_true',
+    default=False,
+    help='add NER to the features'
+)
 parser.add_argument(
     '--dev_path',
     type=str,

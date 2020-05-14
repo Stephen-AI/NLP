@@ -174,17 +174,20 @@ class BaselineReader(nn.Module):
         self.args = args
         self.pad_token_id = args.pad_token_id
 
+        embed_dim = args.embedding_dim
         # Initialize embedding layer (1)
-        self.embedding = nn.Embedding(args.vocab_size, args.embedding_dim)
+        self.embedding = nn.Embedding(args.vocab_size, embed_dim)
 
         # Initialize Context2Query (2)
-        self.aligned_att = AlignedAttention(args.embedding_dim)
+        if args.use_ner:
+            embed_dim += 1
+        self.aligned_att = AlignedAttention(embed_dim)
 
         rnn_cell = nn.LSTM if args.rnn_cell_type == 'lstm' else nn.GRU
 
         # Initialize passage encoder (3)
         self.passage_rnn = rnn_cell(
-            args.embedding_dim * 2,
+            embed_dim * 2,
             args.hidden_dim,
             bidirectional=args.bidirectional,
             batch_first=True,
@@ -192,7 +195,7 @@ class BaselineReader(nn.Module):
 
         # Initialize question encoder (4)
         self.question_rnn = rnn_cell(
-            args.embedding_dim,
+            embed_dim,
             args.hidden_dim,
             bidirectional=args.bidirectional,
             batch_first=True,
@@ -284,6 +287,20 @@ class BaselineReader(nn.Module):
         # 1) Embedding Layer: Embed the passage and question.
         passage_embeddings = self.embedding(batch['passages'])  # [batch_size, p_len, p_dim]
         question_embeddings = self.embedding(batch['questions'])  # [batch_size, q_len, q_dim]
+
+        #entities
+        passage_entities = batch["passage_entities"] # [batch_size, p_len, 1]
+        question_entities = batch["question_entities"] # [batch_size, q_len, 1]
+
+        passage_embeddings = cuda(
+            self.args,
+            torch.cat((passage_embeddings, passage_entities), 2),
+        )
+
+        question_embeddings = cuda(
+            self.args,
+            torch.cat((question_embeddings, question_entities), 2),
+        )
 
         # 2) Context2Query: Compute weighted sum of question embeddings for
         #        each passage word and concatenate with passage embeddings.
